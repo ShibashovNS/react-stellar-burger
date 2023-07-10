@@ -60,8 +60,8 @@ function App() {
       
   return (
     <>
-      <AppHeader setClickOrderList={setClickOrderList} setIsOpen={setIsOpen} />
-      <AppMain setClickIngredient={setClickIngredient} setIsOpen={setIsOpen} setImageIngredient={setImageIngredient} ingredients={dataIngredients} />
+      <AppHeader/>
+      <AppMain setClickIngredient={setClickIngredient} setClickOrderList={setClickOrderList} setIsOpen={ setIsOpen } setImageIngredient={setImageIngredient} ingredients={dataIngredients} />
 
       {isModalOpen && (
       <> 

@@ -2,7 +2,13 @@ import React from "react";
 import styles from './burger-constructor-total.module.css'
 import { Button, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 
-function BurgerConstructorTotal({ingredients, name}) {
+function BurgerConstructorTotal({ setClickOrderList, setIsOpen, ingredients, name }) {
+  
+  const onClick = () => {
+    setIsOpen(true)
+    setClickOrderList(true)
+  }
+
   return (
     <div className={styles.constructorTotal + " pt-10"}>
       <div className={"pr-10"}>
@@ -11,7 +17,7 @@ function BurgerConstructorTotal({ingredients, name}) {
         </span>
         <CurrencyIcon/>
       </div>
-      <Button htmlType="button" type="primary" size="large">{ name }</Button>
+      <Button onClick={onClick} htmlType="button" type="primary" size="large">{ name }</Button>
     </div>
   )
 }

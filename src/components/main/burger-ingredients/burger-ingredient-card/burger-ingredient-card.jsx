@@ -7,9 +7,9 @@ import image from '../../../../../src/images/Rounded.svg'
 function IngredientCard({setIsOpen, setClickIngredient, setImageIngredient, ingredient }) {
 
   const onClick = () => {
+    setClickIngredient(true)
     setImageIngredient(ingredient)
     setIsOpen(true)
-    setClickIngredient(true)
     console.log(ingredient.image)
     console.log(typeof (ingredient.image))
   }

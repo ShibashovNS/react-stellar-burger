@@ -9,7 +9,7 @@ import { ingredientPropType } from "../../../../src/utils/prop-types";
 import BurgerConstructor from "../burger-constructor/burger-constructor";
 
 
-function AppMain({setClickIngredient, setIsOpen, setImageIngredient, ingredients}) {
+function AppMain({setClickOrderList, setClickIngredient, setIsOpen, setImageIngredient, ingredients}) {
   return (
     <main className={styles.main}>
       
@@ -25,7 +25,7 @@ function AppMain({setClickIngredient, setIsOpen, setImageIngredient, ingredients
       <section className={"pt-25"}>
         <>
           <BurgerConstructor ingredient={ingredients} index={0} />
-          <BurgerConstructorTotal ingredients={ingredients} name={"Оформить заказ"} />
+          <BurgerConstructorTotal setClickOrderList={setClickOrderList} setIsOpen={ setIsOpen } ingredients={ingredients} name={"Оформить заказ"} />
         </>
       </section>
   </main>

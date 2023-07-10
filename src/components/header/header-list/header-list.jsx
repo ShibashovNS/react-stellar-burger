@@ -8,13 +8,7 @@ import BurgerIngingredientsTab from "../../main/burger-ingredients/burger-ingred
 import OrderDetails from "../../modal/order-details/order-details";
 import IngredientDetails from "../../modal/ingredient-details/ingredient-details";
 
-
-function HeaderList({setClickOrderList, setIsOpen }) {
-  const onClick = () => {
-    setIsOpen(true)
-    setClickOrderList(true)
-  }
-
+function HeaderList() {
   return (
     <>
       <nav className={styles.header_menu}>
@@ -31,7 +25,7 @@ function HeaderList({setClickOrderList, setIsOpen }) {
             <li className={styles.linkList_item}>
               <a className={styles.header_link}>
               <ListIcon/>
-              <span className="pl-2 text_type_main-default" onClick={onClick}>Лента Заказов</span>
+              <span className="pl-2 text_type_main-default">Лента Заказов</span>
               </a>
             </li>
             </ul>
