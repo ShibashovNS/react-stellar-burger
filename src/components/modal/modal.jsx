@@ -4,6 +4,7 @@ import ReactDom, { createPortal } from 'react-dom';
 import OrderDetails from './order-details/order-details';
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import IngredientDetails from './ingredient-details/ingredient-details';
+import ModalOverlay from '../modal-overlay/modal-overlay';
 
 const modalRoot = document.getElementById('react-modal')
 

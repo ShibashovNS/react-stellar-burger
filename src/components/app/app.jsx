@@ -2,7 +2,7 @@ import styles from "./app.module.css";
 import AppHeader from "../header/app-header/app-header"
 import AppMain from "../main/app-main/app-main";
 import Modal from "../modal/modal";
-import Overlay from "../overlay/overlay";
+import ModalOverlay from "../modal-overlay/modal-overlay";
 import { useState } from "react";
 import React, { useEffect } from "react";
 import OrderDetails from "../modal/order-details/order-details";
@@ -27,7 +27,7 @@ function App() {
   const childForModal = () => {
     return (
       <Modal onClick={onClick} setIsOpen={setIsOpen}>
-        {isClickOrderList && <OrderDetails/> || isClickIngredient && <IngredientDetails imageIngredient={imageIngredient}/>}
+        {isClickOrderList && <OrderDetails /> || isClickIngredient && <IngredientDetails imageIngredient={imageIngredient} />}
       </Modal>     
     )
   }
@@ -43,7 +43,10 @@ function App() {
         })
         .then((res) => {
         setData(res.data)
-      })
+        })
+        .catch((err) => {
+          console.log('Ошибка. Запрос не выполнен');
+        })
     )
   }
 
@@ -62,17 +65,12 @@ function App() {
 
       {isModalOpen && (
       <> 
-      {childForModal()}
-      <Overlay setClickOrderList={setClickOrderList} setIsOpen={setIsOpen} /> 
+          {childForModal()}
+          <ModalOverlay setClickOrderList={setClickOrderList} setIsOpen={setIsOpen} />
       </>
-        
       )}
     </>
   ); 
-}
-
-AppMain.propTypes = {
-  ingredients: PropTypes.arrayOf(ingredientPropType)
 }
 
 export default App;
