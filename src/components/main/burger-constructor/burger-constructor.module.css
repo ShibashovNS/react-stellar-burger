@@ -1,0 +1,6 @@
+.itemMidle {
+  padding-block-end: inherit;
+  height: calc(100vh - 563px);;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  }
