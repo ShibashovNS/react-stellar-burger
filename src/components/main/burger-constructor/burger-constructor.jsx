@@ -17,7 +17,7 @@ const BurgerConstructor = ({ingredient, index}) => {
         
       </div>
       <div className={styles.itemMidle + " custom-scroll pr-2"} style={{ display: 'flex', flexDirection: 'column', gap: '16px'}}>
-        {ingredient.map((item) => {
+        {ingredient.filter(item => item.type !== 'bun').map((item) => {
           return (
             <div key={item._id} style={{ display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
               <DragIcon/>

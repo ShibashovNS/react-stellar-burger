@@ -26,7 +26,7 @@ function App() {
   
   const childForModal = () => {
     return (
-      <Modal onClick={onClick} setIsOpen={setIsOpen}>
+      <Modal onClick={onClick} setClickOrderList={setClickOrderList} setIsOpen={setIsOpen}>
         {isClickOrderList && <OrderDetails /> || isClickIngredient && <IngredientDetails imageIngredient={imageIngredient} />}
       </Modal>     
     )
@@ -66,7 +66,6 @@ function App() {
       {isModalOpen && (
       <> 
           {childForModal()}
-          <ModalOverlay setClickOrderList={setClickOrderList} setIsOpen={setIsOpen} />
       </>
       )}
     </>
