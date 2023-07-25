@@ -9,23 +9,23 @@ import { ingredientPropType } from "../../../../src/utils/prop-types";
 import BurgerConstructor from "../burger-constructor/burger-constructor";
 
 
-function AppMain({setClickOrderList, setClickIngredient, setIsOpen, setImageIngredient, ingredients}) {
+function AppMain({setClickOrderList }) {
   return (
     <main className={styles.main}>
       
       <section >
         <BurgerIngingredientsTab/>
         <div className={styles.main_ingredientBlock + " custom-scroll"}>
-          <BurgerIngredients setIsOpen={setIsOpen} setClickIngredient={setClickIngredient} setImageIngredient={setImageIngredient} ingredients={ingredients} productName={"Булки"} typeProduct={"bun"} />
-          <BurgerIngredients setIsOpen={setIsOpen} setClickIngredient={setClickIngredient} setImageIngredient={setImageIngredient} ingredients={ingredients} productName={"Соусы"} typeProduct={"sauce"} />
-          <BurgerIngredients setIsOpen={setIsOpen} setClickIngredient={setClickIngredient} setImageIngredient={setImageIngredient} ingredients={ingredients} productName={"Начинки"} typeProduct={"main"} />
+          <BurgerIngredients productName={"Булки"} typeProduct={"bun"} />
+          <BurgerIngredients productName={"Соусы"} typeProduct={"sauce"} />
+          <BurgerIngredients productName={"Начинки"} typeProduct={"main"} />
         </div>
       </section>  
       
       <section className={"pt-25"}>
         <>
-          <BurgerConstructor ingredient={ingredients} index={0} />
-          <BurgerConstructorTotal setClickOrderList={setClickOrderList} setIsOpen={ setIsOpen } ingredients={ingredients} name={"Оформить заказ"} />
+          <BurgerConstructor index={0} />
+          <BurgerConstructorTotal name={"Оформить заказ"} />
         </>
       </section>
   </main>
@@ -34,9 +34,9 @@ function AppMain({setClickOrderList, setClickIngredient, setIsOpen, setImageIngr
 
 AppMain.propTypes = {
   ingredients: PropTypes.arrayOf(ingredientPropType),
-  setClickIngredient: PropTypes.func,
-  setIsOpen: PropTypes.func,
-  setImageIngredient: PropTypes.func,
+  setClickIngredient: PropTypes.any,
+  setIsOpen: PropTypes.any,
+  setImageIngredient: PropTypes.any,
 }
 
 export default AppMain

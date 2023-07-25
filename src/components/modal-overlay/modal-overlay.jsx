@@ -1,14 +1,17 @@
 import React from 'react';
 import styles from './modal-overlay.module.css'
 import ReactDom, { createPortal } from 'react-dom';
+import { useDispatch } from 'react-redux';
+import { clickOpen } from '../../services/store/reducers/modalOverlaySlice';
 
 const overlayRoot = document.getElementById('react-modal')
 
-function ModalOverlay({setClickOrderList, setIsOpen}) {
+function ModalOverlay() {
 
+  const dispatch = useDispatch()
+  
   const onClick = () => {
-    setIsOpen(false)
-    setClickOrderList(false)
+    dispatch(clickOpen(false))
   }
 
   return(

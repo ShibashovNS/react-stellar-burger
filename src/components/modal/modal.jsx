@@ -5,16 +5,23 @@ import OrderDetails from './order-details/order-details';
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import IngredientDetails from './ingredient-details/ingredient-details';
 import ModalOverlay from '../modal-overlay/modal-overlay';
+import { useDispatch } from 'react-redux';
+import { clickOpen, clickOrderList } from '../../services/store/reducers/modalOverlaySlice';
+import { clickIngredient } from '../../services/store/reducers/ingredientDetails';
+import { clickDetails } from '../../services/store/reducers/orderDetailsSlice';
 
 
 const modalRoot = document.getElementById('react-modal')
 
-function Modal({setClickOrderList, setIsOpen, children }) {
+function Modal({ children }) {
   
+  const dispatch = useDispatch()
+
   React.useEffect(() => {
     function onEsc(event) {
       if (event.code === 'Escape') {
-        setIsOpen(false)
+        dispatch(clickOpen(false))
+        dispatch(clickDetails(false))
       }
     }
     document.addEventListener('keydown', onEsc);
@@ -23,7 +30,8 @@ function Modal({setClickOrderList, setIsOpen, children }) {
   }, [])
   
   const onClick = () => {
-    setIsOpen(false)
+    dispatch(clickOpen(false))
+    dispatch(clickDetails(false))
   }
 
   return ReactDom.createPortal(
@@ -33,7 +41,7 @@ function Modal({setClickOrderList, setIsOpen, children }) {
         <div className={styles.close_icon}><CloseIcon onClick={onClick}/></div>
         {children}
       </div>
-        <ModalOverlay setClickOrderList={setClickOrderList} setIsOpen={setIsOpen}/>
+        <ModalOverlay/>
       </>
     ), modalRoot
   )
