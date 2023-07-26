@@ -22,6 +22,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { constructorSelector } from "../../services/store/selectors/IngredientsSelector/constructorSelector";
 import { memoIngredientsSelector } from "../../services/store/selectors/memoIngredientSelector";
 import { constructorBunSelector } from "../../services/store/selectors/IngredientsSelector/constructorBunSelector";
+import { setDetails } from "../../services/store/reducers/detailsQuery";
 
 
 const App = () => {
@@ -79,9 +80,10 @@ const App = () => {
       )
     }
   */
-
+  
+  
     useEffect(() => {
-      dispatch(fetchIngredients())
+      dispatch(fetchIngredients());
     }, [])
     
     /*const {draggedBun, draggedIngredients} = useSelector(state => state.constIngredient)*/

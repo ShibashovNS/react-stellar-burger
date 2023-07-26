@@ -7,6 +7,7 @@ export const fetchIngredients = createAsyncThunk(
     try {
       const res = await fetch("https://norma.nomoreparties.space/api/ingredients");
       const base = await res.json();
+      console.log(base)
       return base;
     } catch (err) {
       console.log(err)

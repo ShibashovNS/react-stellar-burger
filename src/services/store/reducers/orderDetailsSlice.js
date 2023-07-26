@@ -2,8 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 import { setDetails } from "./detailsQuery";
 
 const initialState = {
+  orderData: [],
   clickStutus: false,
-  dataId: " ",
   isLoding: false,
   error: " ",
 };
@@ -20,20 +20,20 @@ const orderDetailsSlice = createSlice({
 
   extraReducers: (builder) => {
     builder
-    .addCase(setDetails.pending.type, (state) => {
+    .addCase(setDetails.pending.type, (state, action) => {
       state.isLoding = false;
       state.error = " ";
     }) 
     .addCase(setDetails.fulfilled.type, (state, action) => {
       state.isLoding = true;
       state.error = " ";
-      state.dataId = action.payload.data;
+      state.orderData = action.payload.order.number;
     })  
-    .addCase(setDetails.rejected.type, (state) => {
+    .addCase(setDetails.rejected.type, (state, action) => {
       state.isLoding = false;
       state.error = "Пока текст....";
     })
-  }
+  } 
   
 });
 

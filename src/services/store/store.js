@@ -4,7 +4,7 @@ import constructorReducer from "./reducers/burgerConstructorSlice";
 import ingredDetailsReducer from "./reducers/ingredientDetails";
 import orderDetailsReducer from "./reducers/orderDetailsSlice";
 import modalOverlayReducer from './reducers/modalOverlaySlice'
-import dragAndDropReducer from './reducers/dragAndDropSlice'
+
 
 export const store = configureStore({
   reducer: {

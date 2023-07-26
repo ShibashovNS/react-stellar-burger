@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { clickOpen, clickOrderList } from "../../../../services/store/reducers/modalOverlaySlice";
 import { ingredientSelector } from "../../../../services/store/selectors/ingredientSelector";
 import { clickDetails } from "../../../../services/store/reducers/orderDetailsSlice";
+import { setDetails } from "../../../../services/store/reducers/detailsQuery";
 
 
 function BurgerConstructorTotal({ name }) { 
@@ -16,6 +17,7 @@ function BurgerConstructorTotal({ name }) {
   const onClick = () => {
     dispatch(clickDetails(true))
     dispatch(clickOpen(true))
+    dispatch(setDetails([...draggedBun, ...draggedIngredients]))
   }
 
   return (
