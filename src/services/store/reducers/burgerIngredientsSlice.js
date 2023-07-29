@@ -1,15 +1,14 @@
-import { fetchIngredients } from './ingredientQuery'
-import { createSlice } from '@reduxjs/toolkit'
+import { fetchIngredients } from "./ingredientQuery";
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  
   ingredients: [],
   isLoding: false,
   error: " ",
-}
+};
 
 const burgerIngredientsSlice = createSlice({
-  name: 'ingredients',
+  name: "ingredients",
   initialState,
   /*
   reducers: {
@@ -33,24 +32,28 @@ const burgerIngredientsSlice = createSlice({
   }, */
   extraReducers: (builder) => {
     builder
-    // Add reducers for additional action types here, and handle loading state as needed
-    .addCase(fetchIngredients.pending.type, (state) => {
-      state.isLoding = false;
-      state.error = " ";
-    }) 
-      
-    .addCase(fetchIngredients.fulfilled.type, (state, action) => {
-      state.isLoding = true;
-      state.error = " ";
-      state.ingredients = action.payload.data;
-    })
-      
-    .addCase(fetchIngredients.rejected.type, (state) => {
-      state.isLoding = false;
-      state.error = "Ошибка";
-    })
-  }
-})
+      // Add reducers for additional action types here, and handle loading state as needed
+      .addCase(fetchIngredients.pending.type, (state) => {
+        state.isLoding = false;
+        state.error = " ";
+      })
 
-export const { ingredientsUploading,  ingredientsUpload, ingredientsUploadError} = burgerIngredientsSlice.actions;
+      .addCase(fetchIngredients.fulfilled.type, (state, action) => {
+        state.isLoding = true;
+        state.error = " ";
+        state.ingredients = action.payload.data;
+      })
+
+      .addCase(fetchIngredients.rejected.type, (state) => {
+        state.isLoding = false;
+        state.error = "Ошибка";
+      });
+  },
+});
+
+export const {
+  ingredientsUploading,
+  ingredientsUpload,
+  ingredientsUploadError,
+} = burgerIngredientsSlice.actions;
 export default burgerIngredientsSlice.reducer;

@@ -1,17 +1,11 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import thunk from "redux-thunk";
+import { BASE_URL, checkResponse } from "../../../utils/api";
 
 export const fetchIngredients = createAsyncThunk(
-  'ingredients/get', 
+  "ingredients/get",
   async (_, thunkApi) => {
-    try {
-      const res = await fetch("https://norma.nomoreparties.space/api/ingredients");
-      const base = await res.json();
-      console.log(base)
-      return base;
-    } catch (err) {
-      console.log(err)
-      return thunkApi.rejectWithValue('asdasd')
-    }
-  } 
-)
+    const res = await fetch(`${BASE_URL}/ingredients`);
+    return checkResponse(res);
+  }
+);

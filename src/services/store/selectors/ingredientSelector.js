@@ -1,3 +1,3 @@
 export const ingredientSelector = (store) => {
-return store.ingredients.ingredients
-}
+  return store.ingredients.ingredients;
+};

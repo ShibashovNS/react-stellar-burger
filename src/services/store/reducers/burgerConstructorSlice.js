@@ -16,10 +16,10 @@ const burgerConstructorSlice = createSlice({
 
     addIngredient: (state, action) => {
       state.draggedIngredients = [...state.draggedIngredients, action.payload];
-      console.log(action.payload)
+      console.log(action.payload);
     },
 
-    moveIngredients: (state, action) => { 
+    moveIngredients: (state, action) => {
       const { indexFrom, indexTo, ingredient } = action.payload;
       state.draggedIngredients.splice(indexFrom, 1);
       state.draggedIngredients.splice(indexTo, 0, ingredient);
@@ -33,7 +33,6 @@ const burgerConstructorSlice = createSlice({
       ];
     },
   },
-
 });
 
 export const { addBun, addIngredient, deliteIngredient, moveIngredients } =

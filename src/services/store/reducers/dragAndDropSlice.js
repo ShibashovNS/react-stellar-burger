@@ -9,7 +9,6 @@ const dragAndDropSlice = createSlice({
   initialState,
 
   reducers: {
-
     element: (state, action) => {
       state.elements = action;
     },

@@ -14,7 +14,7 @@ ReactDOM.render(
     <DndProvider backend={HTML5Backend}>
       <Provider store={store}>
         <App />
-      </Provider>   
+      </Provider>
     </DndProvider>
   </React.StrictMode>,
   document.getElementById("root")

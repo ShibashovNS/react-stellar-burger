@@ -1,6 +1,18 @@
 .itemMidle {
   padding-block-end: inherit;
-  height: calc(100vh - 563px);;
+  height: calc(100vh - 563px);
+  min-width: 570px;
   overflow-x: hidden;
   overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
   }
+
+  .bun { 
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+   }
+
+   

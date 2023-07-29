@@ -1,3 +1,3 @@
 export const detailsSelector = (store) => {
-  return store.ingredDetails.selctIngredient
-}
+  return store.ingredDetails.selctIngredient;
+};

@@ -1,21 +1,11 @@
-import React from 'react';
-import styles from './modal-overlay.module.css'
-import { useDispatch } from 'react-redux';
-import { clickOpen } from '../../services/store/reducers/modalOverlaySlice';
-import { clickDetails } from '../../services/store/reducers/orderDetailsSlice';
+import React from "react";
+import styles from "./modal-overlay.module.css";
+import { useDispatch } from "react-redux";
+import { clickOpen } from "../../services/store/reducers/modalOverlaySlice";
+import { clickDetails } from "../../services/store/reducers/orderDetailsSlice";
 
-function ModalOverlay() {
-
-  const dispatch = useDispatch()
-  
-  const onClick = () => {
-    dispatch(clickOpen(false))
-    dispatch(clickDetails(false))
-  }
-
-  return(
-      <div className={styles.overlay} onClick={onClick}></div>
-  )
+function ModalOverlay({ closeModal }) {
+  return <div className={styles.overlay} onClick={closeModal}></div>;
 }
 
-export default ModalOverlay
+export default ModalOverlay;

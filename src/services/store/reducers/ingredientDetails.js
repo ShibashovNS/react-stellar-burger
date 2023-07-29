@@ -21,12 +21,11 @@ const ingredientDetailsSlice = createSlice({
 
     counter: (state, action) => {
       state.count = action.payload;
-      console.log(action.payload)
-    }
-
-    
+      console.log(action.payload);
+    },
   },
 });
 
-export const { addIngredDetails, clickIngredient, counter} = ingredientDetailsSlice.actions;
+export const { addIngredDetails, clickIngredient, counter } =
+  ingredientDetailsSlice.actions;
 export default ingredientDetailsSlice.reducer;

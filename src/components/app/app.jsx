@@ -1,4 +1,4 @@
-import AppHeader from "../header/app-header/app-header"
+import AppHeader from "../header/app-header/app-header";
 import AppMain from "../main/app-main/app-main";
 import Modal from "../modal/modal";
 import { useState, useEffect } from "react";
@@ -9,49 +9,47 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchIngredients } from "../../services/store/reducers/ingredientQuery";
 import { ingredientSelector } from "../../services/store/selectors/ingredientSelector";
 
-
-
 const App = () => {
-
   const [isloding, setIsLoding] = useState(false);
-  const ingredients = useSelector(ingredientSelector)
-  const {setClickOrderList, setIsOpen } = useSelector(state => state.modalOverlay) 
-  const isClickStutusIngredient = useSelector(state => state.ingredDetails.clickStutus)
-  const isClickStutusDetails = useSelector(state => state.orderDetails.clickStutus)
- 
+  const ingredients = useSelector(ingredientSelector);
+  const { setClickOrderList, setIsOpen } = useSelector(
+    (state) => state.modalOverlay
+  );
+  const isClickStutusIngredient = useSelector(
+    (state) => state.ingredDetails.clickStutus
+  );
+  const isClickStutusDetails = useSelector(
+    (state) => state.orderDetails.clickStutus
+  );
+
   const dispatch = useDispatch();
 
   const childForModal = () => {
     return (
       <Modal>
-        {(isClickStutusDetails && <OrderDetails />) || (isClickStutusIngredient && <IngredientDetails/>)}
+        {(isClickStutusDetails && <OrderDetails />) ||
+          (isClickStutusIngredient && <IngredientDetails />)}
       </Modal>
-    )
-  }
-
-    useEffect(() => {
-      dispatch(fetchIngredients());
-    }, [])
-  
-  if (ingredients.length < 1) return null
-
-    if (isloding) {
-      return (
-        <Preloader />
-      )
-    }
-
-    return (
-      <>
-        <AppHeader />
-        <AppMain />
-        {setIsOpen && (
-          <>
-            {childForModal()}
-          </>
-        )}
-      </>
     );
+  };
+
+  useEffect(() => {
+    dispatch(fetchIngredients());
+  }, []);
+
+  if (ingredients.length < 1) return null;
+
+  if (isloding) {
+    return <Preloader />;
   }
+
+  return (
+    <>
+      <AppHeader />
+      <AppMain />
+      {setIsOpen && childForModal()}
+    </>
+  );
+};
 
 export default App;
