@@ -1,10 +1,8 @@
 import React from 'react';
 import styles from './modal-overlay.module.css'
-import ReactDom, { createPortal } from 'react-dom';
 import { useDispatch } from 'react-redux';
 import { clickOpen } from '../../services/store/reducers/modalOverlaySlice';
-
-const overlayRoot = document.getElementById('react-modal')
+import { clickDetails } from '../../services/store/reducers/orderDetailsSlice';
 
 function ModalOverlay() {
 
@@ -12,6 +10,7 @@ function ModalOverlay() {
   
   const onClick = () => {
     dispatch(clickOpen(false))
+    dispatch(clickDetails(false))
   }
 
   return(

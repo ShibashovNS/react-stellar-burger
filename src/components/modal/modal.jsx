@@ -3,11 +3,9 @@ import styles from './modal.module.css';
 import ReactDom, { createPortal } from 'react-dom';
 import OrderDetails from './order-details/order-details';
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import IngredientDetails from './ingredient-details/ingredient-details';
 import ModalOverlay from '../modal-overlay/modal-overlay';
 import { useDispatch } from 'react-redux';
 import { clickOpen, clickOrderList } from '../../services/store/reducers/modalOverlaySlice';
-import { clickIngredient } from '../../services/store/reducers/ingredientDetails';
 import { clickDetails } from '../../services/store/reducers/orderDetailsSlice';
 
 

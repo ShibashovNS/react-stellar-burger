@@ -3,7 +3,6 @@ import styles from "./app-main.module.css"
 import BurgerIngingredientsTab from "../burger-ingredients/burger-ingredients_tab/burger-ingredients_tab";
 import BurgerIngredients from "../burger-ingredients/burger-ingredients/burger-ingredients";
 import BurgerConstructor, { BurgerConstructorBottom, BurgerConstructorMiddle, BurgerConstructorTop } from "../burger-constructor/burger-constructor";
-import { DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import BurgerConstructorTotal from "../burger-constructor/burger-constructor-total/burger-constructor-total";
 import PropTypes from 'prop-types';
 import { ingredientPropType } from "../../../../src/utils/prop-types";

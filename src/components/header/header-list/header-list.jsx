@@ -2,11 +2,8 @@ import { Logo } from "@ya.praktikum/react-developer-burger-ui-components";
 import { BurgerIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { ListIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { ProfileIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import React from "react";
 import styles from "./header-list.module.css"
-import BurgerIngingredientsTab from "../../main/burger-ingredients/burger-ingredients_tab/burger-ingredients_tab";
-import OrderDetails from "../../modal/order-details/order-details";
-import IngredientDetails from "../../modal/ingredient-details/ingredient-details";
+
 
 function HeaderList() {
   return (

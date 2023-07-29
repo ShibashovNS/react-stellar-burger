@@ -4,6 +4,8 @@ import constructorReducer from "./reducers/burgerConstructorSlice";
 import ingredDetailsReducer from "./reducers/ingredientDetails";
 import orderDetailsReducer from "./reducers/orderDetailsSlice";
 import modalOverlayReducer from './reducers/modalOverlaySlice'
+import ingredientsTabReducer from './reducers/ingredientsTab'
+
 
 
 export const store = configureStore({
@@ -13,5 +15,6 @@ export const store = configureStore({
     ingredDetails: ingredDetailsReducer,
     orderDetails: orderDetailsReducer,
     modalOverlay: modalOverlayReducer,
+    ingredientsTab: ingredientsTabReducer,
   },
 });

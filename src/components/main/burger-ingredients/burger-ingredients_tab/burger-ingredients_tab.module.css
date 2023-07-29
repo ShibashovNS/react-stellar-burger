@@ -2,3 +2,7 @@
   display: flex;
   margin: 0;
 }
+
+.tab {
+  box-shadow: inset 0px -2px 0px #4C4CFF;
+}

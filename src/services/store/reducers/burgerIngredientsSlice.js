@@ -47,7 +47,7 @@ const burgerIngredientsSlice = createSlice({
       
     .addCase(fetchIngredients.rejected.type, (state) => {
       state.isLoding = false;
-      state.error = "Проверка";
+      state.error = "Ошибка";
     })
   }
 })

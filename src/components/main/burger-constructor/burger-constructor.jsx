@@ -1,73 +1,40 @@
-import React, { useRef, useState } from 'react';
+import React, { memo, useCallback, useState } from 'react';
 import styles from './burger-constructor.module.css';
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
-import { DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useDispatch, useSelector } from 'react-redux';
-import { useDrop } from 'react-dnd';
-import { data } from '../../../utils/data';
+import { useDrag, useDrop } from 'react-dnd';
 import { addBun, addIngredient, deliteIngredient, removeList } from '../../../services/store/reducers/burgerConstructorSlice';
 import { v4 as uuidv4 } from 'uuid';
-import { useMemo, useCallback } from 'react';
-import { counter } from '../../../services/store/reducers/ingredientDetails';
-import update from 'immutability-helper';
-import { any } from 'prop-types';
+import { BurgerConstruectorCard } from './burger-constructor-card/burger-constructor-card';
 
-const BurgerConstructor = ({ ingredient, index }) => {
+
+const BurgerConstructor = memo(function BurgerConstructor ({ data, index }) {
 
   const dispatch = useDispatch();
   const {draggedBun, draggedIngredients} = useSelector(state => state.constIngredient)
   const { selctIngredient, clickStutus, count} = useSelector(state => state.ingredDetails)
-
-  const [cards, setCards] = useState([])
 
   const {
     bun,
     ingredients,
     isLoding,
   } = useSelector(state => state.ingredients);
-
-
-  const [, refDrop] = useDrop({
+  
+  const [{ isDropped }, refDrop] = useDrop({
     accept: "ingredient",
-    
     drop(item) {
       const ItemWithUuId = {
         ...item,
         _uuid: uuidv4(), 
       };
-    
       { item.type === 'bun' ? dispatch(addBun(ItemWithUuId)) : (dispatch(addIngredient(ItemWithUuId))) };
-    },    
-  }) 
-
-  const moveCard = useCallback((dragIndex, hoverIndex) => {
-    setCards((prevCards) =>
-      update(prevCards, {
-        $splice: [
-          [dragIndex, 1],
-          [hoverIndex, 0, prevCards[dragIndex]],
-        ],
-      }),
-    )
-  }, [])
-
-  const renderCard = useCallback((item, index) => {
-    return (
-      <div key={item._uuid} style={{ display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
-        <DragIcon/>
-        <ConstructorElement
-          type="top"
-          isLocked={true}
-          text={draggedBun[0].name + ' (Верх)'}
-          price={draggedBun[0].price}
-          thumbnail={draggedBun[0].image}
-          key={draggedBun[0]._uuid}
-          index={index}
-          moveCard={moveCard}
-        />
-      </div>
-    )
-  }, [])
+    },
+    collect: (monitor) => ({
+      isDropped: monitor.isOver()
+    })
+  })
+  
+  const [, drop] = useDrop(() => ({ accept: "card" }))
 
   const handleDeliteElement = useCallback((uuid) => {
     dispatch(deliteIngredient(uuid))
@@ -81,20 +48,22 @@ const BurgerConstructor = ({ ingredient, index }) => {
             <ConstructorElement
               type="top"
               isLocked={true}
-              text={draggedBun[0].name + ' (Верх)'}
-              price={draggedBun[0].price}
-              thumbnail={draggedBun[0].image}
-              key={draggedBun[0]._uuid}
+              text={item.name + ' (Верх)'}
+              price={item.price}
+              thumbnail={item.image}
+              key={item._uuid}
             />
           )
         })
         }
       </div>
 
-
-      <div className={styles.itemMidle + " custom-scroll pr-2"} style={{ display: 'flex', flexDirection: 'column', gap: '16px'}}>
-        {
-          draggedIngredients.map((item) => { renderCard(item, index) })
+      <div className={styles.itemMidle + " custom-scroll pr-2"} style={{ display: 'flex', flexDirection: 'column', gap: '16px'}}>    
+        {draggedIngredients.filter((card) => card.type !== 'bun').map((card, index) => {
+          return (
+            <BurgerConstruectorCard key={card._uuid} index={index} data={card} handleDeliteElement={handleDeliteElement}/>
+          )
+          })
         }
       </div >
       
@@ -104,10 +73,10 @@ const BurgerConstructor = ({ ingredient, index }) => {
             <ConstructorElement
             type="bottom"
             isLocked={true}
-            text={draggedBun[0].name + ' (Низ)'}
-            price={draggedBun[0].price}
-            thumbnail={draggedBun[0].image}
-            key={draggedBun[0]._uuid}
+            text={item.name + ' (Низ)'}
+            price={item.price}
+            thumbnail={item.image}
+            key={item._uuid}
         />
           )
         })
@@ -115,6 +84,6 @@ const BurgerConstructor = ({ ingredient, index }) => {
       </div>
     </div>
   )
-}
+})
   
 export default BurgerConstructor

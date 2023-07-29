@@ -1,9 +1,8 @@
-import React from "react";
+import React, { useCallback, useMemo } from "react";
 import styles from './burger-constructor-total.module.css'
 import { Button, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useDispatch, useSelector } from "react-redux";
 import { clickOpen, clickOrderList } from "../../../../services/store/reducers/modalOverlaySlice";
-import { ingredientSelector } from "../../../../services/store/selectors/ingredientSelector";
 import { clickDetails } from "../../../../services/store/reducers/orderDetailsSlice";
 import { setDetails } from "../../../../services/store/reducers/detailsQuery";
 

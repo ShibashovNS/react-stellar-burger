@@ -4,7 +4,6 @@ import IngredientCard from "../burger-ingredient-card/burger-ingredient-card";
 import PropTypes from 'prop-types';
 import { ingredientPropType } from "../../../../../src/utils/prop-types";
 import { useSelector } from "react-redux";
-import { ingredientSelector } from "../../../../services/store/selectors/ingredientSelector";
 import { memoIngredientsSelector } from "../../../../services/store/selectors/memoIngredientSelector";
 
 
