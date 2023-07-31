@@ -44,9 +44,9 @@ const burgerIngredientsSlice = createSlice({
         state.ingredients = action.payload.data;
       })
 
-      .addCase(fetchIngredients.rejected.type, (state) => {
+      .addCase(fetchIngredients.rejected.type, (state, action) => {
         state.isLoding = false;
-        state.error = "Ошибка";
+        state.error = action.payload;
       });
   },
 });

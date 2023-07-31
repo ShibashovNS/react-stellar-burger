@@ -50,7 +50,7 @@ const BurgerConstructor = memo(function BurgerConstructor({ data, index }) {
   });
 
   return (
-    <div ref={refDrop}>
+    <div ref={refDrop} className={isDropped ? styles.gradient_border : {}}>
       <div className={styles.bun + " pl-6 pt-4 pb-4"}>
         {draggedBun.map((item) => {
           return (

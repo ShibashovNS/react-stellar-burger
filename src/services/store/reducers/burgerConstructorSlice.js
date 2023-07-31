@@ -32,9 +32,19 @@ const burgerConstructorSlice = createSlice({
         ),
       ];
     },
+
+    clearOrder: (state, action) => {
+      state.draggedIngredients = action.payload;
+      state.draggedBun = action.payload;
+    },
   },
 });
 
-export const { addBun, addIngredient, deliteIngredient, moveIngredients } =
-  burgerConstructorSlice.actions;
+export const {
+  addBun,
+  addIngredient,
+  deliteIngredient,
+  moveIngredients,
+  clearOrder,
+} = burgerConstructorSlice.actions;
 export default burgerConstructorSlice.reducer;

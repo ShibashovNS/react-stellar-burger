@@ -31,7 +31,7 @@ const orderDetailsSlice = createSlice({
       })
       .addCase(setDetails.rejected.type, (state, action) => {
         state.isLoding = false;
-        state.error = "Пока текст....";
+        state.error = action.payload;
       });
   },
 });

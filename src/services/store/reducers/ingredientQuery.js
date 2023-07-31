@@ -1,11 +1,9 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import thunk from "redux-thunk";
-import { BASE_URL, checkResponse } from "../../../utils/api";
+import { BASE_URL, checkResponse, getEngredients } from "../../../utils/api";
 
+//await нужен когда после ответа мы хотим еще что-то делать, в данном случае он лишний
 export const fetchIngredients = createAsyncThunk(
   "ingredients/get",
-  async (_, thunkApi) => {
-    const res = await fetch(`${BASE_URL}/ingredients`);
-    return checkResponse(res);
-  }
+  getEngredients
 );
