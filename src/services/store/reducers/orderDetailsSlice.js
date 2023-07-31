@@ -28,10 +28,12 @@ const orderDetailsSlice = createSlice({
         state.isLoding = true;
         state.error = " ";
         state.orderData = action.payload.order.number;
+        console.log(action)
       })
       .addCase(setDetails.rejected.type, (state, action) => {
         state.isLoding = false;
         state.error = action.payload;
+        console.log(action)
       });
   },
 });

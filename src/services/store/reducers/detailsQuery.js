@@ -10,8 +10,4 @@ import {
 import { addBun, addIngredient, clearOrder } from "./burgerConstructorSlice";
 
 // у thunkApi есть методы
-export const setDetails = createAsyncThunk("details/post", (id, thunkApi) =>
-  sendOrder(id).then(() => {
-    thunkApi.dispatch(clearOrder([]));
-  })
-);
+export const setDetails = createAsyncThunk("details/post", (id, thunkApi) => sendOrder(id));

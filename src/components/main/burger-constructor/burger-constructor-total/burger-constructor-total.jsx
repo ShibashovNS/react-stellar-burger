@@ -11,6 +11,7 @@ import {
 } from "../../../../services/store/reducers/modalOverlaySlice";
 import { clickDetails } from "../../../../services/store/reducers/orderDetailsSlice";
 import { setDetails } from "../../../../services/store/reducers/detailsQuery";
+import { clearOrder } from "../../../../services/store/reducers/burgerConstructorSlice";
 
 function BurgerConstructorTotal({ name }) {
   const { draggedBun, draggedIngredients } = useSelector(
@@ -23,6 +24,7 @@ function BurgerConstructorTotal({ name }) {
     dispatch(clickDetails(true));
     dispatch(clickOpen(true));
     dispatch(setDetails([...draggedBun, ...draggedIngredients]));
+    dispatch(clearOrder([]))
   };
 
   return (
