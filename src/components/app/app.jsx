@@ -1,75 +1,55 @@
-import styles from "./app.module.css";
-import AppHeader from "../header/app-header/app-header"
+import AppHeader from "../header/app-header/app-header";
 import AppMain from "../main/app-main/app-main";
 import Modal from "../modal/modal";
-import ModalOverlay from "../modal-overlay/modal-overlay";
-import { useState } from "react";
-import React, { useEffect } from "react";
+import { useState, useEffect } from "react";
 import OrderDetails from "../modal/order-details/order-details";
 import IngredientDetails from "../modal/ingredient-details/ingredient-details";
-import PropTypes from 'prop-types';
-import { ingredientPropType } from "../../utils/prop-types";
+import Preloader from "../preloder/preloder";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchIngredients } from "../../services/store/reducers/ingredientQuery";
+import { ingredientSelector } from "../../services/store/selectors/ingredientSelector";
 
+const App = () => {
+  const [isloding, setIsLoding] = useState(false);
+  const ingredients = useSelector(ingredientSelector);
+  const { setClickOrderList, setIsOpen } = useSelector(
+    (state) => state.modalOverlay
+  );
+  const isClickStutusIngredient = useSelector(
+    (state) => state.ingredDetails.clickStutus
+  );
+  const isClickStutusDetails = useSelector(
+    (state) => state.orderDetails.clickStutus
+  );
 
-function App() {
+  const dispatch = useDispatch();
 
-  const [isModalOpen, setIsOpen] = useState(false);
-  const [dataIngredients, setData] = useState([]);
-  const [imageIngredient, setImageIngredient] = useState(null);
-  const [isOpenOrderDetails, setOpenOrderDetails] = useState(false)
-  const [isClickOrderList, setClickOrderList] = useState(false)
-  const [isClickIngredient, setClickIngredient] = useState(false)
-  
-  const onClick = () => {
-    setIsOpen(true)
-  }
-  
   const childForModal = () => {
     return (
-      <Modal onClick={onClick} setClickOrderList={setClickOrderList} setIsOpen={setIsOpen}>
-        {isClickOrderList && <OrderDetails /> || isClickIngredient && <IngredientDetails imageIngredient={imageIngredient} />}
-      </Modal>     
-    )
+      <Modal>
+        {(isClickStutusDetails && <OrderDetails />) ||
+          (isClickStutusIngredient && <IngredientDetails />)}
+      </Modal>
+    );
+  };
+
+  useEffect(() => {
+    dispatch(fetchIngredients());
+  }, []);
+
+  if (ingredients.length < 1) return null;
+
+  if (isloding) {
+    return <Preloader />;
   }
 
-  const getData = () => {
-    return (
-      fetch("https://norma.nomoreparties.space/api/ingredients")
-        .then((res) => {
-          if (res.ok) {
-            return res.json();
-          }
-          return Promise.reject(`Ошибка: ${res.status}`);
-        })
-        .then((res) => {
-        setData(res.data)
-        })
-        .catch((err) => {
-          console.log('Ошибка. Запрос не выполнен');
-        })
-    )
-  }
-
-    useEffect(() => {
-      
-      getData()
-    
-    }, [])
-
-  if (dataIngredients.length < 1) return null
-      
   return (
     <>
-      <AppHeader/>
-      <AppMain setClickIngredient={setClickIngredient} setClickOrderList={setClickOrderList} setIsOpen={ setIsOpen } setImageIngredient={setImageIngredient} ingredients={dataIngredients} />
-
-      {isModalOpen && (
-      <> 
-          {childForModal()}
-      </>
-      )}
+      <AppHeader />
+      <AppMain />
+      {setIsOpen && childForModal()}
     </>
-  ); 
-}
+  );
+};
 
 export default App;

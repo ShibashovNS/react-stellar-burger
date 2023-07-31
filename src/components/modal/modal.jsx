@@ -1,42 +1,49 @@
-import React from 'react';
-import styles from './modal.module.css';
-import ReactDom, { createPortal } from 'react-dom';
-import OrderDetails from './order-details/order-details';
-import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import IngredientDetails from './ingredient-details/ingredient-details';
-import ModalOverlay from '../modal-overlay/modal-overlay';
+import React from "react";
+import styles from "./modal.module.css";
+import ReactDom, { createPortal } from "react-dom";
+import OrderDetails from "./order-details/order-details";
+import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
+import ModalOverlay from "../modal-overlay/modal-overlay";
+import { useDispatch } from "react-redux";
+import {
+  clickOpen,
+  clickOrderList,
+} from "../../services/store/reducers/modalOverlaySlice";
+import { clickDetails } from "../../services/store/reducers/orderDetailsSlice";
 
+const modalRoot = document.getElementById("react-modal");
 
-const modalRoot = document.getElementById('react-modal')
+function Modal({ children }) {
+  const closeModal = () => {
+    dispatch(clickOpen(false));
+    dispatch(clickDetails(false));
+  };
 
-function Modal({setClickOrderList, setIsOpen, children }) {
-  
+  const dispatch = useDispatch();
+
   React.useEffect(() => {
     function onEsc(event) {
-      if (event.code === 'Escape') {
-        setIsOpen(false)
+      if (event.code === "Escape") {
+        closeModal();
       }
     }
-    document.addEventListener('keydown', onEsc);
+    document.addEventListener("keydown", onEsc);
 
-    return () => document.removeEventListener('keydown', onEsc)
-  }, [])
-  
-  const onClick = () => {
-    setIsOpen(false)
-  }
+    return () => document.removeEventListener("keydown", onEsc);
+  }, []);
 
   return ReactDom.createPortal(
-    (
-      <>
+    <>
       <div className={styles.modal}>
-        <div className={styles.close_icon}><CloseIcon onClick={onClick}/></div>
+        <div className={styles.close_icon}>
+          <CloseIcon onClick={closeModal} />
+        </div>
         {children}
       </div>
-        <ModalOverlay setClickOrderList={setClickOrderList} setIsOpen={setIsOpen}/>
-      </>
-    ), modalRoot
-  )
+      <ModalOverlay closeModal={closeModal} />
+    </>,
+    modalRoot
+  );
 }
 
-export default Modal
+export default Modal;
