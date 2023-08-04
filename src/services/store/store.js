@@ -5,6 +5,7 @@ import ingredDetailsReducer from "./reducers/ingredientDetails";
 import orderDetailsReducer from "./reducers/orderDetailsSlice";
 import modalOverlayReducer from "./reducers/modalOverlaySlice";
 import ingredientsTabReducer from "./reducers/ingredientsTab";
+import userReducer from "./reducers/userAuthSlice/userAuthSlice";
 
 export const store = configureStore({
   reducer: {
@@ -14,5 +15,6 @@ export const store = configureStore({
     orderDetails: orderDetailsReducer,
     modalOverlay: modalOverlayReducer,
     ingredientsTab: ingredientsTabReducer,
+    userStatus: userReducer,
   },
 });

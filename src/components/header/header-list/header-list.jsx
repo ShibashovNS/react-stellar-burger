@@ -3,6 +3,7 @@ import { BurgerIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { ListIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { ProfileIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./header-list.module.css";
+import { Link } from "react-router-dom";
 
 function HeaderList() {
   return (
@@ -13,7 +14,7 @@ function HeaderList() {
             <li className={styles.linkList_item}>
               <a className={styles.header_link}>
                 <BurgerIcon />
-                <span className="pl-2 text_type_main-default">Конструктор</span>
+                <Link to='/' className="pl-2 text_type_main-default">Конструктор</Link>
               </a>
             </li>
 
@@ -37,7 +38,7 @@ function HeaderList() {
         <li className={styles.linkList_item}>
           <a className={styles.header_link}>
             <ProfileIcon type="primary" />
-            <span className="pl-2 text_type_main-default">Личный кабинет</span>
+            <Link to='/profile' className="pl-2 text_type_main-default">Личный кабинет</Link>
           </a>
         </li>
       </ul>
