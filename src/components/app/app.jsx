@@ -9,20 +9,23 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchIngredients } from "../../services/store/reducers/ingredientQuery";
 import { ingredientSelector } from "../../services/store/selectors/ingredientSelector";
 
-import { Register, RegisterPage } from "./pages/register/register";
 import HeaderList from "../header/header-list/header-list";
 import { Route, Routes } from "react-router-dom";
-import { userStatusAuth } from "../../utils/api";
-import HomePage from "./pages/home";
-import registerPage from "./pages/register";
-import LoginPage from "./pages/login";
-import PasswordPage from "./pages/forgotPassword";
-import resetPasswordPage from "./pages/resetPassword";
-import Profile from "./pages/profile/profile";
-import Layout from "./pages/layout/layout";
+
 import { store } from "../../services/store/store";
 import { OnlyAuth, OnlyUnAuth } from "../protected-route/protected-route";
-import { Login } from "./pages/login/login";
+import Layout from "../pages/layout/layout";
+import HomePage from "../pages/home";
+import { Register } from "../pages/register/register";
+import PasswordPage from "../pages/forgotPassword";
+import resetPasswordPage from "../pages/resetPassword";
+import Profile from "../pages/profile/profile";
+import { Login } from "../pages/login/login";
+import ResetPassword from "../pages/reset-password/reset-password";
+import { UserForm } from "../pages/userForm/userForm";
+import OrdersPage from "../pages/orders/orders";
+
+
 
 const App = () => {
   const [isloding, setIsLoding] = useState(false);
@@ -69,10 +72,14 @@ console.log(useSelector((store) => store.userStatus.user))
         <Route path="/" element={<Layout/>}>
           <Route path="/" element={<HomePage/>} />
           <Route path="/login" element={<OnlyUnAuth component={<Login/>} />}/>
-          <Route path="/register" element={<registerPage/>} />
+          <Route path="/register" element={<Register/>} />
           <Route path="/forgot-password" element={<PasswordPage/>} />
-          <Route path="/reset-password" element={<resetPasswordPage/>} />
-          <Route path="/profile" element={<OnlyAuth component={<Profile/>} />} />
+          <Route path="/reset-password" element={<ResetPassword/>} />
+          <Route path="/profile" element={<OnlyAuth component={<Profile />} />} >
+            <Route index element={<UserForm />}/>
+            <Route path={'/profile/orders'} element={<OrdersPage/>} />
+          </Route>
+          
         </Route>
       </Routes>
       {setIsOpen && childForModal()}

@@ -3,7 +3,8 @@ import styles from "./login.module.css"
 import React, { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { loginUser } from "../../../../utils/api";
+import { loginUser } from "../../../utils/api";
+
 
 export const Login = () => {
   const location = useLocation();

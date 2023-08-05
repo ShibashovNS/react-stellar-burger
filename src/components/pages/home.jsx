@@ -1,4 +1,5 @@
-import AppMain from "../../main/app-main/app-main";
+import AppMain from "../main/app-main/app-main";
+
 
 export default function HomePage() {
   return <AppMain />;

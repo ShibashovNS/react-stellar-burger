@@ -30,3 +30,12 @@
  cursor: pointer;
  justify-content: end;
 }
+
+.link {
+  text-decoration: none;
+  color: var(--text-inactive-color)
+}
+
+.link_active {
+  color: var(--text-primary-color);
+}

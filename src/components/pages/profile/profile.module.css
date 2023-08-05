@@ -3,16 +3,12 @@
   display: flex;
   flex-direction: row;
   margin: 40px auto;
-}
-
-.form {
-  text-align: end;
+  align-items: baseline;
 }
 
 .nav {
   max-width: 320px;
 }
-
 
 .list {
   list-style: none;

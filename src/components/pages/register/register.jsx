@@ -6,9 +6,10 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./register.module.css";
 import React, { useState } from "react";
-import { registerUser } from "../../../../utils/api";
+
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { registerUser } from "../../../utils/api";
 
 export const Register = () => {
   const [userData, setUserData] = useState({});

@@ -4,11 +4,7 @@ import { setAuthChecked, setUser } from "../services/store/reducers/userAuthSlic
 export const BASE_URL = "https://norma.nomoreparties.space/api";
 
 export function checkResponse(res) {
-  if (res.ok) {
-    return res.json();
-  }
-  /*при ошибке отклоняю промис*/
-  return Promise.reject(`Ошибка: ${res.status}`);
+  return res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
 }
 
 //делаю обертку вокруг fetch чтобы в разных запросах можно было использовать, url базовый статичный, меняется только endpoint в этом api
@@ -103,14 +99,17 @@ const refreshToken = () => {
       body: JSON.stringify({
         token: localStorage.getItem("refreshToken")
       })
-    })
+    }).then(checkResponse)
 };
 
 const fetchWithRefresh = async (url, options) => {
   try {
     const res = await fetch(url, options);
+    console.log(res)
     return await checkResponse(res);
+    
   } catch (err) {
+    console.log(err)
     if (err.message === "jwt expired") {
       const refreshData = await refreshToken();
       if (!refreshData.success) {
@@ -136,6 +135,7 @@ export const getUser = () => {
         authorization: localStorage.getItem("accessToken")
       }
     }).then((res) => {
+      console.log(res)
       if (res.success) {
         dispatch(setUser(res.user));
       } else {
@@ -163,3 +163,36 @@ export const checkUserAuth = createAsyncThunk(
     }
   }
 )
+
+export const forgotPassword = ( {email} ) => {
+  return request(`/password-reset` , {
+    method: 'POST',
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({email}),
+  }
+  )
+};
+
+export const resetPassword = ( {data} ) => {
+  return request(`/password-reset/reset` , {
+    method: 'POST',
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({data}),
+  }
+  )
+};
+
+export const logoutUser = () => {
+  return request(`/auth/logout` , {
+    method: 'POST',
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ token: localStorage.getItem('refreshToken') }),
+  }
+  )
+};
