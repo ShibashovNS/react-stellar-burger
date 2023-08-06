@@ -15,32 +15,27 @@ function HeaderList() {
         <li className={styles.linkList_item}>
           <ul className={styles.linkList_childItem}>
             <li className={styles.linkList_item}>
-              <a className={styles.header_link}>
+              <NavLink
+                to="/"
+                className={({ isActive }) =>
+                  styleLink(isActive) + " pl-2 text_type_main-default"
+                }
+              >
                 <BurgerIcon />
-                <NavLink
-                  to="/"
-                  className={({ isActive }) =>
-                  styleLink(isActive) +
-                    " pl-2 text_type_main-default"
-                  }
-                >
-                  Конструктор
-                </NavLink>
-              </a>
+                <span className="pl-2">Конструктор</span>
+              </NavLink>
             </li>
 
             <li className={styles.linkList_item}>
-              <a className={styles.header_link}>
+              <NavLink
+                className={({ isActive }) =>
+                  styleLink(isActive) + " pl-2 text_type_main-default"
+                }
+              >
                 <ListIcon />
-                <NavLink
-                  className={({ isActive }) =>
-                  styleLink(isActive) +
-                    " pl-2 text_type_main-default"
-                  }
-                >
-                  Лента Заказов
-                </NavLink>
-              </a>
+                <span className="pl-2">Лента Заказов</span>
+                
+              </NavLink>
             </li>
           </ul>
         </li>
@@ -51,17 +46,15 @@ function HeaderList() {
         </li>
 
         <li className={styles.linkList_item}>
-          <a className={styles.header_link}>
-            <ProfileIcon type="primary" />
-            <NavLink
-              to="/profile"
-              className={({ isActive }) =>
+          <NavLink
+            to="/profile"
+            className={({ isActive }) =>
               styleLink(isActive) + " pl-2 text_type_main-default"
-              }
-            >
-              Личный кабинет
-            </NavLink>
-          </a>
+            }
+          >
+            <ProfileIcon type="primary" />
+            <span className="pl-2">Личный кабинет</span>
+          </NavLink>
         </li>
       </ul>
     </nav>

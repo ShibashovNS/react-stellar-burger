@@ -10,11 +10,15 @@ import {
   clickOrderList,
 } from "../../services/store/reducers/modalOverlaySlice";
 import { clickDetails } from "../../services/store/reducers/orderDetailsSlice";
+import { useNavigate } from "react-router-dom";
 
 const modalRoot = document.getElementById("react-modal");
 
 function Modal({ children }) {
+const navigate = useNavigate()
+
   const closeModal = () => {
+    navigate(-1)
     dispatch(clickOpen(false));
     dispatch(clickDetails(false));
   };
@@ -25,6 +29,7 @@ function Modal({ children }) {
     function onEsc(event) {
       if (event.code === "Escape") {
         closeModal();
+        navigate(-1)
       }
     }
     document.addEventListener("keydown", onEsc);

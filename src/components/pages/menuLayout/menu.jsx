@@ -11,9 +11,6 @@ export default function MenuPage() {
   
   const dispatch = useDispatch()
 
-
-  
-  
   const logout = () => {
     dispatch(logoutUser())
   }
@@ -27,11 +24,9 @@ export default function MenuPage() {
         <ul className={styles.list}>
           <li className={styles.item}>
             <NavLink
-               className={({ isActive }) =>
-               styleLink(isActive) + " text text_type_main-medium text_color_inactive"}
-              activeClassName={styles.active}
+              className={({ isActive }) =>
+              styleLink(isActive) + " text text_type_main-medium text_color_inactive"}
               to="/profile/"
-              exact
             >
               Профиль
             </NavLink>
@@ -40,7 +35,6 @@ export default function MenuPage() {
             <NavLink
                className={({ isActive }) =>
                styleLink(isActive) + " text text_type_main-medium text_color_inactive"}
-              activeClassName={styles.active}
               to="/profile/orders"
             >
               История заказов
@@ -48,6 +42,8 @@ export default function MenuPage() {
           </li>
           <li className={styles.item}>
             <Button
+              htmlType="submit"
+              type="secondary"
               className={`${styles.logout} text text_type_main-medium text_color_inactive`}
               onClick={logout}
             >

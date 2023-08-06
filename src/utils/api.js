@@ -99,7 +99,7 @@ const refreshToken = () => {
       body: JSON.stringify({
         token: localStorage.getItem("refreshToken")
       })
-    }).then(checkResponse)
+    })
 };
 
 const fetchWithRefresh = async (url, options) => {
@@ -112,6 +112,7 @@ const fetchWithRefresh = async (url, options) => {
     console.log(err)
     if (err.message === "jwt expired") {
       const refreshData = await refreshToken();
+      console.log(refreshData)
       if (!refreshData.success) {
         return Promise.reject(refreshData);
       }
@@ -186,7 +187,9 @@ export const resetPassword = ( {data} ) => {
   )
 };
 
-export const logoutUser = () => {
+export const logoutUser = createAsyncThunk(
+  "user/logout",
+  async (_, { dispatch }) => {
   return request(`/auth/logout` , {
     method: 'POST',
     headers: {
@@ -195,4 +198,4 @@ export const logoutUser = () => {
     body: JSON.stringify({ token: localStorage.getItem('refreshToken') }),
   }
   )
-};
+})

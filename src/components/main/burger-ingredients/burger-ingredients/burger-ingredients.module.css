@@ -9,5 +9,11 @@ row-gap: 32px;
   margin: 0;
   font-size: 24px;
   font-weight: 700;
-  line-height: 30px
+  line-height: 30px;
+  
+}
+
+.link {
+  text-decoration: none;
+  color:var(--text-primary-light-standart-text, #F2F2F3);
 }

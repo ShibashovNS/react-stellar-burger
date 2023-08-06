@@ -10,9 +10,9 @@ import { useState } from "react";
 export function UserForm() {
   const dispatch = useDispatch();
 
-  const userdata = useSelector((store)=>store.userStatus.user)
+  const {name, email} = useSelector((store)=>store.userStatus.user)
 
-  const [value, setValue] = useState({});
+  const [value, setValue] = useState({name, email, password:"......."});
 
   const onChange = (e) => {
     setValue({
@@ -42,7 +42,9 @@ export function UserForm() {
         onChange={onChange}
       />
       <PasswordInput
+        type="password"
         name="password"
+        autoComplete="on"
         placeholder="Пароль"
         icon="EditIcon"
         value={value?.password}

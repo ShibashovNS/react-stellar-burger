@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect } from "react";
 import { setAuthChecked } from "../../services/store/reducers/userAuthSlice/userAuthSlice";
 import { checkUserAuth } from "../../utils/api";
+import Preloader from "../preloder/preloder";
 
 const Protected = ({ onlyUnAuth = false, component }) => {
   const dispatch = useDispatch();
@@ -18,7 +19,7 @@ const Protected = ({ onlyUnAuth = false, component }) => {
 
   if (!isAuthChecked) {
     // Запрос еще выполняется
-    return null; // или прелоадер
+    return <Preloader/>; // или прелоадер
   }
 
   if (onlyUnAuth && user) {
