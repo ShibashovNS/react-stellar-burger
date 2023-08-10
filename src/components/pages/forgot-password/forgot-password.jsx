@@ -12,29 +12,29 @@ import { forgotPassword } from "../../../utils/api";
 function ForgotPassword() {
   const dispatch = useDispatch();
   const [userData, setUserData] = useState({});
-
+  const navigate = useNavigate();
   const onChange = (e) => {
     setUserData({
       ...userData,
       [e.target.name]: e.target.value,
     });
-  
+
     console.log(userData);
   };
 
   const onSubmit = (evt) => {
     evt.preventDefault();
+    dispatch(forgotPassword(userData));
   };
 
   const onClick = () => {
-    dispatch(forgotPassword(userData))
-  }
-
-
-
+    navigate("/login");
+  };
   return (
     <div className={styles.container}>
-      <h1 className={`text text_type_main-medium mb-6`}>Восстановление пароля</h1>
+      <h1 className={`text text_type_main-medium mb-6`}>
+        Восстановление пароля
+      </h1>
       <form className={styles.form} onSubmit={onSubmit}>
         <div className="mb-6">
           <EmailInput
@@ -44,7 +44,7 @@ function ForgotPassword() {
             onChange={onChange}
           />
         </div>
-        <Button htmlType="submit" type="primary" size="medium"  onClick={onClick}>
+        <Button htmlType="submit" type="primary" size="medium">
           Восстановить
         </Button>
       </form>
@@ -56,6 +56,7 @@ function ForgotPassword() {
           htmlType="button"
           type="secondary"
           size="medium"
+          onClick={onClick}
         >
           Войти
         </Button>

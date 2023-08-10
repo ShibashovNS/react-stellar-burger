@@ -26,11 +26,10 @@ export const Register = () => {
 
   const onSubmit = (evt) => {
     evt.preventDefault();
+    dispatch(registerUser(userData));
   };
 
-  const onClick = () => {
-    dispatch(registerUser(userData));
-  }
+
   
 
   return (
@@ -67,7 +66,6 @@ export const Register = () => {
           htmlType="submit"
           type="primary"
           size="medium"
-          onClick={onClick}
       >
           Зарегистрироваться
         </Button>

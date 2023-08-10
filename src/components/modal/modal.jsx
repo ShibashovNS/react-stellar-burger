@@ -16,9 +16,8 @@ const modalRoot = document.getElementById("react-modal");
 
 function Modal({ children }) {
 const navigate = useNavigate()
-
   const closeModal = () => {
-    navigate(-1)
+    navigate('/')
     dispatch(clickOpen(false));
     dispatch(clickDetails(false));
   };
@@ -29,7 +28,7 @@ const navigate = useNavigate()
     function onEsc(event) {
       if (event.code === "Escape") {
         closeModal();
-        navigate(-1)
+        navigate('/')
       }
     }
     document.addEventListener("keydown", onEsc);

@@ -10,6 +10,7 @@
   justify-content: center;
   background-color: #131316;
   position: fixed;
+  opacity: 0.5;
   top: 0;
   left: 0;
   bottom: 0;

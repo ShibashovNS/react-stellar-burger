@@ -23,16 +23,13 @@ export const Login = () => {
 
   const onSubmit = (evt) => {
     evt.preventDefault();
-  };
-
-  const onClick = () => {
     dispatch(loginUser(value));
-  }
+  };
 
 
   return (
     <div className={styles.container}>
-    <h2 className={`text text_type_main-medium mb-6`} onClick={onClick}>Вход</h2>
+    <h2 className={`text text_type_main-medium mb-6`}>Вход</h2>
     
     <form className={styles.form} onSubmit={onSubmit} >
       <div className="mb-6">
@@ -48,10 +45,12 @@ export const Login = () => {
         onChange={onChange}
         value={value?.password || ""}
         name="password"
+        type="password"
+        autoComplete="on"
         extraClass="mb-2"
           />
       </div>
-      <Button type="primary" size="large" onClick={onClick}>Войти</Button>
+      <Button type="primary" size="large">Войти</Button>
     </form>
 
     <p className="text text_type_main-default text_color_inactive mt-20">Вы— новый пользователь?

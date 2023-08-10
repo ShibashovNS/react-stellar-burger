@@ -1,5 +1,9 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { setAuthChecked, setUser } from "../services/store/reducers/userAuthSlice/userAuthSlice";
+import {
+  setAuthChecked,
+  setUser,
+} from "../services/store/reducers/userAuthSlice/userAuthSlice";
+import { useNavigate } from "react-router-dom";
 
 export const BASE_URL = "https://norma.nomoreparties.space/api";
 
@@ -47,9 +51,6 @@ export const registerUser = createAsyncThunk(
           return Promise.reject("Ошибка данных с сервера");
         }
       })
-      .catch((err) => {
-        console.log(err);
-      })
       .finally(() => {
         console.log("Ok");
       });
@@ -91,28 +92,27 @@ export const loginUser = createAsyncThunk(
 
 // запрос на получение токенов через рефреш токен
 const refreshToken = () => {
-    return request(`/auth/token`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        token: localStorage.getItem("refreshToken")
-      })
-    })
+  return request(`/auth/token`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      token: localStorage.getItem("refreshToken"),
+    }),
+  });
 };
 
 const fetchWithRefresh = async (url, options) => {
   try {
     const res = await fetch(url, options);
-    console.log(res)
+    console.log(res);
     return await checkResponse(res);
-    
   } catch (err) {
-    console.log(err)
+    console.log(err);
     if (err.message === "jwt expired") {
       const refreshData = await refreshToken();
-      console.log(refreshData)
+      console.log(refreshData);
       if (!refreshData.success) {
         return Promise.reject(refreshData);
       }
@@ -129,14 +129,14 @@ const fetchWithRefresh = async (url, options) => {
 
 export const getUser = () => {
   return (dispatch) => {
-    return fetchWithRefresh("https://norma.nomoreparties.space/api/auth/user", {
+    return fetchWithRefresh(`${BASE_URL}/auth/user`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        authorization: localStorage.getItem("accessToken")
-      }
+        authorization: localStorage.getItem("accessToken"),
+      },
     }).then((res) => {
-      console.log(res)
+      console.log(res);
       if (res.success) {
         dispatch(setUser(res.user));
       } else {
@@ -145,7 +145,6 @@ export const getUser = () => {
     });
   };
 };
-
 
 export const checkUserAuth = createAsyncThunk(
   "user/auth",
@@ -163,39 +162,40 @@ export const checkUserAuth = createAsyncThunk(
       dispatch(setUser(null));
     }
   }
-)
+);
 
-export const forgotPassword = ( {email} ) => {
-  return request(`/password-reset` , {
-    method: 'POST',
+export const forgotPassword = ({ email }) => {
+  return request(`/password-reset`, {
+    method: "POST",
     headers: {
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
     },
-    body: JSON.stringify({email}),
-  }
-  )
+    body: JSON.stringify({ email }),
+  });
 };
 
-export const resetPassword = ( {data} ) => {
-  return request(`/password-reset/reset` , {
-    method: 'POST',
+export const resetPassword = ({ data }) => {
+  return request(`/password-reset/reset`, {
+    method: "POST",
     headers: {
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
     },
-    body: JSON.stringify({data}),
-  }
-  )
+    body: JSON.stringify({ data }),
+  });
 };
 
 export const logoutUser = createAsyncThunk(
   "user/logout",
   async (_, { dispatch }) => {
-  return request(`/auth/logout` , {
-    method: 'POST',
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({ token: localStorage.getItem('refreshToken') }),
+    return request(`/auth/logout`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ token: localStorage.getItem("refreshToken") }),
+    }).then(() => {
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("refreshToken");
+    });
   }
-  )
-})
+);

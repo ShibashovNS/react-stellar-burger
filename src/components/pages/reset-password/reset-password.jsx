@@ -26,11 +26,8 @@ function ResetPassword() {
 
   const onSubmit = (evt) => {
     evt.preventDefault();
-  };
-
-  const onClick = () => {
     dispatch(resetPassword(value))
-  }
+  };
 
   return (
     <div className={styles.container}>
@@ -55,7 +52,7 @@ function ResetPassword() {
             onChange={onChange}
           />
         </div>
-        <Button htmlType="submit" type="primary" size="medium" onClick={onClick}>
+        <Button htmlType="submit" type="primary" size="medium">
           Сохранить
         </Button>
       </form>

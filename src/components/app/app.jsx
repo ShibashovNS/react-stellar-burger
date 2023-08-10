@@ -26,6 +26,9 @@ import { UserForm } from "../pages/userForm/userForm";
 import OrdersPage from "../pages/orders/orders";
 import { memoIngredientsSelector } from "../../services/store/selectors/memoIngredientSelector";
 import IngredientDetailsSingle from "../pages/ingredient-details-single/ingredient-details-single";
+import { checkUserAuth, getUser } from "../../utils/api";
+import { createAsyncThunk } from "@reduxjs/toolkit";
+import NotFound from "../pages/not-found/non-found";
 
 const App = () => {
   const [isloding, setIsLoding] = useState(false);
@@ -42,24 +45,18 @@ const App = () => {
 
   const location = useLocation();
   const background = location.state && location.state.background;
-  console.log(background);
 
   const dispatch = useDispatch();
-  console.log(useLocation());
 
   const childForModal = () => {
-    return (
-      <Modal>
-        {(isClickStutusDetails && <OrderDetails />)}
-      </Modal>
-    );
+    return <Modal>{isClickStutusDetails && <OrderDetails />}</Modal>;
   };
 
   useEffect(() => {
     dispatch(fetchIngredients());
-  }, []);
-
-  console.log(useSelector(memoIngredientsSelector));
+    dispatch(checkUserAuth());
+    dispatch(getUser());
+  }, [dispatch]);
 
   if (ingredients.length < 1) return null;
 
@@ -73,9 +70,18 @@ const App = () => {
         <Route path="/" element={<Layout />}>
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<OnlyUnAuth component={<Login />} />} />
-          <Route path="/register" element={<OnlyUnAuth component= {<Register/>} />} />
-          <Route path="/forgot-password" element={<OnlyUnAuth component ={<PasswordPage />}/>} />
-          <Route path="/reset-password" element={<OnlyUnAuth component ={<ResetPassword />}/>} />
+          <Route
+            path="/register"
+            element={<OnlyUnAuth component={<Register />} />}
+          />
+          <Route
+            path="/forgot-password"
+            element={<OnlyUnAuth component={<PasswordPage />} />}
+          />
+          <Route
+            path="/reset-password"
+            element={<OnlyUnAuth component={<ResetPassword />} />}
+          />
           <Route path="/profile" element={<OnlyAuth component={<Profile />} />}>
             <Route index element={<UserForm />} />
             <Route path={"/profile/orders"} element={<OrdersPage />} />
@@ -84,12 +90,20 @@ const App = () => {
             path={"profile/orders/:id"}
             element={<IngredientDetailsSingle />}
           />
-          <Route path="*" element={null} />
+          <Route path="*" element={<NotFound/>} />
         </Route>
       </Routes>
       {background && (
         <Routes>
-          <Route path="profile/orders/:id" element={<Modal> <IngredientDetailsSingle isSinglePage={false} /></Modal>} />
+          <Route
+            path="profile/orders/:id"
+            element={
+              <Modal>
+                {" "}
+                <IngredientDetailsSingle isSinglePage={false} />
+              </Modal>
+            }
+          />
         </Routes>
       )}
       {isClickStutusDetails && childForModal()}

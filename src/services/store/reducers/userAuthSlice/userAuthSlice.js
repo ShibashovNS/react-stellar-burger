@@ -3,7 +3,7 @@ import { loginUser, logoutUser, registerUser } from '../../../../utils/api';
 
 
 const initialState = {
-  user: {},
+  user: null,
   isAuthChecked: false,
 
   isLoding: false,
@@ -49,13 +49,10 @@ const userSlice = createSlice({
     .addCase(loginUser.pending.type, (state, action) => {
       state.isLoding = false;
       state.error = " ";
-      console.log(action.payload)
     })
       
     .addCase(loginUser.fulfilled.type, (state, action) => {
       state.user = action.payload.user;
-      console.log(action.payload.user)
-
       state.isAuthChecked = true;
       state.user = action.payload.user;
       console.log(action.payload)

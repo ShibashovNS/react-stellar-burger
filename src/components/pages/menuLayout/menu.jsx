@@ -8,11 +8,14 @@ import { logoutUser } from "../../../utils/api";
 
 
 export default function MenuPage() {
+  const navigate = useNavigate()
   
   const dispatch = useDispatch()
 
   const logout = () => {
     dispatch(logoutUser())
+    .then(() => navigate('/login'))
+    .catch((err) => console.error(`Error: ${err}`));
   }
 
   const styleLink = (isActive) =>

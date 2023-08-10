@@ -21,7 +21,8 @@ function OrderDetails() {
       <p className={styles.text_order + " text_type_main-medium pt-8"}>
         идентификатор заказа
       </p>
-      {isLoding?<img className="mt-15" src={image} alt="Заказ оформлен" />:<Preloader/>}
+      
+      {isLoding?<img className="mt-15" src={image} alt="Заказ оформлен" />: <Preloader/>}
       <p className={styles.text_status + " text_type_main-default pt-15"}>
         ваш заказ начали готовить
       </p>
@@ -37,3 +38,4 @@ function OrderDetails() {
 }
 
 export default OrderDetails;
+

@@ -18,6 +18,8 @@ function BurgerConstructorTotal({ name }) {
     (state) => state.constIngredient
   );
 
+  const isDisabled = useSelector((store) => store.userStatus.user)
+
   const dispatch = useDispatch();
 
   const onClick = () => {
@@ -41,7 +43,7 @@ function BurgerConstructorTotal({ name }) {
         </span>
         <CurrencyIcon />
       </div>
-      <Button disabled={[...draggedBun, ...draggedIngredients].length<=0} onClick={onClick} htmlType="submit" type="primary" size="large">
+      <Button disabled={([...draggedBun, ...draggedIngredients].length<=0) || !isDisabled} onClick={onClick} htmlType="submit" type="primary" size="large">
         {name}
       </Button>
     </div>
