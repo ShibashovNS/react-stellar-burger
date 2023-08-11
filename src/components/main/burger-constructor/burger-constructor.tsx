@@ -20,25 +20,22 @@ const BurgerConstructor = memo(function BurgerConstructor() {
   const draggedIngredients = useSelector(constructorSelector) as Array<object>;
 
   type TingredintsConstructor = {
-    calories: number;
-    carbohydrates: number;
-    count: number;
-    fat: number;
-    image: string;
-    image_large: string;
-    image_mobile: string;
-    name: string;
-    price: number;
-    proteins: number;
-    type: string;
-    __v: number;
-    _id: string;
-    _uuid: string;
+    calories?: number;
+    carbohydrates?: number;
+    count?: number;
+    fat?: number;
+    image?: string;
+    image_large?: string;
+    image_mobile?: string;
+    name?: string;
+    price?: number;
+    proteins?: number;
+    type?: string;
+    __v?: number;
+    _id?: string;
+    _uuid?: string;
   };
 
-  type TitemConstructor<TingredintsConstructor> = {
-    [key in keyof TingredintsConstructor]?:TingredintsConstructor[key] 
-  }
 
   const [{ isDropped }, refDrop] = useDrop({
     accept: "ingredient",
@@ -68,7 +65,8 @@ const BurgerConstructor = memo(function BurgerConstructor() {
   return (
     <div ref={refDrop} className={isDropped ? styles.gradient_border : ""}>
       <div className={styles.bun + " pl-6 pt-4 pb-4"}>
-        {draggedBun.map((item:TitemConstructor<TingredintsConstructor>) => {
+      {draggedBun.length>0 }      
+        {draggedBun.map((item: TingredintsConstructor) => {
           return (
             <ConstructorElement
               type="top"
