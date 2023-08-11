@@ -7,27 +7,42 @@ import {
   addBun,
   addIngredient,
   deliteIngredient,
-  removeList,
 } from "../../../services/store/reducers/burgerConstructorSlice";
 import { v4 as uuidv4 } from "uuid";
 import { BurgerConstruectorCard } from "./burger-constructor-card/burger-constructor-card";
+import { constructorBunSelector } from "../../../services/store/selectors/IngredientsSelector/constructorBunSelector";
+import { constructorSelector } from "../../../services/store/selectors/IngredientsSelector/constructorSelector";
+import { string } from "prop-types";
 
-const BurgerConstructor = memo(function BurgerConstructor({ data, index }) {
+const BurgerConstructor = memo(function BurgerConstructor() {
   const dispatch = useDispatch();
-  const { draggedBun, draggedIngredients } = useSelector(
-    (state) => state.constIngredient
-  );
-  const { selctIngredient, clickStutus, count } = useSelector(
-    (state) => state.ingredDetails
-  );
+  const draggedBun = useSelector(constructorBunSelector) as Array<object>;
+  const draggedIngredients = useSelector(constructorSelector) as Array<object>;
 
-  const { bun, ingredients, isLoding } = useSelector(
-    (state) => state.ingredients
-  );
+  type TingredintsConstructor = {
+    calories: number;
+    carbohydrates: number;
+    count: number;
+    fat: number;
+    image: string;
+    image_large: string;
+    image_mobile: string;
+    name: string;
+    price: number;
+    proteins: number;
+    type: string;
+    __v: number;
+    _id: string;
+    _uuid: string;
+  };
+
+  type TitemConstructor<TingredintsConstructor> = {
+    [key in keyof TingredintsConstructor]?:TingredintsConstructor[key] 
+  }
 
   const [{ isDropped }, refDrop] = useDrop({
     accept: "ingredient",
-    drop(item) {
+    drop(item: TingredintsConstructor) {
       const itemWithUuId = {
         ...item,
         _uuid: uuidv4(),
@@ -37,6 +52,7 @@ const BurgerConstructor = memo(function BurgerConstructor({ data, index }) {
           ? dispatch(addBun(itemWithUuId))
           : dispatch(addIngredient(itemWithUuId));
       }
+      console.log(item);
     },
     collect: (monitor) => ({
       isDropped: monitor.isOver(),
@@ -45,14 +61,14 @@ const BurgerConstructor = memo(function BurgerConstructor({ data, index }) {
 
   const [, drop] = useDrop(() => ({ accept: "card" }));
 
-  const handleDeliteElement = useCallback((uuid) => {
+  const handleDeliteElement = useCallback((uuid: string)=> {
     dispatch(deliteIngredient(uuid));
-  });
+  },[dispatch]);
 
   return (
-    <div ref={refDrop} className={isDropped ? styles.gradient_border : {}}>
+    <div ref={refDrop} className={isDropped ? styles.gradient_border : ""}>
       <div className={styles.bun + " pl-6 pt-4 pb-4"}>
-        {draggedBun.map((item) => {
+        {draggedBun.map((item:TitemConstructor<TingredintsConstructor>) => {
           return (
             <ConstructorElement
               type="top"

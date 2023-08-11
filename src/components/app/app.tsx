@@ -8,17 +8,14 @@ import Preloader from "../preloder/preloder";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchIngredients } from "../../services/store/reducers/ingredientQuery";
 import { ingredientSelector } from "../../services/store/selectors/ingredientSelector";
-
 import HeaderList from "../header/header-list/header-list";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
-
 import { store } from "../../services/store/store";
 import { OnlyAuth, OnlyUnAuth } from "../protected-route/protected-route";
 import Layout from "../pages/layout/layout";
 import HomePage from "../pages/home";
 import { Register } from "../pages/register/register";
 import PasswordPage from "../pages/forgotPassword";
-import resetPasswordPage from "../pages/resetPassword";
 import Profile from "../pages/profile/profile";
 import { Login } from "../pages/login/login";
 import ResetPassword from "../pages/reset-password/reset-password";
@@ -28,20 +25,17 @@ import { memoIngredientsSelector } from "../../services/store/selectors/memoIngr
 import IngredientDetailsSingle from "../pages/ingredient-details-single/ingredient-details-single";
 import { checkUserAuth, getUser } from "../../utils/api";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import NotFound from "../pages/not-found/non-found";
+import NotFound from "../pages/not-found/non-found (2)";
+import { any } from "prop-types";
+
 
 const App = () => {
   const [isloding, setIsLoding] = useState(false);
   const ingredients = useSelector(ingredientSelector);
-  const { setClickOrderList, setIsOpen } = useSelector(
-    (state) => state.modalOverlay
-  );
-  const isClickStutusIngredient = useSelector(
-    (state) => state.ingredDetails.clickStutus
-  );
+  
   const isClickStutusDetails = useSelector(
-    (state) => state.orderDetails.clickStutus
-  );
+    (state: any)  => (state.orderDetails.clickStutus)  
+  ) as boolean ;
 
   const location = useLocation();
   const background = location.state && location.state.background;

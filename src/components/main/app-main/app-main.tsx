@@ -1,4 +1,4 @@
-import React, { createRef } from "react";
+import React, { SyntheticEvent, createRef } from "react";
 import { useEffect, useRef, useState } from "react";
 import styles from "./app-main.module.css";
 import BurgerIngingredientsTab from "../burger-ingredients/burger-ingredients_tab/burger-ingredients_tab";
@@ -9,7 +9,7 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import BurgerConstructorTotal from "../burger-constructor/burger-constructor-total/burger-constructor-total";
 import PropTypes from "prop-types";
-import { ingredientPropType } from "../../../../src/utils/prop-types";
+import { ingredientPropType } from "../../../utils/prop-types";
 import BurgerConstructor from "../burger-constructor/burger-constructor";
 import { useInView } from "react-intersection-observer";
 import { useDispatch, useSelector } from "react-redux";
@@ -18,50 +18,62 @@ import { changeTypeTab } from "../../../services/store/reducers/ingredientsTab";
 function AppMain() {
   const dispatch = useDispatch();
 
-  const bunRef = useRef(null);
-  const sauceRef = useRef(null);
-  const mainRef = useRef(null);
+  const bunRef = useRef<HTMLHeadingElement>(null);
+  const sauceRef = useRef<HTMLHeadingElement>(null);
+  const mainRef = useRef<HTMLHeadingElement>(null);
 
-  const current = useSelector((state) => state.ingredientsTab.typeTab);
+  const current = useSelector((state: any) => state.ingredientsTab.typeTab);
 
-  function handleTabClick(type) {
+  function handleTabClick(type: string) {
     dispatch(changeTypeTab(type));
 
     switch (type) {
       case "bun":
-        bunRef.current.scrollIntoView({ behavior: "smooth" });
+        if (bunRef.current !== null) {
+          bunRef.current.scrollIntoView({ behavior: "smooth" });
+        }
         break;
 
       case "sauce":
-        sauceRef.current.scrollIntoView({ behavior: "smooth" });
+        if (sauceRef.current !== null) {
+          sauceRef.current.scrollIntoView({ behavior: "smooth" });
+        }
         break;
 
       case "main":
-        mainRef.current.scrollIntoView({ behavior: "smooth" });
+        if (sauceRef.current !== null) {
+          sauceRef.current.scrollIntoView({ behavior: "smooth" });
+        }
         break;
       default:
         break;
     }
   }
 
-  function handleTab(evt) {
-    const target = evt.target;
+  function handleTab(evt:SyntheticEvent) { 
+    const target = evt.target as HTMLDivElement;
     const scrollTop = target.scrollTop;
-    const sauceScroll =
-      sauceRef.current.getBoundingClientRect().y -
-      bunRef.current.getBoundingClientRect().y -
-      40;
-    const mainScroll =
-      mainRef.current.getBoundingClientRect().y -
-      bunRef.current.getBoundingClientRect().y -
-      40;
+    if (
+      sauceRef.current !== null &&
+      bunRef.current !== null &&
+      mainRef.current !== null
+    ) {
+      const sauceScroll =
+        sauceRef.current.getBoundingClientRect().y -
+        bunRef.current.getBoundingClientRect().y -
+        40;
+      const mainScroll =
+        mainRef.current.getBoundingClientRect().y -
+        bunRef.current.getBoundingClientRect().y -
+        40;
 
-    if (scrollTop >= mainScroll) {
-      dispatch(changeTypeTab("main"));
-    } else if (scrollTop < sauceScroll) {
-      dispatch(changeTypeTab("bun"));
-    } else {
-      dispatch(changeTypeTab("sauce"));
+      if (scrollTop >= mainScroll) {
+        dispatch(changeTypeTab("main"));
+      } else if (scrollTop < sauceScroll) {
+        dispatch(changeTypeTab("bun"));
+      } else {
+        dispatch(changeTypeTab("sauce"));
+      }
     }
   }
 
@@ -72,7 +84,6 @@ function AppMain() {
           current={current}
           handleTabClick={handleTabClick}
         />
-
         <div
           className={styles.main_ingredientBlock + " custom-scroll"}
           onScroll={handleTab}
@@ -90,7 +101,7 @@ function AppMain() {
       </section>
 
       <section className={"pt-25"}>
-        <BurgerConstructor index={0} />
+        <BurgerConstructor />
         <BurgerConstructorTotal name={"Оформить заказ"} />
       </section>
     </main>

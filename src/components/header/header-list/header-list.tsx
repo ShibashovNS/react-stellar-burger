@@ -6,7 +6,7 @@ import styles from "./header-list.module.css";
 import { Link, NavLink } from "react-router-dom";
 
 function HeaderList() {
-  const styleLink = (isActive) =>
+  const styleLink = (isActive:boolean) =>
     `${styles.link}${(isActive && ` ${styles.link_active}`) || ""}`;
 
   return (
@@ -21,18 +21,15 @@ function HeaderList() {
                   styleLink(isActive) + " pl-2 text_type_main-default"
                 }
               >
-                <BurgerIcon />
+                <BurgerIcon type={"secondary"} />
                 <span className="pl-2">Конструктор</span>
               </NavLink>
             </li>
 
             <li className={styles.linkList_item}>
               <NavLink
-                className={({ isActive }) =>
-                  styleLink(isActive) + " pl-2 text_type_main-default"
-                }
-              >
-                <ListIcon />
+                className={({ isActive }) => styleLink(isActive) + " pl-2 text_type_main-default"} to={""}              >
+                <ListIcon type={"secondary"} />
                 <span className="pl-2">Лента Заказов</span>
                 
               </NavLink>
