@@ -12,6 +12,7 @@ import {
   counter,
 } from "../../../../services/store/reducers/ingredientDetails";
 import { useDrag } from "react-dnd";
+import { Navigate, useNavigate } from "react-router-dom";
 
 function IngredientCard({ ingredient }) {
   const [elements, setElements] = useState(ingredient);
@@ -27,10 +28,11 @@ function IngredientCard({ ingredient }) {
 
   const dispatch = useDispatch();
 
+
   const onClick = () => {
     dispatch(clickIngredient(true));
     dispatch(addIngredDetails(ingredient));
-    dispatch(clickOpen(true));
+    dispatch(clickOpen(true))
   };
 
   return (

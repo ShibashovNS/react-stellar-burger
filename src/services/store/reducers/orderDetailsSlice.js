@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { setDetails } from "./detailsQuery";
+import Preloader from "../../../components/preloder/preloder";
 
 const initialState = {
   orderData: [],

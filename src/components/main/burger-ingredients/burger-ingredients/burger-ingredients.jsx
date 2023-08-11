@@ -5,9 +5,11 @@ import PropTypes from "prop-types";
 import { ingredientPropType } from "../../../../../src/utils/prop-types";
 import { useSelector } from "react-redux";
 import { memoIngredientsSelector } from "../../../../services/store/selectors/memoIngredientSelector";
+import { Link, useLocation } from "react-router-dom";
 
 function BurgerIngredients({ productName, typeProduct }) {
   const ingredients = useSelector(memoIngredientsSelector);
+  const location = useLocation();
 
   return (
     <>
@@ -16,7 +18,7 @@ function BurgerIngredients({ productName, typeProduct }) {
         {ingredients
           .filter((item) => item.type === typeProduct)
           .map((item) => {
-            return <IngredientCard key={item._id} ingredient={item} />;
+            return <Link className={styles.link} key={item._id} to={`profile/orders/${item._id}`} state={{ background: location }}> <IngredientCard key={item._id} ingredient={item}/> </Link>;
           })}
       </div>
     </>
