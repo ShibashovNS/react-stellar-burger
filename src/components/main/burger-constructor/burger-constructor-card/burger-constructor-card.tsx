@@ -10,7 +10,7 @@ import styles from "./burger-constructor-card.module.css";
 import { TConstructorCard, TingredintsConstructor } from "../../../../utils/types";
 import { number } from "prop-types";
 
-export const BurgerConstruectorCard: FC<TConstructorCard<TingredintsConstructor>> = memo(function BurgerConstruectorCard({
+export const BurgerConstruectorCard: FC<TConstructorCard> = memo(function BurgerConstruectorCard({
   data,
   handleDeliteElement,
   index,
@@ -37,7 +37,7 @@ export const BurgerConstruectorCard: FC<TConstructorCard<TingredintsConstructor>
 
   const [, dropRef] = useDrop({
     accept: "card",
-    hover({ ingredient }:TConstructorCard<TingredintsConstructor>) {
+    hover({ ingredient }:TConstructorCard) {
       if (ingredient._uuid === data._uuid) return;
      
       dispatch(

@@ -4,11 +4,11 @@ export type TingredintsConstructor = {
   carbohydrates?: number;
   count?: number;
   fat?: number;
-  image?: string;
+  image: string;
   image_large?: string;
-  image_mobile?: string;
-  name?: string;
-  price?: number;
+  image_mobile: string;
+  name: string;
+  price: number;
   proteins?: number;
   type?: string;
   __v?: number;
@@ -16,10 +16,10 @@ export type TingredintsConstructor = {
   _uuid?: string;
 };
 
-export type TConstructorCard<T> = {
+export type TConstructorCard = {
   data: TingredintsConstructor;
   index: number;
-  ingredient: T;
+  ingredient: TingredintsConstructor;
   handleDeliteElement;
 }
 
