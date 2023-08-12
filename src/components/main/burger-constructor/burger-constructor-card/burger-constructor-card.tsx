@@ -2,28 +2,27 @@ import {
   ConstructorElement,
   DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import React, { memo } from "react";
+import React, { FC, memo } from "react";
 import { useDrag, useDrop } from "react-dnd";
 import { useDispatch, useSelector } from "react-redux";
 import { moveIngredients } from "../../../../services/store/reducers/burgerConstructorSlice";
 import styles from "./burger-constructor-card.module.css";
+import { TConstructorCard, TingredintsConstructor } from "../../../../utils/types";
+import { number } from "prop-types";
 
-export const BurgerConstruectorCard = memo(function BurgerConstruectorCard({
+export const BurgerConstruectorCard: FC<TConstructorCard<TingredintsConstructor>> = memo(function BurgerConstruectorCard({
   data,
   handleDeliteElement,
   index,
-  text,
-  moveCard,
-  findCard,
 }) {
   const { name, price, image_mobile, _id, _uuid } = data;
   const { draggedBun, draggedIngredients } = useSelector(
-    (state) => state.constIngredient
+    (state:any) => state.constIngredient
   );
 
   const dispatch = useDispatch();
 
-  const findIndex = (item) => {
+  const findIndex = (item: number) => {
     return draggedIngredients.indexOf(item);
   };
 
@@ -38,12 +37,12 @@ export const BurgerConstruectorCard = memo(function BurgerConstruectorCard({
 
   const [, dropRef] = useDrop({
     accept: "card",
-    hover({ ingredient }) {
+    hover({ ingredient }:TConstructorCard<TingredintsConstructor>) {
       if (ingredient._uuid === data._uuid) return;
-
+     
       dispatch(
         moveIngredients({
-          indexFrom: findIndex(ingredient),
+          indexFrom: (findIndex(ingredient)),
           indexTo: index,
           ingredient: ingredient,
         })
@@ -59,7 +58,7 @@ export const BurgerConstruectorCard = memo(function BurgerConstruectorCard({
       style={{ opacity }}
       className={styles.card}
     >
-      <DragIcon />
+      <DragIcon type={"error"} />
       <ConstructorElement
         text={name}
         price={price}

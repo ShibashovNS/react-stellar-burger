@@ -13,35 +13,12 @@ import { BurgerConstruectorCard } from "./burger-constructor-card/burger-constru
 import { constructorBunSelector } from "../../../services/store/selectors/IngredientsSelector/constructorBunSelector";
 import { constructorSelector } from "../../../services/store/selectors/IngredientsSelector/constructorSelector";
 import { string } from "prop-types";
+import { TingredintsConstructor } from "../../../utils/types";
 
 const BurgerConstructor = memo(function BurgerConstructor() {
   const dispatch = useDispatch();
   const draggedBun = useSelector(constructorBunSelector);
   const draggedIngredients = useSelector(constructorSelector);
-
-  type TingredintsConstructor = {
-    calories?: number;
-    carbohydrates?: number;
-    count?: number;
-    fat?: number;
-    image?: string;
-    image_large?: string;
-    image_mobile?: string;
-    name?: string;
-    price?: number;
-    proteins?: number;
-    type?: string;
-    __v?: number;
-    _id?: string;
-    _uuid?: string;
-  } & {
-    type: string;
-    index?: number; 
-    _uuid?: string;
-    }
-
- 
-
 
   const [{ isDropped }, refDrop] = useDrop({
     accept: "ingredient",
