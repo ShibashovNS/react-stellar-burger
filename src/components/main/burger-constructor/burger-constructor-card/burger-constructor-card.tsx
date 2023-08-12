@@ -38,15 +38,17 @@ export const BurgerConstruectorCard: FC<TConstructorCard> = memo(function Burger
   const [, dropRef] = useDrop({
     accept: "card",
     hover({ ingredient }:TConstructorCard) {
-      if (ingredient._uuid === data._uuid) return;
+      if (ingredient !== undefined) {
+        if (ingredient._uuid === data._uuid) return;
      
-      dispatch(
-        moveIngredients({
-          indexFrom: (findIndex(ingredient)),
-          indexTo: index,
-          ingredient: ingredient,
-        })
-      );
+        dispatch(
+          moveIngredients({
+            indexFrom: (findIndex(ingredient)),
+            indexTo: index,
+            ingredient: ingredient,
+          })
+        );
+      }
     },
   });
 
