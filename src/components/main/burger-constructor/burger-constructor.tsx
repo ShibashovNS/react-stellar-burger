@@ -16,8 +16,8 @@ import { string } from "prop-types";
 
 const BurgerConstructor = memo(function BurgerConstructor() {
   const dispatch = useDispatch();
-  const draggedBun = useSelector(constructorBunSelector) as Array<object>;
-  const draggedIngredients = useSelector(constructorSelector) as Array<object>;
+  const draggedBun = useSelector(constructorBunSelector);
+  const draggedIngredients = useSelector(constructorSelector);
 
   type TingredintsConstructor = {
     calories?: number;
@@ -34,7 +34,13 @@ const BurgerConstructor = memo(function BurgerConstructor() {
     __v?: number;
     _id?: string;
     _uuid?: string;
-  };
+  } & {
+    type: string;
+    index?: number; 
+    _uuid?: string;
+    }
+
+ 
 
 
   const [{ isDropped }, refDrop] = useDrop({
@@ -64,8 +70,7 @@ const BurgerConstructor = memo(function BurgerConstructor() {
 
   return (
     <div ref={refDrop} className={isDropped ? styles.gradient_border : ""}>
-      <div className={styles.bun + " pl-6 pt-4 pb-4"}>
-      {draggedBun.length>0 }      
+      <div className={styles.bun + " pl-6 pt-4 pb-4"}>      
         {draggedBun.map((item: TingredintsConstructor) => {
           return (
             <ConstructorElement
@@ -82,8 +87,8 @@ const BurgerConstructor = memo(function BurgerConstructor() {
 
       <div className={styles.itemMidle + " custom-scroll pr-2"}>
         {draggedIngredients
-          .filter((card) => card.type !== "bun")
-          .map((card, index) => {
+          .filter((card:TingredintsConstructor) => card.type !== "bun")
+          .map((card:TingredintsConstructor, index: number) => {
             return (
               <BurgerConstruectorCard
                 key={card._uuid}
@@ -96,7 +101,7 @@ const BurgerConstructor = memo(function BurgerConstructor() {
       </div>
 
       <div className={styles.bun + " pl-6 pt-4"}>
-        {draggedBun.map((item) => {
+        {draggedBun.map((item:TingredintsConstructor) => {
           return (
             <ConstructorElement
               type="bottom"
