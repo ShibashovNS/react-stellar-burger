@@ -22,7 +22,7 @@ export const BurgerConstruectorCard: FC<TConstructorCard<TingredintsConstructor>
 
   const dispatch = useDispatch();
 
-  const findIndex = (item: number) => {
+  const findIndex = (item:TingredintsConstructor) => {
     return draggedIngredients.indexOf(item);
   };
 
