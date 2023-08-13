@@ -25,7 +25,7 @@ import { memoIngredientsSelector } from "../../services/store/selectors/memoIngr
 import IngredientDetailsSingle from "../pages/ingredient-details-single/ingredient-details-single";
 import { checkUserAuth, getUser } from "../../utils/api";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import NotFound from "../pages/not-found/non-found (2)";
+import NotFound from "../pages/not-found/non-found";
 import { any } from "prop-types";
 
 

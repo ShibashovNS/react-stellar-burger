@@ -16,7 +16,7 @@ import { UserForm } from "../userForm/userForm";
 import AppHeader from "../../header/app-header/app-header";
 
 export default function Profile() {
-  const onSubmit = (evt) => {
+  const onSubmit = (evt: React.FormEvent ) => {
     evt.preventDefault();
   };
 

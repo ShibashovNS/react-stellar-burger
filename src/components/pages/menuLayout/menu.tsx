@@ -13,11 +13,9 @@ export default function MenuPage() {
 
   const logout = () => {
     dispatch(logoutUser())
-    .then(() => navigate('/login'))
-    .catch((err) => console.error(`Error: ${err}`));
   }
 
-  const styleLink = (isActive) =>
+  const styleLink = (isActive: boolean) =>
     `${styles.link}${(isActive && ` ${styles.link_active}`) || ""}`
   
   return (
