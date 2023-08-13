@@ -28,6 +28,12 @@ export type TWithChildren<T> = T & { children?: React.ReactNode };
  
 
 export type TingredientType = {
-  productName: "Булки" | "Начинки" | "Соусы";
-  typeProduct: "bun" |  "main" | "sauce";
+  productName: "Булки" | "Соусы" | "Начинки";
+  typeProduct: "bun" | "main" | "sauce";
+  
 }
+
+export type TburgerIngingredients = {
+  current: "bun" | "main" | "sauce";
+  handleTabClick: (value: string) => void
+} 
