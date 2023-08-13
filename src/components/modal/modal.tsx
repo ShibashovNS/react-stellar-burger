@@ -11,10 +11,11 @@ import {
 } from "../../services/store/reducers/modalOverlaySlice";
 import { clickDetails } from "../../services/store/reducers/orderDetailsSlice";
 import { useNavigate } from "react-router-dom";
+import { TWithChildren } from "../../utils/types";
 
-const modalRoot = document.getElementById("react-modal");
+const modalRoot = document.getElementById("react-modal")!;
 
-function Modal({ children }) {
+function Modal({ children }:TWithChildren<unknown>) {
 const navigate = useNavigate()
   const closeModal = () => {
     navigate('/')
@@ -25,7 +26,7 @@ const navigate = useNavigate()
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    function onEsc(event) {
+    function onEsc(event: KeyboardEvent) {
       if (event.code === "Escape") {
         closeModal();
         navigate('/')
@@ -40,7 +41,7 @@ const navigate = useNavigate()
     <>
       <div className={styles.modal}>
         <div className={styles.close_icon}>
-          <CloseIcon onClick={closeModal} />
+          <CloseIcon onClick={closeModal} type={"primary"}/>
         </div>
         {children}
       </div>

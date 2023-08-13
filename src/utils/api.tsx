@@ -4,22 +4,24 @@ import {
   setUser,
 } from "../services/store/reducers/userAuthSlice/userAuthSlice";
 import { useNavigate } from "react-router-dom";
+import { TLogin } from "./types";
+import { string } from "prop-types";
 
 export const BASE_URL = "https://norma.nomoreparties.space/api";
 
-export function checkResponse(res) {
-  return res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
+export function checkResponse(res: Response) {
+  return res.ok ? res.json() : res.json().then((err: any) => Promise.reject(err));
 }
 
 //делаю обертку вокруг fetch чтобы в разных запросах можно было использовать, url базовый статичный, меняется только endpoint в этом api
-export function request(endpoint, options) {
+export function request(endpoint: string, options: RequestInit | undefined) {
   return fetch(`${BASE_URL}${endpoint}`, options).then(checkResponse);
 }
 
 // async нужен когда несколько await поэтому убрал от сюда + а далее передаю рес, но его убрал т.к в стрелочной функции рес передается один и тотже в функицию
-export const getEngredients = () => request(`/ingredients`);
+export const getEngredients = () => request(`/ingredients`,{});
 
-export const sendOrder = (dataId) => {
+export const sendOrder = (dataId: void) => {
   return request(`/orders`, {
     method: "POST",
     headers: {
@@ -60,7 +62,7 @@ export const registerUser = createAsyncThunk(
 //запрос на авторизацию
 export const loginUser = createAsyncThunk(
   "user/login",
-  async (data, { dispatch }) => {
+  async (data: TLogin, thunkApi) => {
     return request("/auth/login", {
       method: "POST",
       headers: {
@@ -103,24 +105,25 @@ const refreshToken = () => {
   });
 };
 
-const fetchWithRefresh = async (url, options) => {
+const fetchWithRefresh = async (url: string, options: any) => {
   try {
     const res = await fetch(url, options);
     console.log(res);
     return await checkResponse(res);
   } catch (err) {
-    console.log(err);
-    if (err.message === "jwt expired") {
-      const refreshData = await refreshToken();
-      console.log(refreshData);
-      if (!refreshData.success) {
-        return Promise.reject(refreshData);
+    if (err instanceof Error) {
+      if (err.message === "jwt expired") {
+        const refreshData = await refreshToken();
+        console.log(refreshData);
+        if (!refreshData.success) {
+          return Promise.reject(refreshData);
+        }
+        localStorage.setItem("accessToken", refreshData.accessToken);
+        localStorage.setItem("refreshToken", refreshData.refreshToken);
+        options.headers.authorization = refreshData.accessToken;
+        const res = await fetch(url, options);
+        return await checkResponse(res);
       }
-      localStorage.setItem("accessToken", refreshData.accessToken);
-      localStorage.setItem("refreshToken", refreshData.refreshToken);
-      options.headers.authorization = refreshData.accessToken;
-      const res = await fetch(url, options);
-      return await checkResponse(res);
     } else {
       return Promise.reject(err);
     }
@@ -128,7 +131,7 @@ const fetchWithRefresh = async (url, options) => {
 };
 
 export const getUser = () => {
-  return (dispatch) => {
+  return (dispatch: (arg0: { payload: any; type: "user/setUser"; }) => void) => {
     return fetchWithRefresh(`${BASE_URL}/auth/user`, {
       method: "GET",
       headers: {
@@ -164,7 +167,7 @@ export const checkUserAuth = createAsyncThunk(
   }
 );
 
-export const forgotPassword = ({ email }) => {
+export const forgotPassword = ({ email }: { email: string }) => {
   return request(`/password-reset`, {
     method: "POST",
     headers: {
@@ -174,7 +177,7 @@ export const forgotPassword = ({ email }) => {
   });
 };
 
-export const resetPassword = ({ data }) => {
+export const resetPassword = ({ data }: any) => {
   return request(`/password-reset/reset`, {
     method: "POST",
     headers: {

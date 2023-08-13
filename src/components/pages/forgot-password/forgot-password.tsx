@@ -4,25 +4,26 @@ import {
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./forgot-password.module.css";
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 
 import { useDispatch } from "react-redux";
 import { forgotPassword } from "../../../utils/api";
+import { TForgotPassword } from "../../../utils/types";
 
 function ForgotPassword() {
   const dispatch = useDispatch();
-  const [userData, setUserData] = useState({});
+  const [userData, setUserData] = useState<TForgotPassword>({
+    email:"",
+  });
   const navigate = useNavigate();
-  const onChange = (e) => {
+  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     setUserData({
       ...userData,
       [e.target.name]: e.target.value,
     });
-
-    console.log(userData);
   };
 
-  const onSubmit = (evt) => {
+  const onSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
     dispatch(forgotPassword(userData));
   };

@@ -37,3 +37,21 @@ export type TburgerIngingredients = {
   current: "bun" | "main" | "sauce";
   handleTabClick: (value: string) => void
 } 
+
+export type TModalOverlay = {
+  closeModal: () => void;
+}
+
+export type TForgotPassword = {
+  email: string;
+}
+
+export type TLogin = {
+  password: string;
+  email: string;
+}
+export type TProfile = {
+  password: string;
+  name: string;
+  email: string;
+}

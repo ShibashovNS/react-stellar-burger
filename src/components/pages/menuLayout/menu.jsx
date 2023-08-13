@@ -9,7 +9,6 @@ import { logoutUser } from "../../../utils/api";
 
 export default function MenuPage() {
   const navigate = useNavigate()
-  
   const dispatch = useDispatch()
 
   const logout = () => {

@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import { detailsSelector } from "../../../services/store/selectors/detailsSelector";
 import { useParams } from "react-router-dom";
 import { memoIngredientsSelector } from "../../../services/store/selectors/memoIngredientSelector";
+import { TingredintsConstructor } from "../../../utils/types";
 
 function IngredientDetailsSingle({ isSinglePage = true }) {
   const { id: _id } = useParams();
@@ -16,7 +17,7 @@ function IngredientDetailsSingle({ isSinglePage = true }) {
   const ingredientsData = useSelector(memoIngredientsSelector);
 
   const detailsIngredient = ingredientsData.find(
-    (ingredient) => ingredient._id === _id
+    (ingredient:TingredintsConstructor) => ingredient._id === _id
   );
 
   return (
