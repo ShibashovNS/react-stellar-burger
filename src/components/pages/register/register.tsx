@@ -10,27 +10,29 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { registerUser } from "../../../utils/api";
+import { TProfile } from "../../../utils/types";
 
 export const Register = () => {
-  const [userData, setUserData] = useState({});
-  const dispatch = useDispatch()
+  const [userData, setUserData] = useState<TProfile>({
+    password: "",
+    name: "",
+    email: "",
+  });
+  const dispatch = useDispatch();
 
-  const onChange = (e) => {
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUserData({
       ...userData,
       [e.target.name]: e.target.value,
     });
-  
+
     console.log(userData);
   };
 
-  const onSubmit = (evt) => {
+  const onSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
     dispatch(registerUser(userData));
   };
-
-
-  
 
   return (
     <div className={styles.container}>
@@ -57,23 +59,21 @@ export const Register = () => {
           <PasswordInput
             onChange={onChange}
             value={userData?.password || ""}
-            type="password"
             name="password"
             autoComplete="on"
           />
         </div>
-        <Button
-          htmlType="submit"
-          type="primary"
-          size="medium"
-      >
+        <Button htmlType="submit" type="primary" size="medium">
           Зарегистрироваться
         </Button>
       </form>
 
       <p className="text text_type_main-default text_color_inactive mt-20">
         Уже зарегистрированы?
-        <Link to={'/login'} className={styles.link}> Войти</Link>
+        <Link to={"/login"} className={styles.link}>
+          {" "}
+          Войти
+        </Link>
       </p>
     </div>
   );

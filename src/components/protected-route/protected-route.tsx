@@ -5,7 +5,7 @@ import { setAuthChecked } from "../../services/store/reducers/userAuthSlice/user
 import { checkUserAuth } from "../../utils/api";
 import Preloader from "../preloder/preloder";
 
-const Protected = ({ onlyUnAuth = false, component }) => {
+const Protected = ({ onlyUnAuth = false, component }:{ onlyUnAuth: boolean, component: any }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -13,8 +13,8 @@ const Protected = ({ onlyUnAuth = false, component }) => {
     dispatch(checkUserAuth());
   }, [dispatch]);
 
-  const isAuthChecked = useSelector((store) => store.userStatus.isAuthChecked);
-  const user = useSelector((store) => store.userStatus.user);
+  const isAuthChecked = useSelector((store: any) => store.userStatus.isAuthChecked) as boolean;
+  const user = useSelector((store: any) => store.userStatus.user) as string;
   const location = useLocation();
 
   if (!isAuthChecked) {
@@ -38,6 +38,6 @@ const Protected = ({ onlyUnAuth = false, component }) => {
   return component;
 };
 
-export const OnlyAuth = (props) => <Protected onlyUnAuth={false} {...props} />;
-export const OnlyUnAuth = (props) => <Protected onlyUnAuth={true} {...props} />;
+export const OnlyAuth = (props: any) => <Protected onlyUnAuth={false} {...props} />;
+export const OnlyUnAuth = (props: any) => <Protected onlyUnAuth={true} {...props} />;
 

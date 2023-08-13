@@ -55,3 +55,8 @@ export type TProfile = {
   name: string;
   email: string;
 }
+
+export type TResetPassword = {
+  password: string;
+  token: string;
+}

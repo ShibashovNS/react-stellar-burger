@@ -6,22 +6,23 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./userForm.module.css";
 import { useState } from "react";
+import { TProfile } from "../../../utils/types";
 
 export function UserForm() {
   const dispatch = useDispatch();
 
-  const {name, email} = useSelector((store)=>store.userStatus.user)
+  const {name, email}: {name: string, email: string} = useSelector((store: any)=>store.userStatus.user)
 
-  const [value, setValue] = useState({name, email, password:"......."});
+  const [value, setValue] = useState<TProfile>({name:"", email:"", password:""});
 
-  const onChange = (e) => {
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue({
       ...value,
       [e.target.name]: e.target.value,
     });
   };
 
-  const onSubmit = (evt) => {
+  const onSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
   };
 
@@ -42,7 +43,6 @@ export function UserForm() {
         onChange={onChange}
       />
       <PasswordInput
-        type="password"
         name="password"
         autoComplete="on"
         placeholder="Пароль"

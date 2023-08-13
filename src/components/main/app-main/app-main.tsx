@@ -41,8 +41,8 @@ function AppMain() {
         break;
 
       case "main":
-        if (sauceRef.current !== null) {
-          sauceRef.current.scrollIntoView({ behavior: "smooth" });
+        if (mainRef.current !== null) {
+          mainRef.current.scrollIntoView({ behavior: "smooth" });
         }
         break;
       default:
@@ -59,13 +59,8 @@ function AppMain() {
       mainRef.current !== null
     ) {
       const sauceScroll =
-        sauceRef.current.getBoundingClientRect().y -
-        bunRef.current.getBoundingClientRect().y -
-        40;
-      const mainScroll =
-        mainRef.current.getBoundingClientRect().y -
-        bunRef.current.getBoundingClientRect().y -
-        40;
+        sauceRef.current.getBoundingClientRect().y - bunRef.current.getBoundingClientRect().y - 40;
+      const mainScroll = mainRef.current.getBoundingClientRect().y - bunRef.current.getBoundingClientRect().y - 40;
 
       if (scrollTop >= mainScroll) {
         dispatch(changeTypeTab("main"));

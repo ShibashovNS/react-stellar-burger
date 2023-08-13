@@ -4,7 +4,7 @@ import {
   setUser,
 } from "../services/store/reducers/userAuthSlice/userAuthSlice";
 import { useNavigate } from "react-router-dom";
-import { TLogin } from "./types";
+import { TLogin, TProfile } from "./types";
 import { string } from "prop-types";
 
 export const BASE_URL = "https://norma.nomoreparties.space/api";
@@ -36,7 +36,7 @@ export const sendOrder = (dataId: void) => {
 //запрос на регистрацию
 export const registerUser = createAsyncThunk(
   "user/register",
-  async (userData, { dispatch }) => {
+  async (userData: TProfile, { dispatch }) => {
     return request(`/auth/register`, {
       method: "POST",
       headers: {
@@ -110,8 +110,7 @@ const fetchWithRefresh = async (url: string, options: any) => {
     const res = await fetch(url, options);
     console.log(res);
     return await checkResponse(res);
-  } catch (err) {
-    if (err instanceof Error) {
+  } catch (err: any) {
       if (err.message === "jwt expired") {
         const refreshData = await refreshToken();
         console.log(refreshData);
@@ -123,10 +122,9 @@ const fetchWithRefresh = async (url: string, options: any) => {
         options.headers.authorization = refreshData.accessToken;
         const res = await fetch(url, options);
         return await checkResponse(res);
+      } else {
+        return Promise.reject(err);
       }
-    } else {
-      return Promise.reject(err);
-    }
   }
 };
 

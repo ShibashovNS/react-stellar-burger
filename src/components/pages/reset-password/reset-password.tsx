@@ -9,22 +9,23 @@ import styles from "./reset-password.module.css";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
 import { resetPassword } from "../../../utils/api";
+import { TResetPassword } from "../../../utils/types";
 
 function ResetPassword() {
-  const [value, setValue] = useState({})
+  const [value, setValue] = useState<TResetPassword>({ token:"", password:""})
 
   console.log(value)
 
   const dispatch = useDispatch();
 
-  const onChange = (e) => {
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue({
       ...value,
       [e.target.name]: e.target.value,
     });
   };
 
-  const onSubmit = (evt) => {
+  const onSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
     dispatch(resetPassword(value))
   };
