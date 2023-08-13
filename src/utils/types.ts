@@ -16,11 +16,18 @@ export type TingredintsConstructor = {
   _uuid: string;
 }
 
-export type TConstructorCard =  {
+export type TConstructorCard = {
   data: TingredintsConstructor;
   index: number;
   ingredient?: TingredintsConstructor;
   handleDeliteElement: (uuid: string) => void
-} 
+  children?: React.ReactNode
+}
+
+export type TWithChildren<T> = T & { children?: React.ReactNode };
  
 
+export type TingredientType = {
+  productName: "Булки" | "Начинки" | "Соусы";
+  typeProduct: "bun" |  "main" | "sauce";
+}

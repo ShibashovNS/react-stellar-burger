@@ -2,19 +2,19 @@ import {
   ConstructorElement,
   DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import React, { FC, memo } from "react";
+import React, { memo } from "react";
 import { useDrag, useDrop } from "react-dnd";
 import { useDispatch, useSelector } from "react-redux";
 import { moveIngredients } from "../../../../services/store/reducers/burgerConstructorSlice";
 import styles from "./burger-constructor-card.module.css";
-import { TConstructorCard, TingredintsConstructor } from "../../../../utils/types";
+import { TConstructorCard, TWithChildren, TingredintsConstructor } from "../../../../utils/types";
 import { number } from "prop-types";
 
-export const BurgerConstruectorCard: FC<TConstructorCard> = memo(function BurgerConstruectorCard({
+export const BurgerConstruectorCard = memo(function BurgerConstruectorCard({
   data,
   handleDeliteElement,
   index,
-}) {
+}: TWithChildren<TConstructorCard>) {
   const { name, price, image_mobile, _id, _uuid } = data;
   const { draggedBun, draggedIngredients } = useSelector(
     (state:any) => state.constIngredient
