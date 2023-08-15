@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { setDetails } from "./detailsQuery";
 import Preloader from "../../../components/preloder/preloder";
+import { sendOrder } from "../../../utils/api";
 
 const initialState = {
   orderData: [],
@@ -21,17 +21,17 @@ const orderDetailsSlice = createSlice({
 
   extraReducers: (builder) => {
     builder
-      .addCase(setDetails.pending.type, (state, action) => {
+      .addCase(sendOrder.pending.type, (state, action) => {
         state.isLoding = false;
         state.error = " ";
       })
-      .addCase(setDetails.fulfilled.type, (state, action) => {
+      .addCase(sendOrder.fulfilled.type, (state, action) => {
         state.isLoding = true;
         state.error = " ";
         state.orderData = action.payload.order.number;
         console.log(action)
       })
-      .addCase(setDetails.rejected.type, (state, action) => {
+      .addCase(sendOrder.rejected.type, (state, action) => {
         state.isLoding = false;
         state.error = action.payload;
         console.log(action)
