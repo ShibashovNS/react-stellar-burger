@@ -3,7 +3,7 @@ import {
   setAuthChecked,
   setUser,
 } from "../services/store/reducers/userAuthSlice/userAuthSlice";
-import { TLogin, TProfile } from "./types";
+import { TForgotPassword, TLogin, TProfile, TResetPassword } from "./types";
 
 export const BASE_URL = "https://norma.nomoreparties.space/api";
 
@@ -165,7 +165,9 @@ export const checkUserAuth = createAsyncThunk(
   }
 );
 
-export const forgotPassword = ({ email }: { email: string }) => {
+export const forgotPassword = createAsyncThunk(
+  "user/forgot",
+  async ( email: TForgotPassword, _) => {
   return request(`/password-reset`, {
     method: "POST",
     headers: {
@@ -173,9 +175,12 @@ export const forgotPassword = ({ email }: { email: string }) => {
     },
     body: JSON.stringify({ email }),
   });
-};
+});
 
-export const resetPassword = ({ data }: any) => {
+
+export const resetPassword = createAsyncThunk(
+  "user/reset",
+  async ( data: TResetPassword, _) => {
   return request(`/password-reset/reset`, {
     method: "POST",
     headers: {
@@ -183,7 +188,7 @@ export const resetPassword = ({ data }: any) => {
     },
     body: JSON.stringify({ data }),
   });
-};
+});
 
 export const logoutUser = createAsyncThunk(
   "user/logout",

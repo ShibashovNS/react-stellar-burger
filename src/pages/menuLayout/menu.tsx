@@ -1,8 +1,8 @@
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import { NavLink, useNavigate } from "react-router-dom";
 import styles from "./menu.module.css";
-import { logoutUser } from "../../../utils/api";
-import { useAppDispatch } from "../../../services/hooks/hooks";
+import { useAppDispatch } from "../../services/hooks/hooks";
+import { logoutUser } from "../../utils/api";
 
 export default function MenuPage() {
   const dispatch = useAppDispatch();

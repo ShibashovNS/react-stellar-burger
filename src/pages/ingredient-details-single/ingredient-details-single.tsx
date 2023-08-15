@@ -1,9 +1,9 @@
+import { useAppSelector } from "../../services/hooks/hooks";
+import { memoIngredientsSelector } from "../../services/store/selectors/memoIngredientSelector";
+import { TingredintsConstructor } from "../../utils/types";
 import stylesSingle from "./ingredient-details-single.module.css";
 import stylesModal from "./ingredient-details.module.css";
 import { useParams } from "react-router-dom";
-import { memoIngredientsSelector } from "../../../services/store/selectors/memoIngredientSelector";
-import { TingredintsConstructor } from "../../../utils/types";
-import { useAppSelector } from "../../../services/hooks/hooks";
 
 function IngredientDetailsSingle({ isSinglePage = true }) {
   const { id: _id } = useParams();

@@ -1,22 +1,23 @@
-import { useNavigate } from "react-router-dom";
 import {
   Input,
   PasswordInput,
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-
 import styles from "./reset-password.module.css";
-import { useDispatch } from "react-redux";
 import { useState } from "react";
-import { resetPassword } from "../../../utils/api";
-import { TResetPassword } from "../../../utils/types";
+import { TResetPassword } from "../../utils/types";
+import { resetPassword } from "../../utils/api";
+import { useAppDispatch } from "../../services/hooks/hooks";
 
 function ResetPassword() {
-  const [value, setValue] = useState<TResetPassword>({ token:"", password:""})
+  const [value, setValue] = useState<TResetPassword>({
+    token: "",
+    password: "",
+  });
 
-  console.log(value)
+  console.log(value);
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue({
@@ -27,7 +28,7 @@ function ResetPassword() {
 
   const onSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
-    dispatch(resetPassword(value))
+    dispatch(resetPassword(value));
   };
 
   return (
@@ -58,7 +59,11 @@ function ResetPassword() {
         </Button>
       </form>
 
-      <div className={styles.text + " text text_type_main-default text_color_inactive mt-20"}>
+      <div
+        className={
+          styles.text + " text text_type_main-default text_color_inactive mt-20"
+        }
+      >
         <span>Вспомнили пароль?</span>
         <Button
           extraClass={styles.link}

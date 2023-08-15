@@ -1,4 +1,3 @@
-import React, { useCallback, useMemo } from "react";
 import styles from "./burger-constructor-total.module.css";
 import {
   Button,
@@ -8,28 +7,27 @@ import {
   useAppDispatch,
   useAppSelector,
 } from "../../../../services/hooks/hooks";
-import {
-  clickOpen,
-  clickOrderList,
-} from "../../../../services/store/reducers/modalOverlaySlice";
+import { clickOpen } from "../../../../services/store/reducers/modalOverlaySlice";
 import { clickDetails } from "../../../../services/store/reducers/orderDetailsSlice";
 import { setDetails } from "../../../../services/store/reducers/detailsQuery";
 import { clearOrder } from "../../../../services/store/reducers/burgerConstructorSlice";
+import { useNavigate } from "react-router-dom";
 
 function BurgerConstructorTotal({ name }) {
   const { draggedBun, draggedIngredients } = useAppSelector(
     (state) => state.constIngredient
   );
 
-  const isDisabled = useAppSelector((store) => store.userStatus.user)
+  const isDisabled = useAppSelector((store) => store.userStatus.user);
 
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const onClick = () => {
-    dispatch(clickDetails(true));
-    dispatch(clickOpen(true));
+    !isDisabled ? navigate("/login") : dispatch(clickDetails(true));
+    !isDisabled ? navigate("/login") : dispatch(clickOpen(true));
     dispatch(setDetails([...draggedBun, ...draggedIngredients]));
-    dispatch(clearOrder([]))
+    isDisabled && dispatch(clearOrder([]));
   };
 
   return (
@@ -46,7 +44,13 @@ function BurgerConstructorTotal({ name }) {
         </span>
         <CurrencyIcon />
       </div>
-      <Button disabled={([...draggedBun, ...draggedIngredients].length<=0) || !isDisabled} onClick={onClick} htmlType="submit" type="primary" size="large">
+      <Button
+        disabled={[...draggedBun, ...draggedIngredients].length <= 0}
+        onClick={onClick}
+        htmlType="submit"
+        type="primary"
+        size="large"
+      >
         {name}
       </Button>
     </div>

@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { loginUser, logoutUser, registerUser } from '../../../../utils/api';
+import { forgotPassword, loginUser, logoutUser, registerUser, resetPassword } from '../../../../utils/api';
 
 
 const initialState = {
@@ -75,6 +75,28 @@ const userSlice = createSlice({
       state.isLoding = false;
       state.error = action.payload;
     })
+    .addCase(forgotPassword.pending.type, (state) => {
+      state.isLoding = true;
+      state.error = " ";
+    })
+    .addCase(forgotPassword.fulfilled.type, (state) => {
+      state.isLoding = false;
+    })
+    .addCase(forgotPassword.rejected.type, (state, action) => {
+      state.isLoding = false;
+      state.error = action.payload;
+    })
+    .addCase(resetPassword.pending.type, (state) => {
+      state.isLoding = true;
+      state.error = " ";
+    })
+    .addCase(resetPassword.fulfilled.type, (state) => {
+      state.isLoding = false;
+    })
+    .addCase(resetPassword.rejected.type, (state, action) => {
+      state.isLoding = false;
+      state.error = action.payload;
+    })
       /*
       .addCase(userStatusAuth.pending.type, (state) => {
         state.isLoding = false;
@@ -100,3 +122,4 @@ const userSlice = createSlice({
 export const { setAuthChecked, setUser} = userSlice.actions
 
 export default userSlice.reducer;
+

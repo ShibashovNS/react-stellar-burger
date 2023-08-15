@@ -4,21 +4,21 @@ import OrderDetails from "../modal/order-details/order-details";
 import Preloader from "../preloder/preloder";
 import { fetchIngredients } from "../../services/store/reducers/ingredientQuery";
 import { ingredientSelector } from "../../services/store/selectors/ingredientSelector";
-import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import { OnlyAuth, OnlyUnAuth } from "../protected-route/protected-route";
-import Layout from "../pages/layout/layout";
-import HomePage from "../pages/home";
-import { Register } from "../pages/register/register";
-import PasswordPage from "../pages/forgotPassword";
-import Profile from "../pages/profile/profile";
-import { Login } from "../pages/login/login";
-import ResetPassword from "../pages/reset-password/reset-password";
-import { UserForm } from "../pages/userForm/userForm";
-import OrdersPage from "../pages/orders/orders";
-import IngredientDetailsSingle from "../pages/ingredient-details-single/ingredient-details-single";
 import { checkUserAuth, getUser } from "../../utils/api";
-import NotFound from "../pages/not-found/non-found";
 import { useAppDispatch, useAppSelector } from "../../services/hooks/hooks";
+import Layout from "../../pages/layout/layout";
+import { Login } from "../../pages/login/login";
+import { Register } from "../../pages/register/register";
+import ResetPassword from "../../pages/reset-password/reset-password";
+import Profile from "../../pages/profile/profile";
+import { UserForm } from "../../pages/userForm/userForm";
+import OrdersPage from "../../pages/orders/orders";
+import IngredientDetailsSingle from "../../pages/ingredient-details-single/ingredient-details-single";
+import NotFound from "../../pages/not-found/non-found";
+import ForgotPassword from "../../pages/forgot-password/forgot-password";
+import AppMain from "../main/app-main/app-main";
 
 const App = () => {
   const [isloding, setIsLoding] = useState(false);
@@ -53,7 +53,7 @@ const App = () => {
     <>
       <Routes location={background || location}>
         <Route path="/" element={<Layout />}>
-          <Route path="/" element={<HomePage />} />
+          <Route path="/" element={<AppMain />} />
           <Route path="/login" element={<OnlyUnAuth component={<Login />} />} />
           <Route
             path="/register"
@@ -61,7 +61,7 @@ const App = () => {
           />
           <Route
             path="/forgot-password"
-            element={<OnlyUnAuth component={<PasswordPage />} />}
+            element={<OnlyUnAuth component={<ForgotPassword/>} />}
           />
           <Route
             path="/reset-password"

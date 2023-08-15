@@ -5,8 +5,8 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./userForm.module.css";
 import { useState } from "react";
-import { TProfile } from "../../../utils/types";
-import { useAppDispatch, useAppSelector } from "../../../services/hooks/hooks";
+import { useAppDispatch, useAppSelector } from "../../services/hooks/hooks";
+import { TProfile } from "../../utils/types";
 
 export function UserForm() {
   const dispatch = useAppDispatch();

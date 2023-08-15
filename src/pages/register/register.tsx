@@ -7,9 +7,9 @@ import {
 import styles from "./register.module.css";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { registerUser } from "../../../utils/api";
-import { TProfile } from "../../../utils/types";
-import { useAppDispatch } from "../../../services/hooks/hooks";
+import { useAppDispatch } from "../../services/hooks/hooks";
+import { TProfile } from "../../utils/types";
+import { registerUser } from "../../utils/api";
 
 export const Register = () => {
   const [userData, setUserData] = useState<TProfile>({

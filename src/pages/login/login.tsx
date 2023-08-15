@@ -6,9 +6,9 @@ import {
 import styles from "./login.module.css";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { loginUser } from "../../../utils/api";
-import { TLogin } from "../../../utils/types";
-import { useAppDispatch } from "../../../services/hooks/hooks";
+import { TLogin } from "../../utils/types";
+import { useAppDispatch } from "../../services/hooks/hooks";
+import { loginUser } from "../../utils/api";
 
 export const Login = () => {
   const [value, setValue] = useState<TLogin>({ email: "", password: "" });
