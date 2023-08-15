@@ -8,6 +8,8 @@ import { moveIngredients } from "../../../../services/store/reducers/burgerConst
 import styles from "./burger-constructor-card.module.css";
 import {
   TConstructorCard,
+  TDragItem,
+  TIsDragging,
   TWithChildren,
   TingredintsConstructor,
 } from "../../../../utils/types";
@@ -32,8 +34,10 @@ export const BurgerConstruectorCard = memo(function BurgerConstruectorCard({
     return draggedIngredients.indexOf(item);
   };
 
+
+
   // часть с ингредиентами в конструкторе
-  const [{ isDragging }, refDrag] = useDrag({
+  const [{ isDragging }, refDrag] = useDrag<TDragItem, unknown, TIsDragging>({
     type: "card",
     item: { ingredient: data },
     collect: (monitor) => ({
@@ -41,9 +45,9 @@ export const BurgerConstruectorCard = memo(function BurgerConstruectorCard({
     }),
   });
 
-  const [, dropRef] = useDrop({
+  const [, dropRef] = useDrop<TDragItem, unknown, unknown>({
     accept: "card",
-    hover({ ingredient }: TConstructorCard) {
+    hover({ ingredient }) {
       if (ingredient !== undefined) {
         if (ingredient._uuid === data._uuid) return;
 

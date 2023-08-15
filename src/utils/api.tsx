@@ -21,7 +21,8 @@ export function request(endpoint: string, options: RequestInit | undefined) {
 // async нужен когда несколько await поэтому убрал от сюда + а далее передаю рес, но его убрал т.к в стрелочной функции рес передается один и тотже в функицию
 export const getEngredients = () => request(`/ingredients`, {});
 
-export const sendOrder = (dataId: void) => {
+export const sendOrder = createAsyncThunk("details/post",
+async (dataId: string[]) => {
   return request(`/orders`, {
     method: "POST",
     headers: {
@@ -31,7 +32,7 @@ export const sendOrder = (dataId: void) => {
       ingredients: dataId,
     }),
   });
-};
+});
 
 //запрос на регистрацию
 export const registerUser = createAsyncThunk(
@@ -205,3 +206,6 @@ export const logoutUser = createAsyncThunk(
     });
   }
 );
+
+
+

@@ -19,6 +19,8 @@ const BurgerConstructor = memo(function BurgerConstructor() {
   const draggedBun = useAppSelector(constructorBunSelector);
   const draggedIngredients = useAppSelector(constructorSelector);
 
+
+  
   const [{ isDropped }, refDrop] = useDrop({
     accept: "ingredient",
     drop(item: TingredintsConstructor) {

@@ -62,6 +62,14 @@ export type TResetPassword = {
   token: string;
 }
 
+export type TDragItem = {
+  ingredient: TingredintsConstructor
+}
+
+export type TIsDragging = {
+  isDragging: boolean
+}
+
 export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>
 export type DispatchFunc = () => AppDispatch

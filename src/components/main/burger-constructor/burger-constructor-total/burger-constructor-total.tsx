@@ -9,13 +9,14 @@ import {
 } from "../../../../services/hooks/hooks";
 import { clickOpen } from "../../../../services/store/reducers/modalOverlaySlice";
 import { clickDetails } from "../../../../services/store/reducers/orderDetailsSlice";
-import { setDetails } from "../../../../services/store/reducers/detailsQuery";
 import { clearOrder } from "../../../../services/store/reducers/burgerConstructorSlice";
 import { useNavigate } from "react-router-dom";
+import { TingredintsConstructor } from "../../../../utils/types";
+import { sendOrder } from "../../../../utils/api";
 
-function BurgerConstructorTotal({ name }) {
+function BurgerConstructorTotal({ name }: { name: string }) {
   const { draggedBun, draggedIngredients } = useAppSelector(
-    (state) => state.constIngredient
+    (state: any) => state.constIngredient
   );
 
   const isDisabled = useAppSelector((store) => store.userStatus.user);
@@ -26,7 +27,7 @@ function BurgerConstructorTotal({ name }) {
   const onClick = () => {
     !isDisabled ? navigate("/login") : dispatch(clickDetails(true));
     !isDisabled ? navigate("/login") : dispatch(clickOpen(true));
-    dispatch(setDetails([...draggedBun, ...draggedIngredients]));
+    dispatch(sendOrder([...draggedBun, ...draggedIngredients]));
     isDisabled && dispatch(clearOrder([]));
   };
 
@@ -34,15 +35,23 @@ function BurgerConstructorTotal({ name }) {
     <div className={styles.constructorTotal + " pt-10"}>
       <div className={"pr-10"}>
         <span className="text_type_digits-medium">
-          {draggedIngredients.reduce(function (acc, data) {
+          {draggedIngredients.reduce(function (
+            acc: number,
+            data: TingredintsConstructor
+          ) {
             return acc + data.price;
-          }, 0) +
+          },
+          0) +
             2 *
-              draggedBun.reduce(function (acc, data) {
+              draggedBun.reduce(function (
+                acc: number,
+                data: TingredintsConstructor
+              ) {
                 return acc + data.price;
-              }, 0)}
+              },
+              0)}
         </span>
-        <CurrencyIcon />
+        <CurrencyIcon type="primary" />
       </div>
       <Button
         disabled={[...draggedBun, ...draggedIngredients].length <= 0}
