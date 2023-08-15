@@ -10,6 +10,7 @@ import { useDispatch } from "react-redux";
 import { forgotPassword } from "../../../utils/api";
 import { TForgotPassword } from "../../../utils/types";
 
+
 function ForgotPassword() {
   const dispatch = useDispatch();
   const [userData, setUserData] = useState<TForgotPassword>({

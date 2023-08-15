@@ -1,4 +1,3 @@
-import { useDispatch, useSelector } from "react-redux";
 import {
   Button,
   Input,
@@ -7,13 +6,20 @@ import {
 import styles from "./userForm.module.css";
 import { useState } from "react";
 import { TProfile } from "../../../utils/types";
+import { useAppDispatch, useAppSelector } from "../../../services/hooks/hooks";
 
 export function UserForm() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const {name, email}: {name: string, email: string} = useSelector((store: any)=>store.userStatus.user)
+  const { name, email }: { name: string; email: string } = useAppSelector(
+    (store: any) => store.userStatus.user
+  );
 
-  const [value, setValue] = useState<TProfile>({name:"", email:"", password:""});
+  const [value, setValue] = useState<TProfile>({
+    name: "",
+    email: "",
+    password: "",
+  });
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue({
@@ -59,10 +65,7 @@ export function UserForm() {
         >
           Отмена
         </Button>
-        <Button
-          htmlType="submit"
-          type="primary"
-        >
+        <Button htmlType="submit" type="primary">
           Сохранить
         </Button>
       </div>

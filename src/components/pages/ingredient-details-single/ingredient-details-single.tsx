@@ -1,23 +1,19 @@
-import React from "react";
 import stylesSingle from "./ingredient-details-single.module.css";
 import stylesModal from "./ingredient-details.module.css";
-import image from "../../../../src/images/done.svg";
-import { string } from "prop-types";
-import { useSelector } from "react-redux";
-import { detailsSelector } from "../../../services/store/selectors/detailsSelector";
 import { useParams } from "react-router-dom";
 import { memoIngredientsSelector } from "../../../services/store/selectors/memoIngredientSelector";
 import { TingredintsConstructor } from "../../../utils/types";
+import { useAppSelector } from "../../../services/hooks/hooks";
 
 function IngredientDetailsSingle({ isSinglePage = true }) {
   const { id: _id } = useParams();
 
   console.log(useParams());
 
-  const ingredientsData = useSelector(memoIngredientsSelector);
+  const ingredientsData = useAppSelector(memoIngredientsSelector);
 
   const detailsIngredient = ingredientsData.find(
-    (ingredient:TingredintsConstructor) => ingredient._id === _id
+    (ingredient: TingredintsConstructor) => ingredient._id === _id
   );
 
   return (

@@ -3,14 +3,14 @@ import {
   setAuthChecked,
   setUser,
 } from "../services/store/reducers/userAuthSlice/userAuthSlice";
-import { useNavigate } from "react-router-dom";
 import { TLogin, TProfile } from "./types";
-import { string } from "prop-types";
 
 export const BASE_URL = "https://norma.nomoreparties.space/api";
 
 export function checkResponse(res: Response) {
-  return res.ok ? res.json() : res.json().then((err: any) => Promise.reject(err));
+  return res.ok
+    ? res.json()
+    : res.json().then((err: Error) => Promise.reject(err));
 }
 
 //делаю обертку вокруг fetch чтобы в разных запросах можно было использовать, url базовый статичный, меняется только endpoint в этом api
@@ -19,7 +19,7 @@ export function request(endpoint: string, options: RequestInit | undefined) {
 }
 
 // async нужен когда несколько await поэтому убрал от сюда + а далее передаю рес, но его убрал т.к в стрелочной функции рес передается один и тотже в функицию
-export const getEngredients = () => request(`/ingredients`,{});
+export const getEngredients = () => request(`/ingredients`, {});
 
 export const sendOrder = (dataId: void) => {
   return request(`/orders`, {
@@ -108,28 +108,28 @@ const refreshToken = () => {
 const fetchWithRefresh = async (url: string, options: any) => {
   try {
     const res = await fetch(url, options);
-    console.log(res);
     return await checkResponse(res);
   } catch (err: any) {
-      if (err.message === "jwt expired") {
-        const refreshData = await refreshToken();
-        console.log(refreshData);
-        if (!refreshData.success) {
-          return Promise.reject(refreshData);
-        }
-        localStorage.setItem("accessToken", refreshData.accessToken);
-        localStorage.setItem("refreshToken", refreshData.refreshToken);
-        options.headers.authorization = refreshData.accessToken;
-        const res = await fetch(url, options);
-        return await checkResponse(res);
-      } else {
-        return Promise.reject(err);
+    if (err.message === "jwt expired") {
+      console.log(err);
+      const refreshData = await refreshToken();
+      console.log(refreshData);
+      if (!refreshData.success) {
+        return Promise.reject(refreshData);
       }
+      localStorage.setItem("accessToken", refreshData.accessToken);
+      localStorage.setItem("refreshToken", refreshData.refreshToken);
+      options.headers.authorization = refreshData.accessToken;
+      const res = await fetch(url, options);
+      return await checkResponse(res);
+    } else {
+      return Promise.reject(err);
+    }
   }
 };
 
 export const getUser = () => {
-  return (dispatch: (arg0: { payload: any; type: "user/setUser"; }) => void) => {
+  return (dispatch: (arg0: { payload: any; type: "user/setUser" }) => void) => {
     return fetchWithRefresh(`${BASE_URL}/auth/user`, {
       method: "GET",
       headers: {

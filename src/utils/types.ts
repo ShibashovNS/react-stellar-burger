@@ -1,3 +1,4 @@
+import { store } from "../services/store/store";
 
 export type TingredintsConstructor = {
   calories: number;
@@ -60,3 +61,7 @@ export type TResetPassword = {
   password: string;
   token: string;
 }
+
+export type AppDispatch = typeof store.dispatch;
+export type RootState = ReturnType<typeof store.getState>
+export type DispatchFunc = () => AppDispatch

@@ -1,8 +1,8 @@
-import React, { memo, useCallback, useState } from "react";
+import React, { memo, useCallback } from "react";
 import styles from "./burger-constructor.module.css";
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useDispatch, useSelector } from "react-redux";
-import { useDrag, useDrop } from "react-dnd";
+import { useAppDispatch, useAppSelector } from "../../../services/hooks/hooks";
+import { useDrop } from "react-dnd";
 import {
   addBun,
   addIngredient,
@@ -12,13 +12,12 @@ import { v4 as uuidv4 } from "uuid";
 import { BurgerConstruectorCard } from "./burger-constructor-card/burger-constructor-card";
 import { constructorBunSelector } from "../../../services/store/selectors/IngredientsSelector/constructorBunSelector";
 import { constructorSelector } from "../../../services/store/selectors/IngredientsSelector/constructorSelector";
-import { string } from "prop-types";
 import { TingredintsConstructor } from "../../../utils/types";
 
 const BurgerConstructor = memo(function BurgerConstructor() {
-  const dispatch = useDispatch();
-  const draggedBun = useSelector(constructorBunSelector);
-  const draggedIngredients = useSelector(constructorSelector);
+  const dispatch = useAppDispatch();
+  const draggedBun = useAppSelector(constructorBunSelector);
+  const draggedIngredients = useAppSelector(constructorSelector);
 
   const [{ isDropped }, refDrop] = useDrop({
     accept: "ingredient",

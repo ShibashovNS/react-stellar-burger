@@ -1,28 +1,21 @@
-import React, { SyntheticEvent, createRef } from "react";
-import { useEffect, useRef, useState } from "react";
+import React, { SyntheticEvent } from "react";
+import { useRef } from "react";
 import styles from "./app-main.module.css";
 import BurgerIngingredientsTab from "../burger-ingredients/burger-ingredients_tab/burger-ingredients_tab";
 import BurgerIngredients from "../burger-ingredients/burger-ingredients/burger-ingredients";
-import {
-  ConstructorElement,
-  DragIcon,
-} from "@ya.praktikum/react-developer-burger-ui-components";
 import BurgerConstructorTotal from "../burger-constructor/burger-constructor-total/burger-constructor-total";
-import PropTypes from "prop-types";
-import { ingredientPropType } from "../../../utils/prop-types";
 import BurgerConstructor from "../burger-constructor/burger-constructor";
-import { useInView } from "react-intersection-observer";
-import { useDispatch, useSelector } from "react-redux";
 import { changeTypeTab } from "../../../services/store/reducers/ingredientsTab";
+import { useAppDispatch, useAppSelector } from "../../../services/hooks/hooks";
 
 function AppMain() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const bunRef = useRef<HTMLHeadingElement>(null);
   const sauceRef = useRef<HTMLHeadingElement>(null);
   const mainRef = useRef<HTMLHeadingElement>(null);
 
-  const current = useSelector((state: any) => state.ingredientsTab.typeTab);
+  const current = useAppSelector((state: any) => state.ingredientsTab.typeTab);
 
   function handleTabClick(type: string) {
     dispatch(changeTypeTab(type));
@@ -50,7 +43,7 @@ function AppMain() {
     }
   }
 
-  function handleTab(evt:SyntheticEvent) { 
+  function handleTab(evt: SyntheticEvent) {
     const target = evt.target as HTMLDivElement;
     const scrollTop = target.scrollTop;
     if (
@@ -59,8 +52,13 @@ function AppMain() {
       mainRef.current !== null
     ) {
       const sauceScroll =
-        sauceRef.current.getBoundingClientRect().y - bunRef.current.getBoundingClientRect().y - 40;
-      const mainScroll = mainRef.current.getBoundingClientRect().y - bunRef.current.getBoundingClientRect().y - 40;
+        sauceRef.current.getBoundingClientRect().y -
+        bunRef.current.getBoundingClientRect().y -
+        40;
+      const mainScroll =
+        mainRef.current.getBoundingClientRect().y -
+        bunRef.current.getBoundingClientRect().y -
+        40;
 
       if (scrollTop >= mainScroll) {
         dispatch(changeTypeTab("main"));

@@ -4,11 +4,17 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import React, { memo } from "react";
 import { useDrag, useDrop } from "react-dnd";
-import { useDispatch, useSelector } from "react-redux";
 import { moveIngredients } from "../../../../services/store/reducers/burgerConstructorSlice";
 import styles from "./burger-constructor-card.module.css";
-import { TConstructorCard, TWithChildren, TingredintsConstructor } from "../../../../utils/types";
-import { number } from "prop-types";
+import {
+  TConstructorCard,
+  TWithChildren,
+  TingredintsConstructor,
+} from "../../../../utils/types";
+import {
+  useAppDispatch,
+  useAppSelector,
+} from "../../../../services/hooks/hooks";
 
 export const BurgerConstruectorCard = memo(function BurgerConstruectorCard({
   data,
@@ -16,13 +22,13 @@ export const BurgerConstruectorCard = memo(function BurgerConstruectorCard({
   index,
 }: TWithChildren<TConstructorCard>) {
   const { name, price, image_mobile, _id, _uuid } = data;
-  const { draggedBun, draggedIngredients } = useSelector(
-    (state:any) => state.constIngredient
+  const { draggedBun, draggedIngredients } = useAppSelector(
+    (state: any) => state.constIngredient
   );
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const findIndex = (item:TingredintsConstructor) => {
+  const findIndex = (item: TingredintsConstructor) => {
     return draggedIngredients.indexOf(item);
   };
 
@@ -37,13 +43,13 @@ export const BurgerConstruectorCard = memo(function BurgerConstruectorCard({
 
   const [, dropRef] = useDrop({
     accept: "card",
-    hover({ ingredient }:TConstructorCard) {
+    hover({ ingredient }: TConstructorCard) {
       if (ingredient !== undefined) {
         if (ingredient._uuid === data._uuid) return;
-     
+
         dispatch(
           moveIngredients({
-            indexFrom: (findIndex(ingredient)),
+            indexFrom: findIndex(ingredient),
             indexTo: index,
             ingredient: ingredient,
           })

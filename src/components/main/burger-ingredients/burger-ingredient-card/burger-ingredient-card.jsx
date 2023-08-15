@@ -1,10 +1,12 @@
-import React, { useState } from "react";
 import styles from "./burger-ingredient-card.module.css";
 import {
   Counter,
   CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useDispatch, useSelector } from "react-redux";
+import {
+  useAppDispatch,
+  useAppSelector,
+} from "../../../../services/hooks/hooks";
 import { clickOpen } from "../../../../services/store/reducers/modalOverlaySlice";
 import {
   addIngredDetails,
@@ -12,27 +14,19 @@ import {
   counter,
 } from "../../../../services/store/reducers/ingredientDetails";
 import { useDrag } from "react-dnd";
-import { Navigate, useNavigate } from "react-router-dom";
 
 function IngredientCard({ ingredient }) {
-  const [elements, setElements] = useState(ingredient);
-  const [draggedElements, setDraggedElements] = useState([]);
-  const { selctIngredient, clickStutus, count } = useSelector(
-    (state) => state.ingredDetails
-  );
-
   const [, refDrag] = useDrag({
     type: "ingredient",
     item: ingredient,
   });
 
-  const dispatch = useDispatch();
-
+  const dispatch = useAppDispatch();
 
   const onClick = () => {
     dispatch(clickIngredient(true));
     dispatch(addIngredDetails(ingredient));
-    dispatch(clickOpen(true))
+    dispatch(clickOpen(true));
   };
 
   return (

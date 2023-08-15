@@ -4,7 +4,10 @@ import {
   Button,
   CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useDispatch, useSelector } from "react-redux";
+import {
+  useAppDispatch,
+  useAppSelector,
+} from "../../../../services/hooks/hooks";
 import {
   clickOpen,
   clickOrderList,
@@ -14,13 +17,13 @@ import { setDetails } from "../../../../services/store/reducers/detailsQuery";
 import { clearOrder } from "../../../../services/store/reducers/burgerConstructorSlice";
 
 function BurgerConstructorTotal({ name }) {
-  const { draggedBun, draggedIngredients } = useSelector(
+  const { draggedBun, draggedIngredients } = useAppSelector(
     (state) => state.constIngredient
   );
 
-  const isDisabled = useSelector((store) => store.userStatus.user)
+  const isDisabled = useAppSelector((store) => store.userStatus.user)
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const onClick = () => {
     dispatch(clickDetails(true));

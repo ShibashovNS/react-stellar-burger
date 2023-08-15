@@ -3,13 +3,13 @@ import styles from "./burger-ingredients.module.css";
 import IngredientCard from "../burger-ingredient-card/burger-ingredient-card";
 import PropTypes from "prop-types";
 import { ingredientPropType } from "../../../../utils/prop-types";
-import { useSelector } from "react-redux";
 import { memoIngredientsSelector } from "../../../../services/store/selectors/memoIngredientSelector";
 import { Link, useLocation } from "react-router-dom";
 import { TWithChildren, TingredientType, TingredintsConstructor } from "../../../../utils/types";
+import { useAppSelector } from "../../../../services/hooks/hooks";
 
 function BurgerIngredients({ productName, typeProduct }: TWithChildren<TingredientType>) {
-  const ingredients = useSelector(memoIngredientsSelector);
+  const ingredients = useAppSelector(memoIngredientsSelector);
   const location = useLocation();
 
   return (

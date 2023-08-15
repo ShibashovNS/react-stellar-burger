@@ -1,23 +1,19 @@
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useDispatch, useSelector } from "react-redux";
-import { NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import styles from "./menu.module.css";
-import { UserForm } from "../userForm/userForm";
-import React, { useState } from "react";
 import { logoutUser } from "../../../utils/api";
-
+import { useAppDispatch } from "../../../services/hooks/hooks";
 
 export default function MenuPage() {
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch();
 
   const logout = () => {
-    dispatch(logoutUser())
-  }
+    dispatch(logoutUser());
+  };
 
   const styleLink = (isActive: boolean) =>
-    `${styles.link}${(isActive && ` ${styles.link_active}`) || ""}`
-  
+    `${styles.link}${(isActive && ` ${styles.link_active}`) || ""}`;
+
   return (
     <>
       <nav className={`${styles.nav} mr-15 mt-20`}>
@@ -25,7 +21,9 @@ export default function MenuPage() {
           <li className={styles.item}>
             <NavLink
               className={({ isActive }) =>
-              styleLink(isActive) + " text text_type_main-medium text_color_inactive"}
+                styleLink(isActive) +
+                " text text_type_main-medium text_color_inactive"
+              }
               to="/profile/"
             >
               Профиль
@@ -33,8 +31,10 @@ export default function MenuPage() {
           </li>
           <li className={styles.item}>
             <NavLink
-               className={({ isActive }) =>
-               styleLink(isActive) + " text text_type_main-medium text_color_inactive"}
+              className={({ isActive }) =>
+                styleLink(isActive) +
+                " text text_type_main-medium text_color_inactive"
+              }
               to="/profile/orders"
             >
               История заказов
