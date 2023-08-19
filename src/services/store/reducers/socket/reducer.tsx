@@ -35,6 +35,7 @@ export const wsReducer = createReducer(initialState, (builder) => {
 })
 
 
+
 /*
 Если будет вопрос можно расскажать, что createSlice не выводит 
 экшены с type литерального типа и совсем строгую типизацию так не получить
