@@ -1,0 +1,6 @@
+.orders {
+  max-height: calc(100vh - 280px);
+  width: 870px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}

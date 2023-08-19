@@ -6,6 +6,31 @@ import orderDetailsReducer from "./reducers/orderDetailsSlice";
 import modalOverlayReducer from "./reducers/modalOverlaySlice";
 import ingredientsTabReducer from "./reducers/ingredientsTab";
 import userReducer from "./reducers/userAuthSlice/userAuthSlice";
+import {wsReducer} from "./reducers/socket/reducer";
+
+import { 
+  connect as DataWsConnect, 
+  disconnect as DataWsDisconnect,
+  wsConnecting as DataWsConnecting,
+  wsOpen as DataWsOpen,
+  wsClose as DataWsClose,
+  wsMessage as DataWsNessage,
+  wsError as DataWsError 
+} from "./reducers/socket/actions";
+import { socketMiddleware } from "./middleware/socket-middleware";
+
+
+const wsActions = {
+  wsConnect: DataWsConnect,
+  wsDisconnect: DataWsDisconnect,
+  wsConnecting: DataWsConnecting,
+  onOpen: DataWsOpen,
+  onClose: DataWsClose,
+  onError: DataWsError,
+  onMessage: DataWsNessage,
+};
+
+const DataMiddleware = socketMiddleware(wsActions);
 
 export const store = configureStore({
   reducer: {
@@ -16,5 +41,9 @@ export const store = configureStore({
     modalOverlay: modalOverlayReducer,
     ingredientsTab: ingredientsTabReducer,
     userStatus: userReducer,
+    wsData: wsReducer,
   },
+  middleware: (getDefaultMiddleware) => {
+    return getDefaultMiddleware().concat(DataMiddleware)
+  }
 });

@@ -19,6 +19,10 @@ import IngredientDetailsSingle from "../../pages/ingredient-details-single/ingre
 import NotFound from "../../pages/not-found/non-found";
 import ForgotPassword from "../../pages/forgot-password/forgot-password";
 import AppMain from "../main/app-main/app-main";
+import Feed from "../../pages/feed/feed";
+import { OrderList } from "../orderIconList/orderIconList";
+import { OrderCard } from "../orderCard/orderCard";
+import { OrderInformation } from "../../pages/order-information/order-information";
 
 const App = () => {
   const [isloding, setIsLoding] = useState(false);
@@ -55,13 +59,17 @@ const App = () => {
         <Route path="/" element={<Layout />}>
           <Route path="/" element={<AppMain />} />
           <Route path="/login" element={<OnlyUnAuth component={<Login />} />} />
+          <Route path="/feed" element={<Feed />} />
+          <Route path="/feed/:id" element={<OrderInformation />} />
+            
+
           <Route
             path="/register"
             element={<OnlyUnAuth component={<Register />} />}
           />
           <Route
             path="/forgot-password"
-            element={<OnlyUnAuth component={<ForgotPassword/>} />}
+            element={<OnlyUnAuth component={<ForgotPassword />} />}
           />
           <Route
             path="/reset-password"
