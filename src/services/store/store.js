@@ -1,4 +1,4 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import ingredientsReducer from "./reducers/burgerIngredientsSlice";
 import constructorReducer from "./reducers/burgerConstructorSlice";
 import ingredDetailsReducer from "./reducers/ingredientDetails";
@@ -18,9 +18,7 @@ import {
   wsError as DataWsError 
 } from "./reducers/socket/actions";
 import { socketMiddleware } from "./middleware/socket-middleware";
-import reducer from "./reducers/socket";
-
-
+import wsReducer from "./reducers/socket";
 
 const wsActions = {
   wsConnect: DataWsConnect,
@@ -34,17 +32,19 @@ const wsActions = {
 
 const DataMiddleware = socketMiddleware(wsActions);
 
+export const rootReducer = combineReducers({
+  ingredients: ingredientsReducer,
+  constIngredient: constructorReducer,
+  ingredDetails: ingredDetailsReducer,
+  orderDetails: orderDetailsReducer,
+  modalOverlay: modalOverlayReducer,
+  ingredientsTab: ingredientsTabReducer,
+  userStatus: userReducer,
+  wsData: wsReducer,
+})
+
 export const store = configureStore({
-  reducer: {
-    ingredients: ingredientsReducer,
-    constIngredient: constructorReducer,
-    ingredDetails: ingredDetailsReducer,
-    orderDetails: orderDetailsReducer,
-    modalOverlay: modalOverlayReducer,
-    ingredientsTab: ingredientsTabReducer,
-    userStatus: userReducer,
-    wsData: reducer,
-  },
+  reducer: rootReducer,
   middleware: (getDefaultMiddleware) => {
     return getDefaultMiddleware().concat(DataMiddleware)
   }

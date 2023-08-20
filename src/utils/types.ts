@@ -1,4 +1,4 @@
-import { store } from "../services/store/store";
+import { rootReducer, store } from "../services/store/store";
 
 export type TingredintsConstructor = {
   calories: number;
@@ -73,7 +73,5 @@ export type TIsDragging = {
 export type AppDispatch = typeof store.dispatch;
 
 
-
-
-export type RootState = ReturnType<typeof store.getState>
+export type RootState = ReturnType<typeof rootReducer>
 export type DispatchFunc = () => AppDispatch

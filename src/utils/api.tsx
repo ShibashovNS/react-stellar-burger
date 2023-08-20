@@ -6,6 +6,7 @@ import {
 import { TForgotPassword, TLogin, TProfile, TResetPassword } from "./types";
 
 export const BASE_URL = "https://norma.nomoreparties.space/api";
+export const ORDERS_ALL = "wss://norma.nomoreparties.space/orders/all"
 
 export function checkResponse(res: Response) {
   return res.ok
