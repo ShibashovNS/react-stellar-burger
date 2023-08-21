@@ -6,7 +6,8 @@ import {
 import { TForgotPassword, TLogin, TProfile, TResetPassword } from "./types";
 
 export const BASE_URL = "https://norma.nomoreparties.space/api";
-export const ORDERS_ALL = "wss://norma.nomoreparties.space/orders/all"
+export const ORDERS_ALL = "wss://norma.nomoreparties.space/orders/all";
+export const ORDERS = "wss://norma.nomoreparties.space/orders";
 
 export function checkResponse(res: Response) {
   return res.ok
@@ -22,6 +23,7 @@ export function request(endpoint: string, options: RequestInit | undefined) {
 // async нужен когда несколько await поэтому убрал от сюда + а далее передаю рес, но его убрал т.к в стрелочной функции рес передается один и тотже в функицию
 export const getEngredients = () => request(`/ingredients`, {});
 
+
 export const sendOrder = createAsyncThunk(
   "details/post",
   async (dataId: string[]) => {
@@ -29,6 +31,7 @@ export const sendOrder = createAsyncThunk(
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        authorization: localStorage.getItem("accessToken"),
       },
       body: JSON.stringify({
         ingredients: dataId,

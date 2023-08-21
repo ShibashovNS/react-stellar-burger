@@ -1,6 +1,11 @@
 .orders {
+  grid-column-start: 1;
+  grid-row-start: 2;
   max-height: calc(100vh - 280px);
-  width: 870px;
   overflow-x: hidden;
   overflow-y: scroll;
+}
+
+.title {
+  justify-self: start;
 }

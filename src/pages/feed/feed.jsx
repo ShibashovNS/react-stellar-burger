@@ -21,13 +21,15 @@ export default function Feed() {
   const ordersData = ordersInf && ordersInf.orders;
   const ingredientsData = useAppSelector(ingredientSelector);
 
+  console.log(ingredientsData)
+
   function price(item) {
     let totalPrice = 0;
     if (item) {
       item.ingredients.forEach((ingrAll) => {
         ingredientsData.forEach((itemData) => {
           if (itemData._id === ingrAll) {
-            totalPrice += itemData.price;
+            totalPrice += itemData.type === "bun" && itemData.price * 2;
           }
         });
       });
