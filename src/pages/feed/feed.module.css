@@ -19,3 +19,7 @@
   overflow-x: hidden;
   overflow-y: scroll;
 }
+
+.title {
+  justify-self: start;
+}
