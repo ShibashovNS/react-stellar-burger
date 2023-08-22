@@ -1,7 +1,10 @@
 import React, { FC, useEffect } from "react";
 import styles from "./order-page.module.css";
 
-import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
+import {
+  CurrencyIcon,
+  FormattedDate,
+} from "@ya.praktikum/react-developer-burger-ui-components";
 import { useAppDispatch, useAppSelector } from "../../services/hooks/hooks";
 import { ingredientSelector } from "../../services/store/selectors/ingredientSelector";
 import { OrderList } from "../orderIconList/orderIconList";
@@ -44,7 +47,7 @@ export const OrderPage = ({ modal = false }) => {
     };
   }, []);
 
-  const done = order.status === "done";
+  const done = order && order.status === "done";
 
   return (
     ordersData && (
@@ -61,10 +64,13 @@ export const OrderPage = ({ modal = false }) => {
           {done ? "Выполнен" : "Готовится"}
         </p>
         <p className={"text text_type_main-medium mt-15 mb-6"}>Состав:</p>
-        <OrderList ingredients={orderIngredients} />
+        <OrderList ingredients={orderIngredients} shift={false} />
         <div className={`${styles.footer} mt-10`}>
           <p className={"text text_type_main-default text_color_inactive"}>
-            {order.createdAt}
+            <FormattedDate
+              className={"text text_type_main-default text_color_inactive"}
+              date={new Date(order.createdAt)}
+            />
           </p>
           <div className={styles.total}>
             <p className={"text text_type_digits-default mr-2"}>
