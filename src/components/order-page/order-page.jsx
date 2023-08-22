@@ -22,7 +22,7 @@ export const OrderPage = ({ modal = false }) => {
   const orderIngredients =
     ordersData && ordersData.filter((item) => item._id === _id)[0].ingredients;
   const order = ordersData && ordersData.filter((item) => item._id === _id)[0];
-  console.log(order);
+  console.log(orderIngredients);
 
   function price(item) {
     let totalPrice = 0;

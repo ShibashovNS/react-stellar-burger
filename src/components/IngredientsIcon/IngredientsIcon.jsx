@@ -3,11 +3,14 @@ import styles from "./IngredientsIcon.module.css";
 import { useAppSelector } from "../../services/hooks/hooks";
 import { ingredientSelector } from "../../services/store/selectors/ingredientSelector";
 
-export const IngredientsIcon = ({ ingredient, index, remains, shift }) => {
+export const IngredientsIcon = ({ ingredient, index, remains, shift, count }) => {
   const ingredients = useAppSelector(ingredientSelector);
-  const { image_mobile, name } = ingredients.filter(
+  const { image_mobile, name, price } = ingredients.filter(
     (item) => item._id === ingredient
   )[0];
+
+    console.log(ingredients)
+
   console.log(ingredients.filter((item) => item._id === ingredient));
   const style = shift
     ? {
@@ -16,8 +19,8 @@ export const IngredientsIcon = ({ ingredient, index, remains, shift }) => {
       }
     : {
         zIndex: 1,
-      };
-
+    };
+  
   return (
     <div>
       {shift ? (
@@ -49,10 +52,12 @@ export const IngredientsIcon = ({ ingredient, index, remains, shift }) => {
             </p>
           </div>
           <p className={"text text_type_digits-default"}>
-            {"2"}&#160;x&#160;{"1222"}
+            {count}&#160;x&#160;{price}
           </p>
         </div>
       )}
     </div>
   );
 };
+
+
