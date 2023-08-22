@@ -14,7 +14,6 @@ export function OrderCard({ ordersData, price }) {
 
   return (
     <li className={styles.card}>
-      <Link to={""} className={styles.link}>
         <div className={"mt-6 mr-6 ml-6 mb-6"}>
           <div className={styles.information}>
             <p className={"text text_type_digits-default"}>{`#${number}`}</p>
@@ -24,7 +23,6 @@ export function OrderCard({ ordersData, price }) {
             />
           </div>
           <p className={"text text_type_main-medium mt-6"}>{name}</p>
-
           <div className={`${styles.container} mt-6`}>
             <OrderList ingredients={ingredients} />
             <div className={`${styles.cost} ml-6`}>
@@ -33,7 +31,7 @@ export function OrderCard({ ordersData, price }) {
             </div>
           </div>
         </div>
-      </Link>
+      
     </li>
   );
 }

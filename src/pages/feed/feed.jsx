@@ -14,14 +14,17 @@ import {
 import { allOrdersInf } from "../../services/store/selectors/wsSelectors/allOrders";
 import { ingredientSelector } from "../../services/store/selectors/ingredientSelector";
 import { FormattedDate } from "@ya.praktikum/react-developer-burger-ui-components";
+import { useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function Feed() {
   const dispatch = useAppDispatch();
   const ordersInf = useAppSelector(allOrdersInf);
   const ordersData = ordersInf && ordersInf.orders;
   const ingredientsData = useAppSelector(ingredientSelector);
+  const location = useLocation();
 
-  console.log(ingredientsData)
+  console.log(ingredientsData);
 
   function price(item) {
     let totalPrice = 0;
@@ -29,7 +32,8 @@ export default function Feed() {
       item.ingredients.forEach((ingrAll) => {
         ingredientsData.forEach((itemData) => {
           if (itemData._id === ingrAll) {
-            totalPrice += itemData.type === "bun" && itemData.price * 2;
+            totalPrice +=
+              itemData.type === "bun" ? itemData.price * 2 : itemData.price;
           }
         });
       });
@@ -83,9 +87,22 @@ export default function Feed() {
           Лента заказов
         </h1>
         <section className={`${styles.orders} custom-scroll pr-2`}>
-          {ordersData.map((item) => (
-            <OrderCard key={item._id} ordersData={item} price={price(item)} />
-          ))}
+          {ordersData.map((item) => {
+            return (
+              <Link
+                className={styles.link}
+                key={item._id}
+                to={`${item._id}`}
+                state={{ background: location }}
+              >
+                <OrderCard
+                  key={item._id}
+                  ordersData={item}
+                  price={price(item)}
+                />
+              </Link>
+            );
+          })}
         </section>
         <div className={styles.stats}>
           <OrderStats ordersInf={ordersInf} />

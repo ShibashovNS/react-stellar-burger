@@ -5,7 +5,11 @@ import { ingredientSelector } from "../../services/store/selectors/ingredientSel
 
 export const IngredientsIcon = ({ ingredient, index, remains, shift }) => {
   const ingredients = useAppSelector(ingredientSelector)
-  const { image_mobile, name } = ingredients.filter((item) => item._id === ingredient)[0];
+
+  console.log(ingredients.filter((item) => item._id === ingredient))
+  
+  console.log(ingredient)
+  const { image_mobile, name } = ingredients.filter((item) => item._id === ingredient)[0]
   
   const style = shift ? {
     marginRight: -20,

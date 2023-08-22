@@ -3,7 +3,7 @@ export function OrderStats({ ordersInf }) {
   console.log(ordersInf);
 
   const listOrders = (array, status) => {
-    const orderStatus = array?.filter((item) => item.status === status);
+    const orderStatus = array?.filter((item) => item.status === status)
     return orderStatus
       ?.slice(0, 25)
       .map((item) => <li key={item._id}>{item.number}</li>);

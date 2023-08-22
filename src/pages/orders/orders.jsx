@@ -1,4 +1,4 @@
-import {FC, useEffect, useMemo} from 'react';
+import { FC, useEffect, useMemo } from "react";
 import { OrderCard } from "../../components/orderCard/orderCard";
 import { useAppDispatch, useAppSelector } from "../../services/hooks/hooks";
 import { ingredientSelector } from "../../services/store/selectors/ingredientSelector";
@@ -10,21 +10,26 @@ import { ORDERS, ORDERS_ALL } from "../../utils/api";
 export default function OrdersPage() {
   const dispatch = useAppDispatch();
   const ordersInf = useAppSelector(allOrdersInf);
-  const ordersData = ordersInf && ordersInf.orders;
+  const ordersData = ordersInf && (ordersInf.orders);
+  const ordersDataReversed = (ordersData && [...ordersData].reverse()) || [];
+  ;
+
+  console.log(ordersData)
+
   const ingredientsData = useAppSelector(ingredientSelector);
 
   const accessToken = useMemo(
-    () => (
-      localStorage.getItem("accessToken")?.replace('Bearer ', '')
-    ), [localStorage.getItem("accessToken")]);
-      
+    () => localStorage.getItem("accessToken")?.replace("Bearer ", ""),
+    [localStorage.getItem("accessToken")]
+  );
+
   function price(item) {
     let totalPrice = 0;
     if (item) {
       item.ingredients.forEach((ingrAll) => {
         ingredientsData.forEach((itemData) => {
           if (itemData._id === ingrAll) {
-            totalPrice += itemData.type === "bun" && itemData.price * 2;
+            totalPrice += itemData.type === "bun" ? itemData.price * 2 : itemData.price;
           }
         });
       });
@@ -41,11 +46,12 @@ export default function OrdersPage() {
   }, []);
 
   return (
-    ordersData &&
+    ordersDataReversed && (
       <section className={`${styles.orders} custom-scroll pr-2`}>
-        {ordersData.map((item) => (
+        {ordersDataReversed.map((item) => (
           <OrderCard key={item._id} ordersData={item} price={price(item)} />
         ))}
       </section>
+    )
   );
 }
