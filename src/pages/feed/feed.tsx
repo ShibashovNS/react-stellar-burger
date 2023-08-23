@@ -29,17 +29,18 @@ export default function Feed() {
     let totalPrice = 0;
     if (item) {
       item.ingredients.forEach((ingrAll) => {
-        ingredientsData.forEach((itemData: { _id: string; type: string; price: number; }) => {
-          if (itemData._id === ingrAll) {
-            totalPrice +=
-              itemData.type === "bun" ? itemData.price * 2 : itemData.price;
+        ingredientsData.forEach(
+          (itemData: { _id: string; type: string; price: number }) => {
+            if (itemData._id === ingrAll) {
+              totalPrice +=
+                itemData.type === "bun" ? itemData.price * 2 : itemData.price;
+            }
           }
-        });
+        );
       });
     }
     return totalPrice;
   }
-
 
   /*
   console.log(ordersData);

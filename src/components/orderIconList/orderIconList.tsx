@@ -38,7 +38,7 @@ export const OrderList: FC<Props> = ({ ingredients, shift = true }) => {
       className={shift === true ? styles.list : styles.icon + " custom-scroll"}
     >
       {listsIconOrder.map(
-        (ingredient: any, index: React.Key | null | undefined) => (
+        (ingredient: any, index: number) => (
           <li key={index}>
             <IngredientsIcon
               count={count[`${ingredient}`]}

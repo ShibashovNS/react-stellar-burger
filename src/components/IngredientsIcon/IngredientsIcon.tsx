@@ -1,14 +1,29 @@
-import React, { FC } from "react";
+import React, { FC, Key } from "react";
 import styles from "./IngredientsIcon.module.css";
 import { useAppSelector } from "../../services/hooks/hooks";
 import { ingredientSelector } from "../../services/store/selectors/ingredientSelector";
+import { Torder } from "../../utils/types";
 
-export const IngredientsIcon = ({ ingredient, index, remains, shift, count }) => {
+interface Props {
+  ingredient: string;
+  index:  number;
+  remains: number | false;
+  shift: boolean;
+  count: number;
+}
+
+export const IngredientsIcon: FC<Props> = ({
+  ingredient,
+  index,
+  remains,
+  shift,
+  count,
+}) => {
   const ingredients = useAppSelector(ingredientSelector);
   const { image_mobile, name, price } = ingredients.filter(
-    (item) => item._id === ingredient
+    (item: Torder) => item._id === ingredient
   )[0];
-  
+
   const style = shift
     ? {
         marginRight: -20,
@@ -16,8 +31,8 @@ export const IngredientsIcon = ({ ingredient, index, remains, shift, count }) =>
       }
     : {
         zIndex: 10,
-    };
-  
+      };
+
   return (
     <div>
       {shift ? (
@@ -48,7 +63,7 @@ export const IngredientsIcon = ({ ingredient, index, remains, shift, count }) =>
               {name}
             </p>
           </div>
-          <p className={"text text_type_digits-default"}>
+          <p className={"text text_type_digits-default pr-4"}>
             {count}&#160;x&#160;{price}
           </p>
         </div>
@@ -56,5 +71,3 @@ export const IngredientsIcon = ({ ingredient, index, remains, shift, count }) =>
     </div>
   );
 };
-
-
