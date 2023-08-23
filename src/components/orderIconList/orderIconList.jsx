@@ -3,15 +3,14 @@ import styles from "./orderIconList.module.css";
 import { IngredientsIcon } from "../IngredientsIcon/IngredientsIcon";
 
 export const OrderList = ({ ingredients, shift = true }) => {
-  
   const uniqueIngredients = ingredients.filter((item, index) => {
     return ingredients.indexOf(item) === index;
   });
-  
-  console.log(uniqueIngredients)
-  
+
   const listsIconOrder =
-  uniqueIngredients.length > 6 ? uniqueIngredients.slice(0, 6) : uniqueIngredients;
+    uniqueIngredients.length > 6
+      ? uniqueIngredients.slice(0, 6)
+      : uniqueIngredients;
 
   const remains = uniqueIngredients.length > 6 && uniqueIngredients.length - 6;
 
@@ -24,10 +23,10 @@ export const OrderList = ({ ingredients, shift = true }) => {
 
   const count = countDuplicates(ingredients);
 
-  console.log(count);
-
   return (
-    <ul className={shift === true ? styles.list : styles.icon}>
+    <ul
+      className={shift === true ? styles.list : styles.icon + " custom-scroll"}
+    >
       {listsIconOrder.map((ingredient, index) => (
         <li key={index}>
           <IngredientsIcon

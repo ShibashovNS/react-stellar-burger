@@ -21,7 +21,6 @@ const ingredientDetailsSlice = createSlice({
 
     counter: (state, action) => {
       state.count = action.payload;
-      console.log(action.payload);
     },
   },
 });

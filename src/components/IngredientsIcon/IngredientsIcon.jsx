@@ -8,17 +8,14 @@ export const IngredientsIcon = ({ ingredient, index, remains, shift, count }) =>
   const { image_mobile, name, price } = ingredients.filter(
     (item) => item._id === ingredient
   )[0];
-
-    console.log(ingredients)
-
-  console.log(ingredients.filter((item) => item._id === ingredient));
+  
   const style = shift
     ? {
         marginRight: -20,
         zIndex: 6 - index,
       }
     : {
-        zIndex: 1,
+        zIndex: 10,
     };
   
   return (

@@ -9,3 +9,8 @@
 .title {
   justify-self: start;
 }
+
+.link {
+  color: var(--text-primary-color);
+  text-decoration: none;
+}

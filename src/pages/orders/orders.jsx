@@ -6,15 +6,15 @@ import { allOrdersInf } from "../../services/store/selectors/wsSelectors/allOrde
 import styles from "./orders.module.css";
 import { connect, wsClose } from "../../services/store/reducers/socket/actions";
 import { ORDERS, ORDERS_ALL } from "../../utils/api";
+import { Link, useLocation } from "react-router-dom";
 
 export default function OrdersPage() {
   const dispatch = useAppDispatch();
   const ordersInf = useAppSelector(allOrdersInf);
-  const ordersData = ordersInf && (ordersInf.orders);
+  const ordersData = ordersInf && ordersInf.orders;
   const ordersDataReversed = (ordersData && [...ordersData].reverse()) || [];
-  ;
-
-  console.log(ordersData)
+  const location = useLocation();
+  console.log(ordersData);
 
   const ingredientsData = useAppSelector(ingredientSelector);
 
@@ -29,7 +29,8 @@ export default function OrdersPage() {
       item.ingredients.forEach((ingrAll) => {
         ingredientsData.forEach((itemData) => {
           if (itemData._id === ingrAll) {
-            totalPrice += itemData.type === "bun" ? itemData.price * 2 : itemData.price;
+            totalPrice +=
+              itemData.type === "bun" ? itemData.price * 2 : itemData.price;
           }
         });
       });
@@ -48,9 +49,18 @@ export default function OrdersPage() {
   return (
     ordersDataReversed && (
       <section className={`${styles.orders} custom-scroll pr-2`}>
-        {ordersDataReversed.map((item) => (
-          <OrderCard key={item._id} ordersData={item} price={price(item)} />
-        ))}
+        {ordersDataReversed.map((item) => {
+          return (
+            <Link
+              className={styles.link}
+              key={item._id}
+              to={`${item._id}`}
+              state={{ background: location }}
+            >
+              <OrderCard key={item._id} ordersData={item} price={price(item)} />
+            </Link>
+          );
+        })}
       </section>
     )
   );

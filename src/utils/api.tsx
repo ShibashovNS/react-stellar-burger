@@ -23,6 +23,22 @@ export function request(endpoint: string, options: RequestInit | undefined) {
 // async нужен когда несколько await поэтому убрал от сюда + а далее передаю рес, но его убрал т.к в стрелочной функции рес передается один и тотже в функицию
 export const getEngredients = () => request(`/ingredients`, {});
 
+
+  export const fetchOrder = createAsyncThunk(
+    'orders/fetchOrder', 
+    async (orderId: number) => {
+      const response = await fetch(`${BASE_URL}/orders/${orderId}`);
+      if (!response.ok) {
+        throw new Error('Ошибка получения заказа');
+      }
+      const data = await response.json();
+      return data;
+    }
+  );
+
+
+export const getOrder = (number: number) => request(`/orders/${number}`, {});
+
 export const sendOrder = createAsyncThunk(
   "details/post",
   async (dataId: string[]) => {

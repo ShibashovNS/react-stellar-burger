@@ -24,8 +24,6 @@ export default function Feed() {
   const ingredientsData = useAppSelector(ingredientSelector);
   const location = useLocation();
 
-  console.log(ingredientsData);
-
   function price(item) {
     let totalPrice = 0;
     if (item) {

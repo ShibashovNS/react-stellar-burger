@@ -8,8 +8,6 @@ import { useParams } from "react-router-dom";
 function IngredientDetailsSingle({ isSinglePage = true }) {
   const { id: _id } = useParams();
 
-  console.log(useParams());
-
   const ingredientsData = useAppSelector(memoIngredientsSelector);
 
   const detailsIngredient = ingredientsData.find(
