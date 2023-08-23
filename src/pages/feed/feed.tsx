@@ -16,6 +16,7 @@ import { ingredientSelector } from "../../services/store/selectors/ingredientSel
 import { FormattedDate } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { TingredintsConstructor, Torder } from "../../utils/types";
 
 export default function Feed() {
   const dispatch = useAppDispatch();
@@ -24,11 +25,11 @@ export default function Feed() {
   const ingredientsData = useAppSelector(ingredientSelector);
   const location = useLocation();
 
-  function price(item) {
+  function price(item: Torder) {
     let totalPrice = 0;
     if (item) {
       item.ingredients.forEach((ingrAll) => {
-        ingredientsData.forEach((itemData) => {
+        ingredientsData.forEach((itemData: { _id: string; type: string; price: number; }) => {
           if (itemData._id === ingrAll) {
             totalPrice +=
               itemData.type === "bun" ? itemData.price * 2 : itemData.price;
@@ -38,6 +39,7 @@ export default function Feed() {
     }
     return totalPrice;
   }
+
 
   /*
   console.log(ordersData);
@@ -85,7 +87,7 @@ export default function Feed() {
           Лента заказов
         </h1>
         <section className={`${styles.orders} custom-scroll pr-2`}>
-          {ordersData.map((item) => {
+          {ordersData.map((item: Torder) => {
             return (
               <Link
                 className={styles.link}

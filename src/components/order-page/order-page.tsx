@@ -21,14 +21,14 @@ export const OrderPage = ({ modal = false }) => {
   const ingredientsData = useAppSelector(ingredientSelector);
   const { id: _id } = useParams();
   const orderIngredients =
-    ordersData && ordersData.filter((item) => item._id === _id)[0].ingredients;
-  const order = ordersData && ordersData.filter((item) => item._id === _id)[0];
+    ordersData && ordersData.filter((item: { _id: string | undefined; }) => item._id === _id)[0].ingredients;
+  const order = ordersData && ordersData.filter((item: { _id: string | undefined; }) => item._id === _id)[0];
 
-  function price(item) {
+  function price(item: { ingredients: any[]; }) {
     let totalPrice = 0;
     if (item) {
-      item.ingredients.forEach((ingrAll) => {
-        ingredientsData.forEach((itemData) => {
+      item.ingredients.forEach((ingrAll: any) => {
+        ingredientsData.forEach((itemData: { _id: any; type: string; price: number; }) => {
           if (itemData._id === ingrAll) {
             totalPrice +=
               itemData.type === "bun" ? itemData.price * 2 : itemData.price;

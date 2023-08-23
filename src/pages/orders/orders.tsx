@@ -7,6 +7,7 @@ import styles from "./orders.module.css";
 import { connect, wsClose } from "../../services/store/reducers/socket/actions";
 import { ORDERS, ORDERS_ALL } from "../../utils/api";
 import { Link, useLocation } from "react-router-dom";
+import { Torder } from "../../utils/types";
 
 export default function OrdersPage() {
   const dispatch = useAppDispatch();
@@ -23,11 +24,11 @@ export default function OrdersPage() {
     [localStorage.getItem("accessToken")]
   );
 
-  function price(item) {
+  function price(item: Torder) {
     let totalPrice = 0;
     if (item) {
       item.ingredients.forEach((ingrAll) => {
-        ingredientsData.forEach((itemData) => {
+        ingredientsData.forEach((itemData: { _id: string; type: string; price: number; }) => {
           if (itemData._id === ingrAll) {
             totalPrice +=
               itemData.type === "bun" ? itemData.price * 2 : itemData.price;
@@ -49,7 +50,7 @@ export default function OrdersPage() {
   return (
     ordersDataReversed && (
       <section className={`${styles.orders} custom-scroll pr-2`}>
-        {ordersDataReversed.map((item) => {
+        {ordersDataReversed.map((item: Torder) => {
           return (
             <Link
               className={styles.link}

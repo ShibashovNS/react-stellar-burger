@@ -6,8 +6,9 @@ import {
   FormattedDate,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import React from "react";
+import { Torder } from "../../utils/types";
 
-export function OrderCard({ ordersData, price }) {
+export function OrderCard({ ordersData, price }:{ ordersData:Torder, price: number }) {
   const { createdAt, ingredients, name, number, status, updatedAt, _id } =
     ordersData;
   const date = new Date(createdAt);

@@ -1,9 +1,15 @@
+import { TordersInf } from "../../utils/types";
 import styles from "./order-stats.module.css";
-export function OrderStats({ ordersInf }) {
+
+type Torders = {
+  ordersInf: TordersInf
+};
+
+export function OrderStats({ ordersInf}:Torders) {
   console.log(ordersInf);
 
-  const listOrders = (array, status) => {
-    const orderStatus = array?.filter((item) => item.status === status)
+  const listOrders = (array:any[], status: string) => {
+    const orderStatus = array?.filter((item) => item.status === status);
     return orderStatus
       ?.slice(0, 25)
       .map((item) => <li key={item._id}>{item.number}</li>);
