@@ -5,7 +5,7 @@ import { fetchOrder, sendOrder } from "../../../utils/api";
 
 const initialState = {
   orderData: [],
-  order:[],
+  order:null,
   clickStutus: false,
   isLoding: false,
   error: " ",
@@ -44,7 +44,7 @@ const orderDetailsSlice = createSlice({
       .addCase(fetchOrder.fulfilled.type, (state, action) => {
         state.isLoding = true;
         state.error = " ";
-        state.order = action.payload.orders;
+        state.order = action.payload.orders[0];
       })
       .addCase(fetchOrder.rejected.type, (state, action) => {
         state.isLoding = false;

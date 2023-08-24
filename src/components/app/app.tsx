@@ -95,11 +95,11 @@ const App = () => {
           </Route>
           <Route
             path="/profile/orders/:id"
-            element={<IngredientDetailsSingle />}
+            element={<OrderInformation modal={false} />}
           />
           <Route
             path="/ingredients/:id"
-            element={<IngredientDetailsSingle />}
+            element={<OrderInformation modal={false} />}
           />
           <Route path="*" element={<NotFound />} />
         </Route>
