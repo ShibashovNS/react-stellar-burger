@@ -25,6 +25,7 @@ import { OrderCard } from "../orderCard/orderCard";
 import { OrderInformation } from "../../pages/order-information/order-information";
 import { clickOpen } from "../../services/store/reducers/modalOverlaySlice";
 import { clickDetails } from "../../services/store/reducers/orderDetailsSlice";
+import { detailsSelector } from "../../services/store/selectors/detailsSelector";
 
 const App = () => {
   const [isloding, setIsLoding] = useState(false);
@@ -44,6 +45,8 @@ const App = () => {
       <Modal isLink={false}>{isClickStutusDetails && <OrderDetails />}</Modal>
     );
   };
+
+
 
   const closeModal = () => {
     dispatch(clickOpen(false));

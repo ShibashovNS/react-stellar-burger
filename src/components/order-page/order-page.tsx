@@ -13,16 +13,17 @@ import { allOrdersInf } from "../../services/store/selectors/wsSelectors/allOrde
 import { connect, wsClose } from "../../services/store/reducers/socket/actions";
 import { ORDERS_ALL, fetchOrder } from "../../utils/api";
 import { TingredientType } from "../../utils/types";
+import { detailsSelector } from "../../services/store/selectors/detailsSelector";
 
 export const OrderPage = ({ modal = false }) => {
   const dispatch = useAppDispatch();
-  const ordersInf = useAppSelector(allOrdersInf);
-  const ordersData = ordersInf && ordersInf.orders;
   const ingredientsData = useAppSelector(ingredientSelector);
-  const { id: _id } = useParams();
-  const orderIngredients =
-    ordersData && ordersData.filter((item: { _id: string | undefined; }) => item._id === _id)[0].ingredients;
-  const order = ordersData && ordersData.filter((item: { _id: string | undefined; }) => item._id === _id)[0];
+  const { id: number } = useParams();
+  console.log(number)
+  const orderData = useAppSelector(detailsSelector)
+  
+  const orderIngredients = orderData.ingredients;
+  const order = orderData && orderData[0];
 
   function price(item: { ingredients: any[]; }) {
     let totalPrice = 0;
@@ -39,8 +40,10 @@ export const OrderPage = ({ modal = false }) => {
     return totalPrice;
   }
 
+
   useEffect(() => {
     dispatch(connect(ORDERS_ALL));
+    dispatch(fetchOrder(number));
 
     return () => {
       wsClose();
@@ -48,9 +51,10 @@ export const OrderPage = ({ modal = false }) => {
   }, []);
 
   const done = order && order.status === "done";
-  if (!ordersData) return null;
+  
 
   return (
+    orderData&&
     <section className={`${styles.container} mt-15 mb-10 mr-10 ml-10`}>
       <p
         className={`text text_type_digits-default ${!modal && styles.number}`}

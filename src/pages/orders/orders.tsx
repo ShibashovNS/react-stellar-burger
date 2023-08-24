@@ -55,7 +55,7 @@ export default function OrdersPage() {
             <Link
               className={styles.link}
               key={item._id}
-              to={`${item._id}`}
+              to={`${item.number}`}
               state={{ background: location }}
             >
               <OrderCard key={item._id} ordersData={item} price={price(item)} />

@@ -44,7 +44,7 @@ const orderDetailsSlice = createSlice({
       .addCase(fetchOrder.fulfilled.type, (state, action) => {
         state.isLoding = true;
         state.error = " ";
-        state.order = action.payload;
+        state.order = action.payload.orders;
       })
       .addCase(fetchOrder.rejected.type, (state, action) => {
         state.isLoding = false;

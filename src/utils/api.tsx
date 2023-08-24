@@ -26,8 +26,8 @@ export const getEngredients = () => request(`/ingredients`, {});
 
   export const fetchOrder = createAsyncThunk(
     'orders/fetchOrder', 
-    async (orderId: number) => {
-      const response = await fetch(`${BASE_URL}/orders/${orderId}`);
+    async (orderNum: number | string | undefined) => {
+      const response = await fetch(`${BASE_URL}/orders/${orderNum}`);
       if (!response.ok) {
         throw new Error('Ошибка получения заказа');
       }
