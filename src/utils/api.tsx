@@ -6,6 +6,8 @@ import {
 import { TForgotPassword, TLogin, TProfile, TResetPassword } from "./types";
 
 export const BASE_URL = "https://norma.nomoreparties.space/api";
+export const ORDERS_ALL = "wss://norma.nomoreparties.space/orders/all";
+export const ORDERS = "wss://norma.nomoreparties.space/orders";
 
 export function checkResponse(res: Response) {
   return res.ok
@@ -21,18 +23,39 @@ export function request(endpoint: string, options: RequestInit | undefined) {
 // async нужен когда несколько await поэтому убрал от сюда + а далее передаю рес, но его убрал т.к в стрелочной функции рес передается один и тотже в функицию
 export const getEngredients = () => request(`/ingredients`, {});
 
-export const sendOrder = createAsyncThunk("details/post",
-async (dataId: string[]) => {
-  return request(`/orders`, {
-    method: "POST",
-    headers: {
+
+  export const fetchOrder = createAsyncThunk(
+    'orders/fetchOrder', 
+    async (orderNum: number | string | undefined) => {
+      const response = await fetch(`${BASE_URL}/orders/${orderNum}`);
+      if (!response.ok) {
+        throw new Error('Ошибка получения заказа');
+      }
+      const data = await response.json();
+      return data;
+    }
+  );
+
+
+export const getOrder = (number: number) => request(`/orders/${number}`, {});
+
+export const sendOrder = createAsyncThunk(
+  "details/post",
+  async (dataId: string[]) => {
+    const headers: HeadersInit = {
       "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      ingredients: dataId,
-    }),
-  });
-});
+      authorization: localStorage.getItem("accessToken") || "",
+    };
+
+    return request(`/orders`, {
+      method: "POST",
+      headers,
+      body: JSON.stringify({
+        ingredients: dataId,
+      }),
+    });
+  }
+);
 
 //запрос на регистрацию
 export const registerUser = createAsyncThunk(
@@ -110,8 +133,12 @@ const fetchWithRefresh = async (url: string, options: any) => {
   try {
     const res = await fetch(url, options);
     return await checkResponse(res);
-  } catch (err: any) {
-    if (err.message === "jwt expired") {
+  } catch (err) {
+    console.log(err);
+    console.log(err instanceof Error);
+    if (
+      (err instanceof Error ? err.message : "unknown_error") === "jwt expired"
+    ) {
       console.log(err);
       const refreshData = await refreshToken();
       console.log(refreshData);
@@ -168,28 +195,29 @@ export const checkUserAuth = createAsyncThunk(
 
 export const forgotPassword = createAsyncThunk(
   "user/forgot",
-  async ( email: TForgotPassword, _) => {
-  return request(`/password-reset`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ email }),
-  });
-});
-
+  async (email: TForgotPassword, _) => {
+    return request(`/password-reset`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email }),
+    });
+  }
+);
 
 export const resetPassword = createAsyncThunk(
   "user/reset",
-  async ( data: TResetPassword, _) => {
-  return request(`/password-reset/reset`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ data }),
-  });
-});
+  async (data: TResetPassword, _) => {
+    return request(`/password-reset/reset`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ data }),
+    });
+  }
+);
 
 export const logoutUser = createAsyncThunk(
   "user/logout",
@@ -206,6 +234,3 @@ export const logoutUser = createAsyncThunk(
     });
   }
 );
-
-
-

@@ -7,7 +7,7 @@
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: max-content 3.9fr 1fr;
+  grid-template-columns: max-content 3.7fr 1fr;
   align-items: center;
 }
 

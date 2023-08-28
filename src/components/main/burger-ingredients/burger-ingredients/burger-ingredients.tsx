@@ -19,7 +19,7 @@ function BurgerIngredients({ productName, typeProduct }: TWithChildren<Tingredie
         {ingredients
           .filter((item: TingredintsConstructor) => item.type === typeProduct)
           .map((item: TingredintsConstructor) => {
-            return <Link className={styles.link} key={item._id} to={`profile/orders/${item._id}`} state={{ background: location }}> <IngredientCard key={item._id} ingredient={item}/> </Link>;
+            return <Link className={styles.link} key={item._id} to={`ingredients/${item._id}`} state={{ background: location }}> <IngredientCard key={item._id} ingredient={item}/> </Link>;
           })}
       </div>
     </>

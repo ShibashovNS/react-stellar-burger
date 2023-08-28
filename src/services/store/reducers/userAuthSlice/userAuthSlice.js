@@ -29,16 +29,12 @@ const userSlice = createSlice({
     .addCase(registerUser.pending.type, (state, action) => {
       state.isLoding = false;
       state.error = " ";
-      console.log(action.payload)
     })
       
     .addCase(registerUser.fulfilled.type, (state, action) => {
       state.user = action.payload.user;
-      console.log(action.payload.user)
-
       state.isAuthChecked = true;
       state.user = action.payload.user;
-      console.log(action.payload)
     })
       
     .addCase(registerUser.rejected.type, (state, action) => {
@@ -55,7 +51,6 @@ const userSlice = createSlice({
       state.user = action.payload.user;
       state.isAuthChecked = true;
       state.user = action.payload.user;
-      console.log(action.payload)
     })
       
     .addCase(loginUser.rejected.type, (state, action) => {

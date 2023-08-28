@@ -1,6 +1,7 @@
 import styles from "./ingredient-details.module.css";
-import { useAppSelector } from "../../../../services/hooks/hooks";
+
 import { detailsSelector } from "../../../services/store/selectors/detailsSelector";
+import { useAppSelector } from "../../../services/hooks/hooks";
 
 function IngredientDetails() {
   const detailsIngredient = useAppSelector(detailsSelector);

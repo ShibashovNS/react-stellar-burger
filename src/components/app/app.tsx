@@ -6,7 +6,7 @@ import { fetchIngredients } from "../../services/store/reducers/ingredientQuery"
 import { ingredientSelector } from "../../services/store/selectors/ingredientSelector";
 import { Route, Routes, useLocation } from "react-router-dom";
 import { OnlyAuth, OnlyUnAuth } from "../protected-route/protected-route";
-import { checkUserAuth, getUser } from "../../utils/api";
+import { checkUserAuth, fetchOrder, getOrder, getUser } from "../../utils/api";
 import { useAppDispatch, useAppSelector } from "../../services/hooks/hooks";
 import Layout from "../../pages/layout/layout";
 import { Login } from "../../pages/login/login";
@@ -19,6 +19,13 @@ import IngredientDetailsSingle from "../../pages/ingredient-details-single/ingre
 import NotFound from "../../pages/not-found/non-found";
 import ForgotPassword from "../../pages/forgot-password/forgot-password";
 import AppMain from "../main/app-main/app-main";
+import Feed from "../../pages/feed/feed";
+import { OrderList } from "../orderIconList/orderIconList";
+import { OrderCard } from "../orderCard/orderCard";
+import { OrderInformation } from "../../pages/order-information/order-information";
+import { clickOpen } from "../../services/store/reducers/modalOverlaySlice";
+import { clickDetails } from "../../services/store/reducers/orderDetailsSlice";
+import { detailsSelector } from "../../services/store/selectors/detailsSelector";
 
 const App = () => {
   const [isloding, setIsLoding] = useState(false);
@@ -34,7 +41,16 @@ const App = () => {
   const dispatch = useAppDispatch();
 
   const childForModal = () => {
-    return <Modal>{isClickStutusDetails && <OrderDetails />}</Modal>;
+    return (
+      <Modal isLink={false}>{isClickStutusDetails && <OrderDetails />}</Modal>
+    );
+  };
+
+
+
+  const closeModal = () => {
+    dispatch(clickOpen(false));
+    dispatch(clickDetails(false));
   };
 
   useEffect(() => {
@@ -55,13 +71,19 @@ const App = () => {
         <Route path="/" element={<Layout />}>
           <Route path="/" element={<AppMain />} />
           <Route path="/login" element={<OnlyUnAuth component={<Login />} />} />
+          <Route path="/feed" element={<Feed />} />
+          <Route
+            path="/feed/:id"
+            element={<OrderInformation modal={false} />}
+          />
+
           <Route
             path="/register"
             element={<OnlyUnAuth component={<Register />} />}
           />
           <Route
             path="/forgot-password"
-            element={<OnlyUnAuth component={<ForgotPassword/>} />}
+            element={<OnlyUnAuth component={<ForgotPassword />} />}
           />
           <Route
             path="/reset-password"
@@ -72,8 +94,12 @@ const App = () => {
             <Route path={"/profile/orders"} element={<OrdersPage />} />
           </Route>
           <Route
-            path={"profile/orders/:id"}
-            element={<IngredientDetailsSingle />}
+            path="/profile/orders/:id"
+            element={<OrderInformation modal={false} />}
+          />
+          <Route
+            path="/ingredients/:id"
+            element={<OrderInformation modal={false} />}
           />
           <Route path="*" element={<NotFound />} />
         </Route>
@@ -81,11 +107,29 @@ const App = () => {
       {background && (
         <Routes>
           <Route
-            path="profile/orders/:id"
+            path="/ingredients/:id"
             element={
-              <Modal>
+              <Modal isLink>
                 {" "}
                 <IngredientDetailsSingle isSinglePage={false} />
+              </Modal>
+            }
+          />
+          <Route
+            path="/feed/:id"
+            element={
+              <Modal isLink>
+                {" "}
+                <OrderInformation modal={true} />
+              </Modal>
+            }
+          />
+          <Route
+            path="/profile/orders/:id"
+            element={
+              <Modal isLink>
+                {" "}
+                <OrderInformation modal={true} />
               </Modal>
             }
           />

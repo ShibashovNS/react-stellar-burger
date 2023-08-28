@@ -1,9 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 import Preloader from "../../../components/preloder/preloder";
-import { sendOrder } from "../../../utils/api";
+import { fetchOrder, sendOrder } from "../../../utils/api";
+
 
 const initialState = {
   orderData: [],
+  order:null,
   clickStutus: false,
   isLoding: false,
   error: " ",
@@ -29,12 +31,24 @@ const orderDetailsSlice = createSlice({
         state.isLoding = true;
         state.error = " ";
         state.orderData = action.payload.order.number;
-        console.log(action)
       })
       .addCase(sendOrder.rejected.type, (state, action) => {
         state.isLoding = false;
         state.error = action.payload;
-        console.log(action)
+      })
+      
+      .addCase(fetchOrder.pending.type, (state, action) => {
+        state.isLoding = false;
+        state.error = " ";
+      })
+      .addCase(fetchOrder.fulfilled.type, (state, action) => {
+        state.isLoding = true;
+        state.error = " ";
+        state.order = action.payload.orders[0];
+      })
+      .addCase(fetchOrder.rejected.type, (state, action) => {
+        state.isLoding = false;
+        state.error = action.payload;
       });
   },
 });

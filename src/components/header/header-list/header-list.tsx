@@ -28,7 +28,8 @@ function HeaderList() {
 
             <li className={styles.linkList_item}>
               <NavLink
-                className={({ isActive }) => styleLink(isActive) + " pl-2 text_type_main-default"} to={""}              >
+                to="/feed"
+                className={({ isActive }) => styleLink(isActive) + " pl-2 text_type_main-default"}>
                 <ListIcon type={"secondary"} />
                 <span className="pl-2">Лента Заказов</span>
                 

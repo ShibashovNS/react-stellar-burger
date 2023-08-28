@@ -16,7 +16,6 @@ const burgerConstructorSlice = createSlice({
 
     addIngredient: (state, action) => {
       state.draggedIngredients = [...state.draggedIngredients, action.payload];
-      console.log(action.payload);
     },
 
     moveIngredients: (state, action) => {
