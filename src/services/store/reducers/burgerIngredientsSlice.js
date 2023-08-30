@@ -1,7 +1,7 @@
 import { fetchIngredients } from "./ingredientQuery";
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {
+export const initialState = {
   ingredients: [],
   isLoding: false,
   error: " ",
@@ -34,12 +34,12 @@ const burgerIngredientsSlice = createSlice({
     builder
       // Add reducers for additional action types here, and handle loading state as needed
       .addCase(fetchIngredients.pending.type, (state) => {
-        state.isLoding = false;
+        state.isLoding = true;
         state.error = " ";
       })
 
       .addCase(fetchIngredients.fulfilled.type, (state, action) => {
-        state.isLoding = true;
+        state.isLoding = false;
         state.error = " ";
         state.ingredients = action.payload.data;
       })

@@ -1,12 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {
+export const initialState = {
   selctIngredient: [],
   clickStutus: false,
   count: 0,
 };
 
-const ingredientDetailsSlice = createSlice({
+export const ingredientDetailsSlice = createSlice({
   name: "ingredDetails",
   initialState,
 

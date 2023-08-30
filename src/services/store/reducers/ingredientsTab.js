@@ -4,7 +4,7 @@ const initialState = {
   typeTab: null,
 };
 
-const ingredientsTabSlice = createSlice({
+export const ingredientsTabSlice = createSlice({
   name: "ingredientsTab",
   initialState,
 

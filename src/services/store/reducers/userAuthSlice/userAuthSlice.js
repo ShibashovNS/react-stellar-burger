@@ -10,7 +10,7 @@ const initialState = {
   error: " ",
 };
 
-const userSlice = createSlice({
+export const userSlice = createSlice({
   name: 'user',
   initialState,
 
@@ -27,14 +27,13 @@ const userSlice = createSlice({
     builder
       
     .addCase(registerUser.pending.type, (state, action) => {
-      state.isLoding = false;
+      state.isLoding = true;
       state.error = " ";
     })
       
     .addCase(registerUser.fulfilled.type, (state, action) => {
       state.user = action.payload.user;
       state.isAuthChecked = true;
-      state.user = action.payload.user;
     })
       
     .addCase(registerUser.rejected.type, (state, action) => {

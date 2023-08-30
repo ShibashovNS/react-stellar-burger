@@ -16,9 +16,6 @@ export enum IOrderStatus {
     pending = 'pending',
     created = 'created',
 }
-  
-
-
 
 export type TFeedOrder = {
     _id: string;

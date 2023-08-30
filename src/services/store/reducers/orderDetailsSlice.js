@@ -24,11 +24,11 @@ const orderDetailsSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(sendOrder.pending.type, (state, action) => {
-        state.isLoding = false;
+        state.isLoding = true;
         state.error = " ";
       })
       .addCase(sendOrder.fulfilled.type, (state, action) => {
-        state.isLoding = true;
+        state.isLoding = false;
         state.error = " ";
         state.orderData = action.payload.order.number;
       })
@@ -38,11 +38,11 @@ const orderDetailsSlice = createSlice({
       })
       
       .addCase(fetchOrder.pending.type, (state, action) => {
-        state.isLoding = false;
+        state.isLoding = true;
         state.error = " ";
       })
       .addCase(fetchOrder.fulfilled.type, (state, action) => {
-        state.isLoding = true;
+        state.isLoding = false;
         state.error = " ";
         state.order = action.payload.orders[0];
       })
