@@ -22,7 +22,7 @@ function OrderDetails() {
         идентификатор заказа
       </p>
       
-      {isLoding?<img className="mt-15" src={image} alt="Заказ оформлен" />: <Preloader/>}
+      {isLoding? <Preloader/>:<img className="mt-15" src={image} alt="Заказ оформлен" />}
       <p className={styles.text_status + " text_type_main-default pt-15"}>
         ваш заказ начали готовить
       </p>
