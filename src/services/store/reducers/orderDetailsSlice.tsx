@@ -27,12 +27,12 @@ const orderDetailsSlice = createSlice({
         state.isLoding = true;
         state.error = " ";
       })
-      .addCase(sendOrder.fulfilled.type, (state, action) => {
+      .addCase(sendOrder.fulfilled.type, (state, action:any) => {
         state.isLoding = false;
         state.error = " ";
         state.orderData = action.payload.order.number;
       })
-      .addCase(sendOrder.rejected.type, (state, action) => {
+      .addCase(sendOrder.rejected.type, (state, action:any) => {
         state.isLoding = false;
         state.error = action.payload;
       })
@@ -41,12 +41,12 @@ const orderDetailsSlice = createSlice({
         state.isLoding = true;
         state.error = " ";
       })
-      .addCase(fetchOrder.fulfilled.type, (state, action) => {
+      .addCase(fetchOrder.fulfilled.type, (state, action:any) => {
         state.isLoding = false;
         state.error = " ";
         state.order = action.payload.orders[0];
       })
-      .addCase(fetchOrder.rejected.type, (state, action) => {
+      .addCase(fetchOrder.rejected.type, (state, action:any) => {
         state.isLoding = false;
         state.error = action.payload;
       });

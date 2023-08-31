@@ -71,6 +71,7 @@ export type TIsDragging = {
 export type AppDispatch = typeof store.dispatch;
 
 export type RootState = ReturnType<typeof rootReducer>;
+export type RootGetState = ReturnType<typeof store.getState>;
 export type DispatchFunc = () => AppDispatch;
 
 export type TordersInf = {

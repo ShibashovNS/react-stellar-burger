@@ -1,5 +1,3 @@
-import { RootState } from "../../../utils/types";
-
-export const detailsSelector = (store:RootState) => {
+export const detailsSelector = (store) => {
   return store.orderDetails.order;
 };

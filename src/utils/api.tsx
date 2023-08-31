@@ -3,7 +3,7 @@ import {
   setAuthChecked,
   setUser,
 } from "../services/store/reducers/userAuthSlice/userAuthSlice";
-import { TForgotPassword, TLogin, TProfile, TResetPassword } from "./types";
+import { TForgotPassword, TLogin, TProfile, TResetPassword, TingredintsConstructor } from "./types";
 
 export const BASE_URL = "https://norma.nomoreparties.space/api";
 export const ORDERS_ALL = "wss://norma.nomoreparties.space/orders/all";
@@ -41,7 +41,7 @@ export const getOrder = (number: number) => request(`/orders/${number}`, {});
 
 export const sendOrder = createAsyncThunk(
   "details/post",
-  async (dataId: string[]) => {
+  async (dataId: TingredintsConstructor[]) => {
     const headers: HeadersInit = {
       "Content-Type": "application/json",
       authorization: localStorage.getItem("accessToken") || "",
