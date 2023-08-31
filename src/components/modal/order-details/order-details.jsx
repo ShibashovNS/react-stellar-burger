@@ -14,18 +14,18 @@ function OrderDetails() {
   return (
     <div className={styles.order_details + " pt-30"}>
       <p
-        className={styles.text_num + " shadow text text_type_digits-large pt-8"}
+        className={styles.text_num + " shadow text text_type_digits-large pt-8"} data-test={'order_num'}
       >{
         !isLoding?orderNumber:""}
         
       </p>
-      <p className={styles.text_order + " text_type_main-medium pt-8"}>{
+      <p className={styles.text_order + " text_type_main-medium pt-8"} data-test={'order_title'}>{
         !isLoding?"идентификатор заказа":""}
       </p>
       <div className={styles.image_container}>
-      {isLoding?<Preloader/>: <img className="mt-15" src={image} alt="Заказ оформлен" />}
+      {isLoding?<Preloader/>: <img className="mt-15" src={image} alt="Заказ оформлен" data-test={'order_status-image'} />}
       </div>
-      <p className={styles.text_status + " text_type_main-default pt-15"}>
+      <p className={styles.text_status + " text_type_main-default pt-15"} data-test={'order_status'}>
       {
         !isLoding?"ваш заказ начали готовить":""}
         
@@ -34,6 +34,7 @@ function OrderDetails() {
         className={
           styles.text_end + " text_type_main-default text_color_inacti pt-2"
         }
+        data-test={'order_text'}
       >{
         !isLoding?"Дождитесь готовности на орбитальной станции":""}
   
