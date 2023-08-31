@@ -32,7 +32,7 @@ const App = () => {
   const ingredients = useAppSelector(ingredientSelector);
 
   const isClickStutusDetails = useAppSelector(
-    (state: any) => state.orderDetails.clickStutus
+    (state) => state.orderDetails.clickStutus
   ) as boolean;
 
   const location = useLocation();

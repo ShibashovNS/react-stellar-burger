@@ -16,7 +16,7 @@ import { sendOrder } from "../../../../utils/api";
 
 function BurgerConstructorTotal({ name }: { name: string }) {
   const { draggedBun, draggedIngredients } = useAppSelector(
-    (state: any) => state.constIngredient
+    (state) => state.constIngredient
   );
 
   const isDisabled = useAppSelector((store) => store.userStatus.user);
