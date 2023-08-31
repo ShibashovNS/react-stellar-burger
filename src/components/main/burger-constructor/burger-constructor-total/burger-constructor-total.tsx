@@ -34,7 +34,7 @@ function BurgerConstructorTotal({ name }: { name: string }) {
   return (
     <div className={styles.constructorTotal + " pt-10"}>
       <div className={"pr-10"}>
-        <span className="text_type_digits-medium">
+        <span className="text_type_digits-medium" data-test={'total'}>
           {draggedIngredients.reduce(function (
             acc: number,
             data: TingredintsConstructor
