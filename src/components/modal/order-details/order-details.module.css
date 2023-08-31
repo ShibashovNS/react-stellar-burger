@@ -30,3 +30,8 @@ border: 2px solid var(--interface-accent, #4C4CFF);
 border-radius: var(--common-border-radius-s);
 }
 
+.image_container {
+  display: flex;
+  place-content: center;
+  width: 40%;
+}
