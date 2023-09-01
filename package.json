@@ -1,7 +1,7 @@
 {
   "name": "react-stellar-burger",
   "version": "0.1.0",
-  "homepage": ".",
+  "homepage": "https://shibashovns.github.io/react-stellar-burger/",
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
