@@ -30,6 +30,7 @@ import { detailsSelector } from "../../services/store/selectors/detailsSelector"
 const App = () => {
   const [isloding, setIsLoding] = useState(false);
   const ingredients = useAppSelector(ingredientSelector);
+  const isAuthChecked = useAppSelector((store) => store.userStatus.isAuthChecked);
 
   const isClickStutusDetails = useAppSelector(
     (state) => state.orderDetails.clickStutus
@@ -56,6 +57,7 @@ const App = () => {
   useEffect(() => {
     dispatch(fetchIngredients());
     dispatch(checkUserAuth());
+    isAuthChecked&&
     dispatch(getUser());
   }, [dispatch]);
 

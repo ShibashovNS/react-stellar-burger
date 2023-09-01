@@ -2,16 +2,16 @@ const { title } = require("process");
 
 describe("Тестируем работу модального окна", () => {
   it("Запуск приложения", () => {
-    Cypress.on("uncaught:exception", (err, runnable) => {
-      // returning false here prevents Cypress from
-      // failing the test
-      return false;
-    });
-
+   
     cy.visit("http://localhost:3000");
     cy.location().should((location) => {
       expect(location.origin).to.eq("http://localhost:3000");
     });
+
+    //перехватываю запрос с ингредиентами
+    cy.intercept("GET", "https://norma.nomoreparties.space/api/ingredients", {
+      fixture: "getIngredients.json",
+    }).as("getIngredients");
 
     cy.get("button").contains("Оформить заказ").should("exist").as("order-btn");
     cy.get("@order-btn").should("to.be.disabled");
@@ -85,7 +85,7 @@ describe("Тестируем работу модального окна", () => 
 
     // Перехватываем POST-запрос и возвращаем ответ из фикстуры
     cy.intercept("POST", "https://norma.nomoreparties.space/api/orders", {
-      fixture: "example.json",
+      fixture: "resOrder.json",
     }).as("postOrder");
 
     // Выполняем действия, которые вызывают POST-запрос
@@ -136,8 +136,8 @@ describe("Тестируем работу модального окна", () => 
     //Проверяем модальные окна по клику
     cy.get("@Sauce").click("center");
     cy.get("@modal").should("exist");
-    cy.location().should((loc) =>
-      expect(loc.pathname).to.eq("/ingredients/643d69a5c3f7b9001cfa0943")
+    cy.location().should((location) =>
+      expect(location.pathname).to.eq("/ingredients/643d69a5c3f7b9001cfa0943")
     );
     cy.get("@modal").should("contain.text", "Детали ингредиента");
     cy.get("@modal").should("contain.text", "Калории,ккал");
@@ -154,6 +154,9 @@ describe("Тестируем работу модального окна", () => 
     cy.get("@modal").should(($modal) => {
       expect($modal).to.have.descendants("img");
     });
-    
+    cy.get("@close").click();
+    cy.location().should((location) =>
+    expect(location.pathname).to.eq("/")
+  );
   });
 });
