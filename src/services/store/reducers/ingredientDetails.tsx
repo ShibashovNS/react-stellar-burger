@@ -1,4 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { TingredintsConstructor } from "../../../utils/types";
+
+export type TStateDetails = {
+  selctIngredient: TingredintsConstructor[],
+  clickStutus: false,
+  count: 0,
+};
+
+
 
 export const initialState = {
   selctIngredient: [],

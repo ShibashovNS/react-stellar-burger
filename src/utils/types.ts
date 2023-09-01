@@ -1,6 +1,7 @@
 import { rootReducer, store } from "../services/store/store";
 
 export type TingredintsConstructor = {
+  [x: string]: any;
   calories: number;
   carbohydrates: number;
   count: number;
