@@ -1,9 +1,5 @@
 import { string } from "prop-types";
-import ingredientsTabReducer, { changeTypeTab } from "./ingredientsTab";
-
-const initialState = {
-  typeTab: null,
-};
+import ingredientsTabReducer, { changeTypeTab, initialState } from "./ingredientsTab";
 
 describe("ingredientsTabReducer", () => {
   it("Тест начальное значение стэйта", () => {

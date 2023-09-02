@@ -1,10 +1,4 @@
-import modalOverlayReducer, { clickOpen, clickOrderList } from "./modalOverlaySlice";
-
-
-const initialState = {
-  setClickOrderList: false,
-  setIsOpen: false,
-};
+import modalOverlayReducer, { clickOpen, clickOrderList, initialState } from "./modalOverlaySlice";
 
 describe("modalOverlayReducer", () => {
   it('Тест начальное значние стэйта', () => {

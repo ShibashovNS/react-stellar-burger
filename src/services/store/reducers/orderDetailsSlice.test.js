@@ -1,12 +1,4 @@
-import orderDetailsReducer from "./orderDetailsSlice";
-
-const initialState = {
-  orderData: [],
-  order:null,
-  clickStutus: false,
-  isLoding: false,
-  error: " ",
-};
+import orderDetailsReducer, { initialState } from "./orderDetailsSlice";
 
 const dataOrder = [
   {
@@ -24,8 +16,6 @@ const dataOrder = [
     "__v": 0
 }
 ];
-
-
 
 describe("orderDetailsReducer", () => {
   it("Загрузка данных", () => {

@@ -1,12 +1,5 @@
-import userSlice from "./userAuthSlice";
-
-const initialState = {
-  user: null,
-  isAuthChecked: false,
-
-  isLoding: false,
-  error: " ",
-};
+import { dataUser } from "../../../../utils/const";
+import userSlice, { initialState } from "./userAuthSlice";
 
 describe("userSlice", () => {
   it("Загрузка данных", () => {
@@ -26,10 +19,10 @@ describe("userSlice", () => {
     expect(
       userSlice(initialState, {
         type: "user/register/fulfilled",
-        payload: { user: { email: "shibashov95@b.ru", name: "Никита" } },
+        payload: dataUser,
       })
     ).toEqual({
-      user: { email: "shibashov95@b.ru", name: "Никита" },
+      user: dataUser.user,
       isAuthChecked: true,
       isLoding: false,
       error: " ",

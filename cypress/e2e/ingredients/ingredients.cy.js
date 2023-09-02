@@ -1,15 +1,16 @@
 const { title } = require("process");
+const testUrl = "http://localhost:3000";
+const BASE_URL = "https://norma.nomoreparties.space/api";
 
 describe("Тестируем работу модального окна", () => {
   it("Запуск приложения", () => {
-   
-    cy.visit("http://localhost:3000");
+    cy.visit(testUrl);
     cy.location().should((location) => {
-      expect(location.origin).to.eq("http://localhost:3000");
+      expect(location.origin).to.eq(testUrl);
     });
 
     //перехватываю запрос с ингредиентами
-    cy.intercept("GET", "https://norma.nomoreparties.space/api/ingredients", {
+    cy.intercept("GET", `${BASE_URL}/ingredients`, {
       fixture: "getIngredients.json",
     }).as("getIngredients");
 
@@ -79,7 +80,7 @@ describe("Тестируем работу модального окна", () => 
     cy.get("button").contains("Оформить заказ").should("exist").as("order-btn");
 
     // Перехватываем POST-запрос и возвращаем ответ из фикстуры
-    cy.intercept("POST", "https://norma.nomoreparties.space/api/orders", {
+    cy.intercept("POST", `${BASE_URL}/orders`, {
       fixture: "resOrder.json",
     }).as("postOrder");
 
@@ -140,15 +141,13 @@ describe("Тестируем работу модального окна", () => 
     cy.get("@modal").should("contain.text", "14");
     cy.get("@modal").should("contain.text", "50");
     cy.get("@modal").should("contain.text", "22");
-    cy.get("@modal").should("contain.text", "11")
-   
+    cy.get("@modal").should("contain.text", "11");
+
     //Проверяем содержится ли картинка в попапе
     cy.get("@modal").should(($modal) => {
       expect($modal).to.have.descendants("img");
     });
     cy.get("@close").click();
-    cy.location().should((location) =>
-    expect(location.pathname).to.eq("/")
-  );
+    cy.location().should((location) => expect(location.pathname).to.eq("/"));
   });
 });

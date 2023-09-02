@@ -1,10 +1,7 @@
-import burgerConstructorReducer, { clearOrder } from "./burgerConstructorSlice";
+import burgerConstructorReducer, { clearOrder, initialState } from "./burgerConstructorSlice";
 import { addBun, addIngredient } from "./burgerConstructorSlice";
 
-export const initialState = {
-  draggedBun: [],
-  draggedIngredients: [],
-};
+
 
 describe('burgerConstructorReducer', () => {
   it("Тест начальное значение стэйта", () => {

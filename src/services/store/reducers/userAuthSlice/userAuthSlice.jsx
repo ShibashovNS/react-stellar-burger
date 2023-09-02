@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { forgotPassword, loginUser, logoutUser, registerUser, resetPassword } from '../../../../utils/api';
 
 
-const initialState = {
+export const initialState = {
   user: null,
   isAuthChecked: false,
 

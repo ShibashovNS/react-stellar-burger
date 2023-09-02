@@ -3,7 +3,7 @@ import Preloader from "../../../components/preloder/preloder";
 import { fetchOrder, sendOrder } from "../../../utils/api";
 
 
-const initialState = {
+export const initialState = {
   orderData: [],
   order:null,
   clickStutus: false,

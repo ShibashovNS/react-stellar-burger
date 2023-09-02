@@ -1,16 +1,14 @@
-import ingredientDetailsReducer, { addIngredDetails, clickIngredient, counter }  from "./ingredientDetails";
-
-export const initialState = {
-  selctIngredient: [],
-  clickStutus: false,
-  count: 0,
-};
-
+import ingredientDetailsReducer, {
+  addIngredDetails,
+  clickIngredient,
+  counter,
+  initialState,
+} from "./ingredientDetails";
 
 describe("ingredientDetailsReducer", () => {
   it("Тест начальное значение стэйт", () => {
-    expect(ingredientDetailsReducer(undefined, {})).toEqual(initialState)
-  })
+    expect(ingredientDetailsReducer(undefined, {})).toEqual(initialState);
+  });
 
   it("Тест selctIngredient", () => {
     const paylode = [
@@ -24,32 +22,36 @@ describe("ingredientDetailsReducer", () => {
         calories: 4242,
         price: 424,
         image: "https://code.s3.yandex.net/react/code/meat-01.png",
-        image_mobile: "https://code.s3.yandex.net/react/code/meat-01-mobile.png",
+        image_mobile:
+          "https://code.s3.yandex.net/react/code/meat-01-mobile.png",
         image_large: "https://code.s3.yandex.net/react/code/meat-01-large.png",
         __v: 0,
-        count:1
+        count: 1,
       },
     ];
-    expect(ingredientDetailsReducer(initialState, addIngredDetails(paylode))).toEqual({
+    expect(
+      ingredientDetailsReducer(initialState, addIngredDetails(paylode))
+    ).toEqual({
       ...initialState,
-      selctIngredient: paylode
-    })
-  })
+      selctIngredient: paylode,
+    });
+  });
 
-  it('Тест clickStutus', () => {
-    const payload = true
-    expect(ingredientDetailsReducer(initialState, clickIngredient(payload))).toEqual({
+  it("Тест clickStutus", () => {
+    const payload = true;
+    expect(
+      ingredientDetailsReducer(initialState, clickIngredient(payload))
+    ).toEqual({
       ...initialState,
-      clickStutus: payload
-    })
-  })
+      clickStutus: payload,
+    });
+  });
 
-  it('Тест count', () => {
-    const payload = 2
+  it("Тест count", () => {
+    const payload = 2;
     expect(ingredientDetailsReducer(initialState, counter(payload))).toEqual({
       ...initialState,
-      count: payload
-    })
-  })
-
-})
+      count: payload,
+    });
+  });
+});

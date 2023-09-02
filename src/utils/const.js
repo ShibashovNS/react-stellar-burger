@@ -31,3 +31,8 @@ const dataBun = [
     __v: 0,
   },
 ];
+
+
+export const dataUser = { user: { email: "shibashov95@b.ru", name: "Никита" } }
+
+
