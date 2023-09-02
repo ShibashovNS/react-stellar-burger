@@ -4,11 +4,12 @@ import image from "../../../../src/images/done.svg";
 import { useSelector } from "react-redux";
 import { sendOrder } from "../../../utils/api";
 import Preloader from "../../preloder/preloder";
+import { RootState } from "../../../utils/types";
 
 function OrderDetails() {
-  const orderNumber = useSelector((state) => state.orderDetails.orderData);
+  const orderNumber = useSelector((state:RootState) => state.orderDetails.orderData);
 
- const isLoding =  useSelector((state) => state.orderDetails.isLoding)
+ const isLoding =  useSelector((state:RootState) => state.orderDetails.isLoding)
 
 
   return (

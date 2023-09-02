@@ -1,2 +1,4 @@
-export const userserStatusAuth = (state:any) => state.user.isAuthChecked as boolean; 
-export const userserData = (state:any) => state.user.user as string;
+import { RootState } from "../../../../utils/types";
+
+export const userserStatusAuth = (state: { user: { isAuthChecked: boolean; }; }) => state.user.isAuthChecked; 
+export const userserData = (state: { user: { user: string; }; }) => state.user.user;

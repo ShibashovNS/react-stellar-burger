@@ -1,8 +1,6 @@
 import React from "react";
 import styles from "./burger-ingredients.module.css";
 import IngredientCard from "../burger-ingredient-card/burger-ingredient-card";
-import PropTypes from "prop-types";
-import { ingredientPropType } from "../../../../utils/prop-types";
 import { memoIngredientsSelector } from "../../../../services/store/selectors/memoIngredientSelector";
 import { Link, useLocation } from "react-router-dom";
 import { TWithChildren, TingredientType, TingredintsConstructor } from "../../../../utils/types";
@@ -25,12 +23,6 @@ function BurgerIngredients({ productName, typeProduct }: TWithChildren<Tingredie
     </>
   );
 }
-
-BurgerIngredients.propTypes = {
-  ingredients: PropTypes.arrayOf(ingredientPropType),
-  productName: PropTypes.string,
-  typeProduct: PropTypes.string,
-};
 
 export default BurgerIngredients;
 
