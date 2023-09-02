@@ -101,7 +101,7 @@ const App = () => {
           />
           <Route
             path="/ingredients/:id"
-            element={<OrderInformation modal={false} />}
+            element={<IngredientDetailsSingle isSinglePage/>}
           />
           <Route path="*" element={<NotFound />} />
         </Route>

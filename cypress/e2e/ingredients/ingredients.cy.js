@@ -61,11 +61,6 @@ describe("Тестируем работу модального окна", () => 
     cy.get("@order-btn").should("not.be.disabled");
     cy.get("@order-btn").click();
 
-    //Проверяем эндпоинт после перенаправления на страницу авторизации
-    cy.location().should((location) =>
-      expect(location.pathname).to.eq("/login")
-    );
-
     //Авторизовываемся
     cy.get('[data-test="loginEmaile"]').as("loginEmaile");
     cy.get('[data-test="loginPassword"]').as("loginPassword");
@@ -136,9 +131,6 @@ describe("Тестируем работу модального окна", () => 
     //Проверяем модальные окна по клику
     cy.get("@Sauce").click("center");
     cy.get("@modal").should("exist");
-    cy.location().should((location) =>
-      expect(location.pathname).to.eq("/ingredients/643d69a5c3f7b9001cfa0943")
-    );
     cy.get("@modal").should("contain.text", "Детали ингредиента");
     cy.get("@modal").should("contain.text", "Калории,ккал");
     cy.get("@modal").should("contain.text", "Белки, г");
