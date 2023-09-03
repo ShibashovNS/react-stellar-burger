@@ -1,7 +1,7 @@
 import { rootReducer, store } from "../services/store/store";
+import { TFeedOrder } from "./live-table";
 
 export type TingredintsConstructor = {
-  [x: string]: any;
   calories: number;
   carbohydrates: number;
   count: number;
@@ -76,15 +76,15 @@ export type RootGetState = ReturnType<typeof store.getState>;
 export type DispatchFunc = () => AppDispatch;
 
 export type TordersInf = {
-  orders: [];
+  orders: TFeedOrder[] ;
   success: boolean;
   total: number;
   totalToday: number;
-};
+} ;
 
 export type Torder = {
   createdAt:string,
-  ingredients:[],
+  ingredients:string[],
   name:string,
   number:number,
   status:string,

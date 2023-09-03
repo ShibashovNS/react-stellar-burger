@@ -5,7 +5,9 @@ import { useAppSelector } from "../../../services/hooks/hooks";
 
 function IngredientDetails() {
   const detailsIngredient = useAppSelector(detailsSelector);
-  return (
+ 
+    return (
+      detailsIngredient&&
     <div className={styles.ingredientDetails + " pt-30"}>
       <p
         className={

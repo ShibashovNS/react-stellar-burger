@@ -2,8 +2,15 @@ import { createSlice } from "@reduxjs/toolkit";
 import Preloader from "../../../components/preloder/preloder";
 import { fetchOrder, sendOrder } from "../../../utils/api";
 
+type TorderDetails = {
+  orderData: [],
+  order:null,
+  clickStutus: boolean,
+  isLoding: boolean,
+  error: string,
+}
 
-export const initialState = {
+export const initialState:TorderDetails = {
   orderData: [],
   order:null,
   clickStutus: false,

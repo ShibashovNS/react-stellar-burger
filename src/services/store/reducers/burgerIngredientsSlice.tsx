@@ -1,4 +1,4 @@
-import { TingredintsConstructor } from "../../../utils/types";
+import { RootState, TingredintsConstructor } from "../../../utils/types";
 import { fetchIngredients } from "./ingredientQuery";
 import { createSlice } from "@reduxjs/toolkit";
 
