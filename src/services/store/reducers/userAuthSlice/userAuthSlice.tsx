@@ -2,14 +2,20 @@ import { createSlice } from '@reduxjs/toolkit';
 import { forgotPassword, loginUser, logoutUser, registerUser, resetPassword } from '../../../../utils/api';
 
 export type TstateUser = {
-  user: {},
+  user: {
+    name: string,
+    email: string
+  },
   isAuthChecked: boolean,
   isLoding: boolean,
   error: string,
 };
 
 export const initialState:TstateUser = {
-  user: {},
+  user: {
+    name: '',
+    email: ''
+  },
   isAuthChecked: false,
   isLoding: false,
   error: " ",
@@ -67,7 +73,10 @@ export const userSlice = createSlice({
       state.error = " ";
     })
     .addCase(logoutUser.fulfilled.type, (state) => {
-      state.user = {};
+      state.user = {
+        name: '',
+        email: ''
+      };
       state.isLoding = false;
     })
     .addCase(logoutUser.rejected.type, (state, action:any) => {

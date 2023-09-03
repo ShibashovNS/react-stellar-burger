@@ -9,15 +9,14 @@ import { useAppDispatch, useAppSelector } from "../../services/hooks/hooks";
 import { TProfile } from "../../utils/types";
 
 export function UserForm() {
-  const dispatch = useAppDispatch();
 
-  const { name, email }: { name: string; email: string } = useAppSelector(
-    (store: any) => store.userStatus.user
+  const { name, email } = useAppSelector(
+    (store) => store.userStatus.user
   );
 
   const [value, setValue] = useState<TProfile>({
-    name: "",
-    email: "",
+    name: name,
+    email: email,
     password: "",
   });
 
