@@ -1,6 +1,6 @@
 const { title } = require("process");
 const testUrl = "http://localhost:3000";
-const BASE_URL = "https://norma.nomoreparties.space/api";
+import { BASE_URL } from "../../../src/utils/api";
 
 describe("Тестируем работу модального окна", () => {
   it("Запуск приложения", () => {
