@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/react-stellar-burger/static/css/main.69175c1f.css",
-    "main.js": "/react-stellar-burger/static/js/main.f944358e.js",
+    "main.js": "/react-stellar-burger/static/js/main.f2fbc670.js",
     "static/js/787.5ef76428.chunk.js": "/react-stellar-burger/static/js/787.5ef76428.chunk.js",
     "static/media/JetBrainsMono-Bold.woff": "/react-stellar-burger/static/media/JetBrainsMono-Bold.3914674f1cb2335acf26.woff",
     "static/media/JetBrainsMono-Regular.woff": "/react-stellar-burger/static/media/JetBrainsMono-Regular.f52bee61d00ce995b89f.woff",
@@ -12,11 +12,11 @@
     "static/media/done.svg": "/react-stellar-burger/static/media/done.2022ce2b88cc7b71fc8b9023c521656c.svg",
     "index.html": "/react-stellar-burger/index.html",
     "main.69175c1f.css.map": "/react-stellar-burger/static/css/main.69175c1f.css.map",
-    "main.f944358e.js.map": "/react-stellar-burger/static/js/main.f944358e.js.map",
+    "main.f2fbc670.js.map": "/react-stellar-burger/static/js/main.f2fbc670.js.map",
     "787.5ef76428.chunk.js.map": "/react-stellar-burger/static/js/787.5ef76428.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.69175c1f.css",
-    "static/js/main.f944358e.js"
+    "static/js/main.f2fbc670.js"
   ]
 }

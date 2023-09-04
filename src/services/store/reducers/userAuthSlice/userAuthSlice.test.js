@@ -8,7 +8,10 @@ describe("userSlice", () => {
         type: "user/register/pending",
       })
     ).toEqual({
-      user: {},
+      user: {
+        name: '',
+        email: ''
+      },
       isAuthChecked: false,
       isLoding: true,
       error: " ",
@@ -36,7 +39,10 @@ describe("userSlice", () => {
         payload: "Ошибка",
       })
     ).toEqual({
-      user: {},
+      user: {
+        name: '',
+        email: ''
+      },
       isAuthChecked: false,
       isLoding: false,
       error: "Ошибка",
