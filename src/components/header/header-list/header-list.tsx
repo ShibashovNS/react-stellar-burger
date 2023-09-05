@@ -38,9 +38,9 @@ function HeaderList() {
           </ul>
         </li>
         <li className={styles.linkList_item}>
-          <a>
+          <Link to={'/'}>
             <Logo />
-          </a>
+          </Link>
         </li>
 
         <li className={styles.linkList_item}>

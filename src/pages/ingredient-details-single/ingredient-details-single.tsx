@@ -1,6 +1,5 @@
 import { useAppSelector } from "../../services/hooks/hooks";
 import { memoIngredientsSelector } from "../../services/store/selectors/memoIngredientSelector";
-import { TingredintsConstructor } from "../../utils/types";
 import stylesSingle from "./ingredient-details-single.module.css";
 import stylesModal from "./ingredient-details.module.css";
 import { useParams } from "react-router-dom";
@@ -11,8 +10,10 @@ function IngredientDetailsSingle({ isSinglePage = true }) {
   const ingredientsData = useAppSelector(memoIngredientsSelector);
 
   const detailsIngredient = ingredientsData.find(
-    (ingredient: TingredintsConstructor) => ingredient._id === _id
+    (ingredient) => ingredient._id === _id
   );
+
+  if (!detailsIngredient) return null
 
   return (
     <div>

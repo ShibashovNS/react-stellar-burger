@@ -25,7 +25,7 @@ export const BurgerConstruectorCard = memo(function BurgerConstruectorCard({
 }: TWithChildren<TConstructorCard>) {
   const { name, price, image_mobile, _id, _uuid } = data;
   const { draggedBun, draggedIngredients } = useAppSelector(
-    (state: any) => state.constIngredient
+    (state) => state.constIngredient
   );
 
   const dispatch = useAppDispatch();

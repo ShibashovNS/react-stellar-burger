@@ -1,6 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { TingredintsConstructor } from "../../../utils/types";
 
-const initialState = {
+type Tinitial = {
+  draggedBun: TingredintsConstructor[],
+  draggedIngredients: TingredintsConstructor[],
+}
+
+export const initialState: Tinitial = {
   draggedBun: [],
   draggedIngredients: [],
 };

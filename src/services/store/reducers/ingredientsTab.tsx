@@ -1,10 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {
+export const initialState = {
   typeTab: null,
 };
 
-const ingredientsTabSlice = createSlice({
+export const ingredientsTabSlice = createSlice({
   name: "ingredientsTab",
   initialState,
 

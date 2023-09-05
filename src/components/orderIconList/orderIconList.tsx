@@ -1,6 +1,7 @@
 import React, { FC } from "react";
 import styles from "./orderIconList.module.css";
 import { IngredientsIcon } from "../IngredientsIcon/IngredientsIcon";
+import { TingredientType } from "../../utils/types";
 
 interface Props {
   ingredients: string[];
@@ -21,9 +22,9 @@ export const OrderList: FC<Props> = ({ ingredients, shift = true }) => {
 
   const remains = uniqueIngredients.length > 6 && uniqueIngredients.length - 6;
 
-  function countDuplicates(arr: any[]) {
+  function countDuplicates(arr:any[]) {
     return arr.reduce(
-      (counts: { [x: string]: any }, current: string | number) => {
+      (counts: { [x: string]:any }, current: string | number) => {
         counts[current] = (counts[current] || 0) + 1;
         return counts;
       },
@@ -38,7 +39,7 @@ export const OrderList: FC<Props> = ({ ingredients, shift = true }) => {
       className={shift === true ? styles.list : styles.icon + " custom-scroll"}
     >
       {listsIconOrder.map(
-        (ingredient: any, index: number) => (
+        (ingredient: string, index: number) => (
           <li key={index}>
             <IngredientsIcon
               count={count[`${ingredient}`]}

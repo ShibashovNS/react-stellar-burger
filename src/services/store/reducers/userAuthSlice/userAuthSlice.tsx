@@ -1,16 +1,27 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { forgotPassword, loginUser, logoutUser, registerUser, resetPassword } from '../../../../utils/api';
 
+export type TstateUser = {
+  user: {
+    name: string,
+    email: string
+  },
+  isAuthChecked: boolean,
+  isLoding: boolean,
+  error: string,
+};
 
-const initialState = {
-  user: null,
+export const initialState:TstateUser = {
+  user: {
+    name: '',
+    email: ''
+  },
   isAuthChecked: false,
-
   isLoding: false,
   error: " ",
 };
 
-const userSlice = createSlice({
+export const userSlice = createSlice({
   name: 'user',
   initialState,
 
@@ -27,17 +38,16 @@ const userSlice = createSlice({
     builder
       
     .addCase(registerUser.pending.type, (state, action) => {
-      state.isLoding = false;
+      state.isLoding = true;
       state.error = " ";
     })
       
-    .addCase(registerUser.fulfilled.type, (state, action) => {
+    .addCase(registerUser.fulfilled.type, (state, action:any) => {
       state.user = action.payload.user;
       state.isAuthChecked = true;
-      state.user = action.payload.user;
     })
       
-    .addCase(registerUser.rejected.type, (state, action) => {
+    .addCase(registerUser.rejected.type, (state, action:any) => {
         state.isLoding = false;
         state.error = action.payload;  
     })
@@ -47,13 +57,13 @@ const userSlice = createSlice({
       state.error = " ";
     })
       
-    .addCase(loginUser.fulfilled.type, (state, action) => {
+    .addCase(loginUser.fulfilled.type, (state, action:any) => {
       state.user = action.payload.user;
       state.isAuthChecked = true;
       state.user = action.payload.user;
     })
       
-    .addCase(loginUser.rejected.type, (state, action) => {
+    .addCase(loginUser.rejected.type, (state, action:any) => {
         state.isLoding = false;
         state.error = action.payload;  
     })
@@ -63,10 +73,13 @@ const userSlice = createSlice({
       state.error = " ";
     })
     .addCase(logoutUser.fulfilled.type, (state) => {
-      state.user = null;
+      state.user = {
+        name: '',
+        email: ''
+      };
       state.isLoding = false;
     })
-    .addCase(logoutUser.rejected.type, (state, action) => {
+    .addCase(logoutUser.rejected.type, (state, action:any) => {
       state.isLoding = false;
       state.error = action.payload;
     })
@@ -77,7 +90,7 @@ const userSlice = createSlice({
     .addCase(forgotPassword.fulfilled.type, (state) => {
       state.isLoding = false;
     })
-    .addCase(forgotPassword.rejected.type, (state, action) => {
+    .addCase(forgotPassword.rejected.type, (state, action:any) => {
       state.isLoding = false;
       state.error = action.payload;
     })
@@ -88,7 +101,7 @@ const userSlice = createSlice({
     .addCase(resetPassword.fulfilled.type, (state) => {
       state.isLoding = false;
     })
-    .addCase(resetPassword.rejected.type, (state, action) => {
+    .addCase(resetPassword.rejected.type, (state, action:any) => {
       state.isLoding = false;
       state.error = action.payload;
     })

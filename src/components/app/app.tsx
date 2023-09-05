@@ -30,9 +30,10 @@ import { detailsSelector } from "../../services/store/selectors/detailsSelector"
 const App = () => {
   const [isloding, setIsLoding] = useState(false);
   const ingredients = useAppSelector(ingredientSelector);
+  const isAuthChecked = useAppSelector((store) => store.userStatus.isAuthChecked);
 
   const isClickStutusDetails = useAppSelector(
-    (state: any) => state.orderDetails.clickStutus
+    (state) => state.orderDetails.clickStutus
   ) as boolean;
 
   const location = useLocation();
@@ -56,6 +57,7 @@ const App = () => {
   useEffect(() => {
     dispatch(fetchIngredients());
     dispatch(checkUserAuth());
+    isAuthChecked&&
     dispatch(getUser());
   }, [dispatch]);
 
@@ -99,7 +101,7 @@ const App = () => {
           />
           <Route
             path="/ingredients/:id"
-            element={<OrderInformation modal={false} />}
+            element={<IngredientDetailsSingle isSinglePage/>}
           />
           <Route path="*" element={<NotFound />} />
         </Route>

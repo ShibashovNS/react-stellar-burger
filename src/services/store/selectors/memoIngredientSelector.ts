@@ -8,7 +8,7 @@ export const memoIngredientsSelector = createSelector(
   [ingredientSelector, constructorSelector, constructorBunSelector],
   (ingredients, constructorIngredients, constructorBunSelector) => {
     const newIngredientsArr = ingredients.reduce(
-      (acc = [], item: TingredintsConstructor) => {
+      (acc: TingredintsConstructor[] = [], item) => {
         const count = [
           ...constructorIngredients,
           ...constructorBunSelector,

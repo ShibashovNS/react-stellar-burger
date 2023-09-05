@@ -43,9 +43,9 @@ function Modal({ children, isLink = true}: TWithChildren<TisLink>) {
 
   return ReactDom.createPortal(
     <>
-      <div className={styles.modal}>
-        <div className={styles.close_icon}>
-          <CloseIcon onClick={closeModal} type={"primary"} />
+      <div className={styles.modal} data-test={'modal'}>
+        <div className={styles.close_icon} data-test={'close'}>
+          <CloseIcon onClick={closeModal} type={"primary"}/>
         </div>
         {children}
       </div>

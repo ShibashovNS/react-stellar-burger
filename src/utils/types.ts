@@ -1,4 +1,5 @@
 import { rootReducer, store } from "../services/store/store";
+import { TFeedOrder } from "./live-table";
 
 export type TingredintsConstructor = {
   calories: number;
@@ -29,11 +30,11 @@ export type TWithChildren<T> = T & { children?: React.ReactNode };
 
 export type TingredientType = {
   productName: "Булки" | "Соусы" | "Начинки";
-  typeProduct: "bun" | "main" | "sauce";
+  typeProduct: "bun" | "main" | "sauce" | null;
 };
 
 export type TburgerIngingredients = {
-  current: "bun" | "main" | "sauce";
+  current: "bun" | "main" | "sauce" | null;
   handleTabClick: (value: string) => void;
 };
 
@@ -71,18 +72,19 @@ export type TIsDragging = {
 export type AppDispatch = typeof store.dispatch;
 
 export type RootState = ReturnType<typeof rootReducer>;
+export type RootGetState = ReturnType<typeof store.getState>;
 export type DispatchFunc = () => AppDispatch;
 
 export type TordersInf = {
-  orders: [];
+  orders: TFeedOrder[] ;
   success: boolean;
   total: number;
   totalToday: number;
-};
+} ;
 
 export type Torder = {
   createdAt:string,
-  ingredients:[],
+  ingredients:string[],
   name:string,
   number:number,
   status:string,

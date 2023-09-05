@@ -1,6 +1,7 @@
 {
-  "name": "react-burger-starter",
+  "name": "react-stellar-burger",
   "version": "0.1.0",
+  "homepage": "https://shibashovns.github.io/react-stellar-burger/",
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
@@ -33,13 +34,18 @@
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
     "@types/uuid": "^9.0.2",
+    "cypress": "^12.17.4",
+    "gh-pages": "^6.0.0",
     "typescript": "^4.9.5"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "test:cy": "cypress open",
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [

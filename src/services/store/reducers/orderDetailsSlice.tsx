@@ -2,8 +2,15 @@ import { createSlice } from "@reduxjs/toolkit";
 import Preloader from "../../../components/preloder/preloder";
 import { fetchOrder, sendOrder } from "../../../utils/api";
 
+type TorderDetails = {
+  orderData: [],
+  order:null,
+  clickStutus: boolean,
+  isLoding: boolean,
+  error: string,
+}
 
-const initialState = {
+export const initialState:TorderDetails = {
   orderData: [],
   order:null,
   clickStutus: false,
@@ -24,29 +31,29 @@ const orderDetailsSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(sendOrder.pending.type, (state, action) => {
-        state.isLoding = false;
+        state.isLoding = true;
         state.error = " ";
       })
-      .addCase(sendOrder.fulfilled.type, (state, action) => {
-        state.isLoding = true;
+      .addCase(sendOrder.fulfilled.type, (state, action:any) => {
+        state.isLoding = false;
         state.error = " ";
         state.orderData = action.payload.order.number;
       })
-      .addCase(sendOrder.rejected.type, (state, action) => {
+      .addCase(sendOrder.rejected.type, (state, action:any) => {
         state.isLoding = false;
         state.error = action.payload;
       })
       
       .addCase(fetchOrder.pending.type, (state, action) => {
-        state.isLoding = false;
+        state.isLoding = true;
         state.error = " ";
       })
-      .addCase(fetchOrder.fulfilled.type, (state, action) => {
-        state.isLoding = true;
+      .addCase(fetchOrder.fulfilled.type, (state, action:any) => {
+        state.isLoding = false;
         state.error = " ";
         state.order = action.payload.orders[0];
       })
-      .addCase(fetchOrder.rejected.type, (state, action) => {
+      .addCase(fetchOrder.rejected.type, (state, action:any) => {
         state.isLoding = false;
         state.error = action.payload;
       });

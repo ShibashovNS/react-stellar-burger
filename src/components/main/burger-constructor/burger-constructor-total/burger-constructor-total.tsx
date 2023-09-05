@@ -16,7 +16,7 @@ import { sendOrder } from "../../../../utils/api";
 
 function BurgerConstructorTotal({ name }: { name: string }) {
   const { draggedBun, draggedIngredients } = useAppSelector(
-    (state: any) => state.constIngredient
+    (state) => state.constIngredient
   );
 
   const isDisabled = useAppSelector((store) => store.userStatus.user);
@@ -34,7 +34,7 @@ function BurgerConstructorTotal({ name }: { name: string }) {
   return (
     <div className={styles.constructorTotal + " pt-10"}>
       <div className={"pr-10"}>
-        <span className="text_type_digits-medium">
+        <span className="text_type_digits-medium" data-test={'total'}>
           {draggedIngredients.reduce(function (
             acc: number,
             data: TingredintsConstructor

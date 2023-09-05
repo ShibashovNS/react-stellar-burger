@@ -1,12 +1,21 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { TingredintsConstructor } from "../../../utils/types";
 
-const initialState = {
+export type TStateDetails = {
+  selctIngredient: TingredintsConstructor[],
+  clickStutus: false,
+  count: 0,
+};
+
+
+
+export const initialState = {
   selctIngredient: [],
   clickStutus: false,
   count: 0,
 };
 
-const ingredientDetailsSlice = createSlice({
+export const ingredientDetailsSlice = createSlice({
   name: "ingredDetails",
   initialState,
 

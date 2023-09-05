@@ -15,7 +15,7 @@ function AppMain() {
   const sauceRef = useRef<HTMLHeadingElement>(null);
   const mainRef = useRef<HTMLHeadingElement>(null);
 
-  const current = useAppSelector((state: any) => state.ingredientsTab.typeTab);
+  const current = useAppSelector((state) => state.ingredientsTab.typeTab);
 
   function handleTabClick(type: string) {
     dispatch(changeTypeTab(type));

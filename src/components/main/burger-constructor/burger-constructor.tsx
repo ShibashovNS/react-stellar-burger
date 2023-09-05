@@ -46,7 +46,7 @@ const BurgerConstructor = memo(function BurgerConstructor() {
   },[dispatch]);
 
   return (
-    <div ref={refDrop} className={isDropped ? styles.gradient_border : ""}>
+    <div ref={refDrop} className={isDropped ? styles.gradient_border : ""} data-test={'constructor'}>
       <div className={styles.bun + " pl-6 pt-4 pb-4"}>      
         {draggedBun.map((item: TingredintsConstructor) => {
           return (
@@ -57,6 +57,7 @@ const BurgerConstructor = memo(function BurgerConstructor() {
               price={item.price}
               thumbnail={item.image}
               key={item._uuid}
+              
             />
           );
         })}
@@ -72,6 +73,7 @@ const BurgerConstructor = memo(function BurgerConstructor() {
                 index={index}
                 data={card}
                 handleDeliteElement={handleDeliteElement}
+                
               />
             );
           })}
@@ -87,6 +89,7 @@ const BurgerConstructor = memo(function BurgerConstructor() {
               price={item.price}
               thumbnail={item.image}
               key={item._uuid}
+              
             />
           );
         })}

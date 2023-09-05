@@ -1,14 +1,19 @@
+import { ReactNode, Key } from "react";
 import { TordersInf } from "../../utils/types";
 import styles from "./order-stats.module.css";
+import { TFeedOrder } from "../../utils/live-table";
 
 type Torders = {
-  ordersInf: TordersInf
+  number: ReactNode;
+  _id: Key;
+  status: string;
+  ordersInf: TordersInf;
 };
 
 export function OrderStats({ ordersInf}:Torders) {
   console.log(ordersInf);
 
-  const listOrders = (array:any[], status: string) => {
+  const listOrders = (array:Torders[], status: string) => {
     const orderStatus = array?.filter((item) => item.status === status);
     return orderStatus
       ?.slice(0, 25)

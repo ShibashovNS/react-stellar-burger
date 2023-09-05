@@ -39,7 +39,7 @@ function IngredientCard({ ingredient }: Tingredient) {
 
   return (
     ingredient && (
-      <div className={styles.card} ref={refDrag} draggable>
+      <div className={styles.card} ref={refDrag} draggable data-test_id={ingredient._id}>
         {ingredient.count > 0 && (
           <Counter
             count={

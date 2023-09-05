@@ -1,3 +1,5 @@
+import { TordersInf } from "./types";
+
 export enum WebsocketStatus {
     CONNECTING = 'CONNECTING...',
     ONLINE = 'ONLINE',
@@ -16,9 +18,6 @@ export enum IOrderStatus {
     pending = 'pending',
     created = 'created',
 }
-  
-
-
 
 export type TFeedOrder = {
     _id: string;
@@ -28,6 +27,7 @@ export type TFeedOrder = {
     status: IOrderStatus;
     createdAt: string;
     updatedAt: string;
+    ordersInf: TordersInf;
   }
 
 export type TWSMessage = {
